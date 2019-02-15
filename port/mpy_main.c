@@ -68,6 +68,7 @@ static char *heap = RT_NULL;
 void mpy_main(const char *filename) {
     int stack_dummy;
     stack_top = (void *)&stack_dummy;
+    rt_uint16_t old_flag;
 
     rtt_getchar_init();
 
@@ -97,6 +98,11 @@ void mpy_main(const char *filename) {
     mp_obj_list_append(mp_sys_path, mp_obj_new_str(MICROPY_PY_PATH, strlen(MICROPY_PY_PATH)));
     mp_obj_list_init(mp_sys_argv, 0);
     readline_init0();
+
+    /* Save the open flag */
+    old_flag = rt_console_get_device()->open_flag;
+    /* clean the stream flag. stream flag will automatically append '\r' */
+    rt_console_get_device()->open_flag &= ~RT_DEVICE_FLAG_STREAM;
 
     if (filename) {
 #ifndef MICROPYTHON_USING_UOS
@@ -136,6 +142,9 @@ void mpy_main(const char *filename) {
             }
         }
     }
+
+    /* restore the open flag */
+    rt_console_get_device()->open_flag = old_flag;
 
     gc_sweep_all();
 
