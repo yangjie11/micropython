@@ -37,7 +37,7 @@ int mp_hal_stdin_rx_chr(void) {
     char ch;
     while (1) {
         ch = rtt_getchar();
-        if (ch != 0xFF) {
+        if (ch != (char)0xFF) {
             break;
         }
         MICROPY_EVENT_POLL_HOOK;
