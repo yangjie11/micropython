@@ -1,9 +1,8 @@
 # MicroPython 模块
 
-!!! abstract "简介"
-    - MicroPython 提供丰富的模块，每个模块提供特定的功能。了解开发的过程中一些常用的模块的使用方式，可以让你很好的使用 MicroPython 的功能。
+- MicroPython 提供丰富的模块，每个模块提供特定的功能。了解开发的过程中一些常用的模块的使用方式，可以让你很好的使用 MicroPython 的功能。
 
-    - 这些模块可以通过 env 工具的 menuconfig 功能来开启和关闭，如果你需要使用特定的模块，在 menuconfig 中选中模块名，保存退出后，重新编译运行即可。
+- 这些模块可以通过 env 工具的 menuconfig 功能来开启和关闭，如果你需要使用特定的模块，在 menuconfig 中选中模块名，保存退出后，重新编译运行即可。
 
 ## Python 标准库和微型库
 
@@ -81,7 +80,4 @@ Python 的标准库被 “微型化”后，就是 MicroPython 标准库，也�
 [26]: 06-Tools_Module/07-uzlib.md
 [27]: 06-Tools_Module/08-urandom.md
 [28]: 07-Network_Module/01-usocket.md
-
-
-
 

@@ -2,8 +2,7 @@
 
 ## 开始使用 MicroPython
 
-!!! note "注意"
-     RT-Thread MicroPython 需要运行在 **RT-Thread 3.0** 版本以上。
+> **注意**：RT-Thread MicroPython 需要运行在 **RT-Thread 3.0** 版本以上。
 
 ### 选择合适的 BSP 平台
 
@@ -111,5 +110,3 @@ while True:
 ```
 
 针对自己的开发板修改引脚号，使用**粘贴模式**输入以上脚本，即可通过按键 KEY 控制 LED 灯的亮灭。
-
-----------

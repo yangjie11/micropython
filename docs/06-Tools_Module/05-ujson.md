@@ -1,10 +1,10 @@
-# **ujson** – JSON编码与解码
-!!! abstract "简介"
-    `ujson` 模块提供 Python 对象到 JSON（JavaScript Object Notation） 数据格式的转换。
+## **ujson** – JSON编码与解码
 
-## 函数
+`ujson` 模块提供 Python 对象到 JSON（JavaScript Object Notation） 数据格式的转换。
 
-### **ujson.dumps**(obj)  
+### 函数
+
+#### **ujson.dumps**(obj)  
 
 将 dict 类型转换成 str。
 
@@ -23,7 +23,7 @@ obj：要转换的对象
 <class 'str'> {3: 4, 1: 2, "a": 6}
 ```
 
-### **ujson.loads**(str)  
+#### **ujson.loads**(str)  
 解析 JSON 字符串并返回对象。如果字符串格式错误将引发 ValueError 异常。 
 示例：
 
@@ -40,5 +40,3 @@ obj：要转换的对象
 ```
 
 更多内容可参考 [ujson](http://docs.micropython.org/en/latest/pyboard/library/ujson.html)  。
-
-----------

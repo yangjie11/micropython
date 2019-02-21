@@ -1,10 +1,7 @@
 # RT-Thread MicroPython 开发手册介绍
 
-----------
+本手册介绍了 RT-Thread MicroPython 的基础知识、常用模块，以及开发新模块的流程。带领读者了解 MicroPython ，并学会使用 MicroPython 进行开发。
 
-!!! abstract "摘要"
-     本手册介绍了 RT-Thread MicroPython 的基础知识、常用模块，以及开发新模块的流程。带领读者了解 MicroPython ，并学会使用 MicroPython 进行开发。
-     
 ## 主要特性
 
 - MicroPython 是 Python 3 编程语言的一种精简而高效的实现，它包含 Python 标准库的一个子集，并被优化为在微控制器和受限环境中运行。
@@ -54,7 +51,7 @@
     - [手机遥控车](https://www.bilibili.com/video/av15008143?from=search&seid=16285206333541196172)
     - [搭建 MQTT 服务器](http://www.360doc.com/content/17/1218/22/8473307_714341237.shtml)
 
-# MicroPython 开发资源
+## MicroPython 开发资源
 
 - [RT-Thread MicroPython 开发手册](https://www.rt-thread.org/document/site/rtthread-development-guide/micropython/docs/README/)
 
