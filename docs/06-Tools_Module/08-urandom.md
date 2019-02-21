@@ -1,10 +1,10 @@
-# **urandom** - 随机数生成模块
-!!! abstract "简介"
-    `urandom` 模块实现了伪随机数生成器。
+## **urandom** - 随机数生成模块
 
-## 函数 
+`urandom` 模块实现了伪随机数生成器。
 
-### **urandom.choice**(obj)  
+### 函数 
+
+#### **urandom.choice**(obj)  
 
 随机生成对象 obj 中的元数。
 
@@ -27,7 +27,7 @@ D
 2
 ```
 
-### **urandom.getrandbits**(size)  
+#### **urandom.getrandbits**(size)  
 
 随机生成 0 到 size 个位二进制数范围内的正整数。 比如 ：
 
@@ -51,7 +51,7 @@ size：位大小
 155
 ```
 
-### **urandom.randint**(start, end)  
+#### **urandom.randint**(start, end)  
 
 随机生成一个 start 到 end 之间的整数。 
 
@@ -70,7 +70,7 @@ end：指定范围内的结束值，包含在范围内
 2
 ```
 
-### **urandom.random**()  
+#### **urandom.random**()  
 随机生成一个 0 到 1 之间的浮点数。 
 示例：
 
@@ -81,7 +81,7 @@ end：指定范围内的结束值，包含在范围内
 0.3168149
 ```
 
-### **urandom.randrange**(start, end, step)  
+#### **urandom.randrange**(start, end, step)  
 
 随机生成 start 到 end 并且递增为 step 的范围内的正整数。例如，randrange(0, 8, 2)中，随机生成的数为 0、2、4、6 中任一个。
 
@@ -102,7 +102,7 @@ step：递增基数
 2
 ```
 
-### **urandom.seed**(sed)  
+#### **urandom.seed**(sed)  
 
 指定随机数种子，通常和其他随机数生成函数搭配使用。 
 **注意：** 
@@ -153,7 +153,7 @@ end
 
    从上面可以看到生成两个随机数列表是一样的，你也可以多生成几个随机数列表查看结果。
 
-### **urandom.uniform**(start, end)  
+#### **urandom.uniform**(start, end)  
 
 随机生成start到end之间的浮点数。
 
@@ -172,5 +172,3 @@ stop：指定范围内的结束值，包含在范围内
 ```
 
 更多内容可参考 [urandom](https://docs.python.org/3/library/random.html?highlight=random#module-random) 。
-
-----------

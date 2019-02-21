@@ -1,7 +1,6 @@
 # RT-Thread MicroPython 包管理
 
-!!! abstract "简介"  
-    MicroPython 自身不像 CPython 那样拥有广泛的标准库。但是 MicroPython 有一个相关且独立的项目 micropython-lib，它提供了来自 CPython 标准库的许多模块的实现。由于 RT-Thread 操作系统提供了很好的 `POSIX` 标准支持，所以 micropython-lib 中很多模块可以在 RT-Thread MicroPython 上直接运行。这篇文章将介绍如何利用这些扩展模块来增强 MicroPython 的功能。
+MicroPython 自身不像 CPython 那样拥有广泛的标准库。但是 MicroPython 有一个相关且独立的项目 micropython-lib，它提供了来自 CPython 标准库的许多模块的实现。由于 RT-Thread 操作系统提供了很好的 `POSIX` 标准支持，所以 micropython-lib 中很多模块可以在 RT-Thread MicroPython 上直接运行。这篇文章将介绍如何利用这些扩展模块来增强 MicroPython 的功能。
 
 ## 1. 使用 micropython-lib 源代码 
 
