@@ -12,6 +12,7 @@ src    += Glob('port/*.c')
 src    += Glob('lib/netutils/*.c')
 src    += Glob('lib/timeutils/*.c')
 src    += Glob('drivers/bus/*.c')
+src    += Glob('port/native/*.c')
 
 path    = [cwd + '/']
 path   += [cwd + '/port']
