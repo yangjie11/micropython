@@ -29,15 +29,15 @@
 #include <assert.h>
 #include <string.h>
 #include <errno.h>
-#include <dlfcn.h>
 #include <stdint.h>
-#include <dlmodule.h>
 
 #include "py/runtime.h"
 #include "py/binary.h"
 #include "py/mperrno.h"
 
 #ifdef MICROPYTHON_USING_FFI
+#include <dlfcn.h>
+#include <dlmodule.h>
 
 typedef enum {
     FFI_TYPE_UNKNOWN,
