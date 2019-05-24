@@ -155,6 +155,7 @@
 #define MICROPY_READER_POSIX        (1)
 #define MICROPY_PY_BUILTINS_COMPILE (1)
 #define MICROPY_PY_BUILTINS_EXECFILE (1)
+#define MICROPY_PERSISTENT_CODE_LOAD (1)
 #else
 #define MICROPY_PY_IO               (0)
 #define MICROPY_PY_MODUOS           (0)
