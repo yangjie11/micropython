@@ -27,13 +27,13 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
-
 #include <rtthread.h>
 #include <drivers/pin.h>
-
 #include "py/runtime.h"
 #include "py/gc.h"
 #include "py/mphal.h"
+#include "py/mperrno.h"
+#include "py/stream.h"
 #include "modmachine.h"
 
 #if MICROPY_PY_PIN
@@ -219,7 +219,9 @@ STATIC mp_uint_t machine_pin_ioctl(mp_obj_t self_in, mp_uint_t request, uintptr_
             return 0;
         }
     }
-    return -1;
+
+    *errcode = MP_EINVAL;
+    return MP_STREAM_ERROR;
 }
 
 STATIC const mp_rom_map_elem_t machine_pin_locals_dict_table[] = {
