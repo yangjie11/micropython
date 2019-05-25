@@ -427,7 +427,7 @@ STATIC mp_obj_t ffifunc_call(mp_obj_t self_in, size_t n_args, size_t n_kw, const
         ffi_arg retval;
         ffi_call(self->func, &retval, n_args, values);
         m_free(values);
-        return return_ffi_value(retval, self->rettype);
+        return return_ffi_value((void *)retval, self->rettype);
     }
 
 __error:
