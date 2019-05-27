@@ -36,6 +36,11 @@
 #include "py/mperrno.h"
 
 #ifdef MICROPYTHON_USING_FFI
+
+#if !defined(__GNUC__) 
+#error "The ffi module only supports GCC toolchain at present"
+#endif
+
 #include <dlfcn.h>
 #include <dlmodule.h>
 
