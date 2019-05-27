@@ -43,6 +43,7 @@ RT-Thread MicroPython  遵循 MIT 许可，详见 `LICENSE` 文件。
 
 - 需要使用 **RT-Thread 3.0** 以上版本。
 - 在 `menuconfig` 选项中选择 `Micropython` 的 `latest` 版本。
+- 目前 `System Module` 下的 `ffi` 模块只支持 GCC 工具链，且需要在链接脚本中添加相关段信息。 
 
 ## 5、开发资源
 
