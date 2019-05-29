@@ -32,8 +32,8 @@
 #include "py/runtime.h"
 #include "py/mphal.h"
 #include "lib/netutils/netutils.h"
-#include "systick.h"
-#include "pendsv.h"
+//#include "systick.h"
+//#include "pendsv.h"
 #include "modnetwork.h"
 
 #if MICROPY_PY_NETWORK
@@ -78,40 +78,40 @@ void mod_network_lwip_poll_wrapper(uint32_t ticks_ms) {
 ///
 /// This module provides network drivers and routing configuration.
 
-void mod_network_init(void) {
-    mp_obj_list_init(&MP_STATE_PORT(mod_network_nic_list), 0);
-}
+//void mod_network_init(void) {
+//    mp_obj_list_init(&MP_STATE_PORT(mod_network_nic_list), 0);
+//}
 
-void mod_network_deinit(void) {
-}
+//void mod_network_deinit(void) {
+//}
 
-void mod_network_register_nic(mp_obj_t nic) {
-    for (mp_uint_t i = 0; i < MP_STATE_PORT(mod_network_nic_list).len; i++) {
-        if (MP_STATE_PORT(mod_network_nic_list).items[i] == nic) {
-            // nic already registered
-            return;
-        }
-    }
-    // nic not registered so add to list
-    mp_obj_list_append(MP_OBJ_FROM_PTR(&MP_STATE_PORT(mod_network_nic_list)), nic);
-}
+//void mod_network_register_nic(mp_obj_t nic) {
+//    for (mp_uint_t i = 0; i < MP_STATE_PORT(mod_network_nic_list).len; i++) {
+//        if (MP_STATE_PORT(mod_network_nic_list).items[i] == nic) {
+//            // nic already registered
+//            return;
+//        }
+//    }
+//    // nic not registered so add to list
+//    mp_obj_list_append(MP_OBJ_FROM_PTR(&MP_STATE_PORT(mod_network_nic_list)), nic);
+//}
 
-mp_obj_t mod_network_find_nic(const uint8_t *ip) {
-    // find a NIC that is suited to given IP address
-    for (mp_uint_t i = 0; i < MP_STATE_PORT(mod_network_nic_list).len; i++) {
-        mp_obj_t nic = MP_STATE_PORT(mod_network_nic_list).items[i];
-        // TODO check IP suitability here
-        //mod_network_nic_type_t *nic_type = (mod_network_nic_type_t*)mp_obj_get_type(nic);
-        return nic;
-    }
+//mp_obj_t mod_network_find_nic(const uint8_t *ip) {
+//    // find a NIC that is suited to given IP address
+//    for (mp_uint_t i = 0; i < MP_STATE_PORT(mod_network_nic_list).len; i++) {
+//        mp_obj_t nic = MP_STATE_PORT(mod_network_nic_list).items[i];
+//        // TODO check IP suitability here
+//        //mod_network_nic_type_t *nic_type = (mod_network_nic_type_t*)mp_obj_get_type(nic);
+//        return nic;
+//    }
 
-    nlr_raise(mp_obj_new_exception_msg(&mp_type_OSError, "no available NIC"));
-}
+//    nlr_raise(mp_obj_new_exception_msg(&mp_type_OSError, "no available NIC"));
+//}
 
-STATIC mp_obj_t network_route(void) {
-    return MP_OBJ_FROM_PTR(&MP_STATE_PORT(mod_network_nic_list));
-}
-STATIC MP_DEFINE_CONST_FUN_OBJ_0(network_route_obj, network_route);
+//STATIC mp_obj_t network_route(void) {
+//    return MP_OBJ_FROM_PTR(&MP_STATE_PORT(mod_network_nic_list));
+//}
+//STATIC MP_DEFINE_CONST_FUN_OBJ_0(network_route_obj, network_route);
 
 STATIC const mp_rom_map_elem_t mp_module_network_globals_table[] = {
     { MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_network) },
@@ -127,7 +127,7 @@ STATIC const mp_rom_map_elem_t mp_module_network_globals_table[] = {
     { MP_ROM_QSTR(MP_QSTR_CC3K), MP_ROM_PTR(&mod_network_nic_type_cc3k) },
     #endif
 
-    { MP_ROM_QSTR(MP_QSTR_route), MP_ROM_PTR(&network_route_obj) },
+//    { MP_ROM_QSTR(MP_QSTR_route), MP_ROM_PTR(&network_route_obj) },
 };
 
 STATIC MP_DEFINE_CONST_DICT(mp_module_network_globals, mp_module_network_globals_table);
