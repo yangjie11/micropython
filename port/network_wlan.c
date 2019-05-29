@@ -37,18 +37,7 @@
 #include <wlan_mgnt.h>
 #include <wlan_cfg.h>
 #include <wlan_prot.h>
-
-//#include "queue.h"
-//#include "user_interface.h"
-//#include "espconn.h"
-//#include "spi_flash.h"
-//#include "ets_alt_task.h"
-//#include "lwip/dns.h"
-
-#define MODNETWORK_INCLUDE_CONSTANTS (1)
-
-#define STATION_IF   0
-#define SOFTAP_IF    1
+#include "modnetwork.h"
 
 typedef struct _wlan_if_obj_t {
     mp_obj_base_t base;
@@ -88,7 +77,10 @@ STATIC mp_obj_t get_wlan(size_t n_args, const mp_obj_t *args) {
 MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(get_wlan_obj, 0, 1, get_wlan);
 
 STATIC mp_obj_t esp_active(size_t n_args, const mp_obj_t *args) {
+// TODO
+
 //    wlan_if_obj_t *self = MP_OBJ_TO_PTR(args[0]);
+
 //    uint32_t mode = wifi_get_opmode();
 //    if (n_args > 1) {
 //        int mask = self->if_id == STATION_IF ? STATION_MODE : SOFTAP_MODE;
@@ -119,6 +111,8 @@ STATIC mp_obj_t esp_active(size_t n_args, const mp_obj_t *args) {
 //    } else {
 //        return mp_obj_new_bool(mode & SOFTAP_MODE);
 //    }
+
+    return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(esp_active_obj, 1, 2, esp_active);
 
@@ -496,7 +490,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(esp_isconnected_obj, esp_isconnected);
 //STATIC MP_DEFINE_CONST_FUN_OBJ_KW(esp_config_obj, 1, esp_config);
 
 STATIC const mp_rom_map_elem_t wlan_if_locals_dict_table[] = {
-//    { MP_ROM_QSTR(MP_QSTR_active), MP_ROM_PTR(&esp_active_obj) },
+    { MP_ROM_QSTR(MP_QSTR_active), MP_ROM_PTR(&esp_active_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_connect), MP_ROM_PTR(&esp_connect_obj) },
     { MP_ROM_QSTR(MP_QSTR_disconnect), MP_ROM_PTR(&esp_disconnect_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_status), MP_ROM_PTR(&esp_status_obj) },
@@ -504,35 +498,8 @@ STATIC const mp_rom_map_elem_t wlan_if_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_isconnected), MP_ROM_PTR(&esp_isconnected_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_config), MP_ROM_PTR(&esp_config_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_ifconfig), MP_ROM_PTR(&esp_ifconfig_obj) },
-};
-
-STATIC MP_DEFINE_CONST_DICT(wlan_if_locals_dict, wlan_if_locals_dict_table);
-
-const mp_obj_type_t wlan_if_type = {
-    { &mp_type_type },
-    .name = MP_QSTR_WLAN,
-    .locals_dict = (mp_obj_dict_t*)&wlan_if_locals_dict,
-};
-
-//STATIC mp_obj_t esp_phy_mode(size_t n_args, const mp_obj_t *args) {
-//    if (n_args == 0) {
-//        return mp_obj_new_int(wifi_get_phy_mode());
-//    } else {
-//        wifi_set_phy_mode(mp_obj_get_int(args[0]));
-//        return mp_const_none;
-//    }
-//}
-//STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(esp_phy_mode_obj, 0, 1, esp_phy_mode);
-
-//STATIC const mp_rom_map_elem_t mp_module_network_globals_table[] = {
-//    { MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_network) },
-//    { MP_ROM_QSTR(MP_QSTR_WLAN), MP_ROM_PTR(&get_wlan_obj) },
-//    { MP_ROM_QSTR(MP_QSTR_phy_mode), MP_ROM_PTR(&esp_phy_mode_obj) },
-
-//#if MODNETWORK_INCLUDE_CONSTANTS
-//    { MP_ROM_QSTR(MP_QSTR_STA_IF), MP_ROM_INT(STATION_IF)},
-//    { MP_ROM_QSTR(MP_QSTR_AP_IF), MP_ROM_INT(SOFTAP_IF)},
-
+    
+#if MODNETWORK_INCLUDE_CONSTANTS
 //    { MP_ROM_QSTR(MP_QSTR_STAT_IDLE), MP_ROM_INT(STATION_IDLE)},
 //    { MP_ROM_QSTR(MP_QSTR_STAT_CONNECTING), MP_ROM_INT(STATION_CONNECTING)},
 //    { MP_ROM_QSTR(MP_QSTR_STAT_WRONG_PASSWORD), MP_ROM_INT(STATION_WRONG_PASSWORD)},
@@ -549,12 +516,15 @@ const mp_obj_type_t wlan_if_type = {
 //    { MP_ROM_QSTR(MP_QSTR_AUTH_WPA_PSK), MP_ROM_INT(AUTH_WPA_PSK) },
 //    { MP_ROM_QSTR(MP_QSTR_AUTH_WPA2_PSK), MP_ROM_INT(AUTH_WPA2_PSK) },
 //    { MP_ROM_QSTR(MP_QSTR_AUTH_WPA_WPA2_PSK), MP_ROM_INT(AUTH_WPA_WPA2_PSK) },
-//#endif
-//};
+#endif
+};
 
-//STATIC MP_DEFINE_CONST_DICT(mp_module_network_globals, mp_module_network_globals_table);
+STATIC MP_DEFINE_CONST_DICT(wlan_if_locals_dict, wlan_if_locals_dict_table);
 
-//const mp_obj_module_t network_module = {
-//    .base = { &mp_type_module },
-//    .globals = (mp_obj_dict_t*)&mp_module_network_globals,
-//};
+const mp_obj_type_t wlan_if_type = {
+    { &mp_type_type },
+    .name = MP_QSTR_WLAN,
+    .locals_dict = (mp_obj_dict_t*)&wlan_if_locals_dict,
+};
+
+
