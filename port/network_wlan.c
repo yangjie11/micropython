@@ -3,7 +3,7 @@
  *
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2016 Paul Sokolovsky
+ * Copyright (c) 2019 SummerGift <SummerGift@qq.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -117,50 +117,36 @@ STATIC mp_obj_t esp_active(size_t n_args, const mp_obj_t *args) {
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(esp_active_obj, 1, 2, esp_active);
 
 STATIC mp_obj_t esp_connect(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args) {
-//    enum { ARG_ssid, ARG_password, ARG_bssid };
-//    static const mp_arg_t allowed_args[] = {
-//        { MP_QSTR_, MP_ARG_OBJ, {.u_obj = mp_const_none} },
-//        { MP_QSTR_, MP_ARG_OBJ, {.u_obj = mp_const_none} },
-//        { MP_QSTR_bssid, MP_ARG_KW_ONLY | MP_ARG_OBJ, {.u_obj = mp_const_none} },
-//    };
+    enum { ARG_ssid, ARG_password, ARG_bssid };
+    static const mp_arg_t allowed_args[] = {
+        { MP_QSTR_, MP_ARG_OBJ, {.u_obj = mp_const_none} },
+        { MP_QSTR_, MP_ARG_OBJ, {.u_obj = mp_const_none} },
+        { MP_QSTR_bssid, MP_ARG_KW_ONLY | MP_ARG_OBJ, {.u_obj = mp_const_none} },
+    };
 
-//    // parse args
-//    mp_arg_val_t args[MP_ARRAY_SIZE(allowed_args)];
-//    mp_arg_parse_all(n_args - 1, pos_args + 1, kw_args, MP_ARRAY_SIZE(allowed_args), allowed_args, args);
+    // parse args
+    mp_arg_val_t args[MP_ARRAY_SIZE(allowed_args)];
+    mp_arg_parse_all(n_args - 1, pos_args + 1, kw_args, MP_ARRAY_SIZE(allowed_args), allowed_args, args);
 
-//    require_if(pos_args[0], STATION_IF);
-//    struct station_config config = {{0}};
-//    size_t len;
-//    const char *p;
-//    bool set_config = false;
+    require_if(pos_args[0], STATION_IF);
+    
+    const char *ssid = RT_NULL;
+    const char *key = RT_NULL;
+    size_t len;
+    const char *p;
 
-//    // set parameters based on given args
-//    if (args[ARG_ssid].u_obj != mp_const_none) {
-//        p = mp_obj_str_get_data(args[ARG_ssid].u_obj, &len);
-//        len = MIN(len, sizeof(config.ssid));
-//        memcpy(config.ssid, p, len);
-//        set_config = true;
-//    }
-//    if (args[ARG_password].u_obj != mp_const_none) {
-//        p = mp_obj_str_get_data(args[ARG_password].u_obj, &len);
-//        len = MIN(len, sizeof(config.password));
-//        memcpy(config.password, p, len);
-//        set_config = true;
-//    }
-//    if (args[ARG_bssid].u_obj != mp_const_none) {
-//        p = mp_obj_str_get_data(args[ARG_bssid].u_obj, &len);
-//        if (len != sizeof(config.bssid)) {
-//            mp_raise_ValueError(NULL);
-//        }
-//        config.bssid_set = 1;
-//        memcpy(config.bssid, p, sizeof(config.bssid));
-//        set_config = true;
-//    }
+    // set parameters based on given args
+    if (args[ARG_ssid].u_obj != mp_const_none) {
+        p = mp_obj_str_get_data(args[ARG_ssid].u_obj, &len);
+        ssid = p;
+    }
 
-//    if (set_config) {
-//        error_check(wifi_station_set_config(&config), "Cannot set STA config");
-//    }
-//    error_check(wifi_station_connect(), "Cannot connect to AP");
+    if (args[ARG_password].u_obj != mp_const_none) {
+        p = mp_obj_str_get_data(args[ARG_password].u_obj, &len);
+        key = p;
+    }
+
+    error_check(rt_wlan_connect(ssid, key) == RT_EOK, "Cannot connect to AP");
 
     return mp_const_none;
 }
@@ -491,7 +477,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(esp_isconnected_obj, esp_isconnected);
 
 STATIC const mp_rom_map_elem_t wlan_if_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_active), MP_ROM_PTR(&esp_active_obj) },
-//    { MP_ROM_QSTR(MP_QSTR_connect), MP_ROM_PTR(&esp_connect_obj) },
+    { MP_ROM_QSTR(MP_QSTR_connect), MP_ROM_PTR(&esp_connect_obj) },
     { MP_ROM_QSTR(MP_QSTR_disconnect), MP_ROM_PTR(&esp_disconnect_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_status), MP_ROM_PTR(&esp_status_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_scan), MP_ROM_PTR(&esp_scan_obj) },
