@@ -235,6 +235,10 @@
 #define MICROPY_PY_NETWORK          (1)
 #endif
 
+#ifndef MICROPY_PY_WLAN
+#define MICROPY_PY_WLAN             (1)
+#endif
+
 #if MICROPY_PY_THREAD
 #define MICROPY_EVENT_POLL_HOOK \
     do { \
