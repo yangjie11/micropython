@@ -41,6 +41,8 @@ STATIC const mp_rom_map_elem_t mp_module_network_globals_table[] = {
     
 #if defined(MICROPY_PY_WLAN)
     { MP_ROM_QSTR(MP_QSTR_WLAN), MP_ROM_PTR(&get_wlan_obj) },
+    { MP_ROM_QSTR(MP_QSTR_STA_IF), MP_ROM_INT(STATION_IF)},
+    { MP_ROM_QSTR(MP_QSTR_AP_IF), MP_ROM_INT(SOFTAP_IF)},
 #endif
 };
 
