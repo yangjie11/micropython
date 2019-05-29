@@ -72,6 +72,10 @@ void mpy_main(const char *filename) {
 
     rtt_getchar_init();
 
+    if (rt_thread_self()->stack_size < 4096) {
+        rt_kprintf("The stack (%.*s) size for executing MicroPython must be >=4096\n", RT_NAME_MAX, rt_thread_self()->name);
+    }
+
 #if MICROPY_PY_THREAD
     mp_thread_init(rt_thread_self()->stack_addr, ((rt_uint32_t)stack_top - (rt_uint32_t)rt_thread_self()->stack_addr) / 4);
 #endif
