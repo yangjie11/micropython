@@ -160,23 +160,23 @@ STATIC mp_obj_t esp_disconnect(mp_obj_t self_in) {
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(esp_disconnect_obj, esp_disconnect);
 
 STATIC mp_obj_t esp_status(size_t n_args, const mp_obj_t *args) {
-//    wlan_if_obj_t *self = MP_OBJ_TO_PTR(args[0]);
-//    if (n_args == 1) {
-//        // Get link status
-//        if (self->if_id == STATION_IF) {
-//            return MP_OBJ_NEW_SMALL_INT(wifi_station_get_connect_status());
-//        }
-//        return MP_OBJ_NEW_SMALL_INT(-1);
-//    } else {
-//        // Get specific status parameter
-//        switch (mp_obj_str_get_qstr(args[1])) {
-//            case MP_QSTR_rssi:
-//                if (self->if_id == STATION_IF) {
-//                    return MP_OBJ_NEW_SMALL_INT(wifi_station_get_rssi());
-//                }
-//        }
-//        mp_raise_ValueError("unknown status param");
-//    }
+    wlan_if_obj_t *self = MP_OBJ_TO_PTR(args[0]);
+    if (n_args == 1) {
+        // Get link status
+        if (self->if_id == STATION_IF) {
+            return MP_OBJ_NEW_SMALL_INT(rt_wlan_is_connected() == RT_TRUE);
+        }
+        return MP_OBJ_NEW_SMALL_INT(-1);
+    } else {
+        // Get specific status parameter
+        switch (mp_obj_str_get_qstr(args[1])) {
+            case MP_QSTR_rssi:
+                if (self->if_id == STATION_IF) {
+                    return MP_OBJ_NEW_SMALL_INT(rt_wlan_get_rssi());
+                }
+        }
+        mp_raise_ValueError("unknown status param");
+    }
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(esp_status_obj, 1, 2, esp_status);
 
@@ -479,7 +479,7 @@ STATIC const mp_rom_map_elem_t wlan_if_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_active), MP_ROM_PTR(&esp_active_obj) },
     { MP_ROM_QSTR(MP_QSTR_connect), MP_ROM_PTR(&esp_connect_obj) },
     { MP_ROM_QSTR(MP_QSTR_disconnect), MP_ROM_PTR(&esp_disconnect_obj) },
-//    { MP_ROM_QSTR(MP_QSTR_status), MP_ROM_PTR(&esp_status_obj) },
+    { MP_ROM_QSTR(MP_QSTR_status), MP_ROM_PTR(&esp_status_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_scan), MP_ROM_PTR(&esp_scan_obj) },
     { MP_ROM_QSTR(MP_QSTR_isconnected), MP_ROM_PTR(&esp_isconnected_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_config), MP_ROM_PTR(&esp_config_obj) },
