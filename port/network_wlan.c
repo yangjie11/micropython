@@ -174,7 +174,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_KW(esp_connect_obj, 1, esp_connect);
 
 STATIC mp_obj_t esp_disconnect(mp_obj_t self_in) {
     require_if(self_in, STATION_IF);
-    error_check(rt_wlan_disconnect(), "Cannot disconnect from AP");
+    error_check(rt_wlan_disconnect() == RT_EOK, "Cannot disconnect from AP");
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(esp_disconnect_obj, esp_disconnect);
@@ -498,7 +498,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(esp_isconnected_obj, esp_isconnected);
 STATIC const mp_rom_map_elem_t wlan_if_locals_dict_table[] = {
 //    { MP_ROM_QSTR(MP_QSTR_active), MP_ROM_PTR(&esp_active_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_connect), MP_ROM_PTR(&esp_connect_obj) },
-//    { MP_ROM_QSTR(MP_QSTR_disconnect), MP_ROM_PTR(&esp_disconnect_obj) },
+    { MP_ROM_QSTR(MP_QSTR_disconnect), MP_ROM_PTR(&esp_disconnect_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_status), MP_ROM_PTR(&esp_status_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_scan), MP_ROM_PTR(&esp_scan_obj) },
     { MP_ROM_QSTR(MP_QSTR_isconnected), MP_ROM_PTR(&esp_isconnected_obj) },
