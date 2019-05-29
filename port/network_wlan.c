@@ -220,32 +220,123 @@ STATIC mp_obj_t *esp_scan_list = NULL;
 //    esp_scan_list = NULL;
 //}
 
-//STATIC mp_obj_t esp_scan(mp_obj_t self_in) {
-//    require_if(self_in, STATION_IF);
+void wlan_station_scan(void)
+{
+    if (esp_scan_list == NULL) {
+        // called unexpectedly
+        return;
+    }
+    
+    struct rt_wlan_scan_result *scan_result = RT_NULL;
+
+    /* scan ap info */
+    scan_result = rt_wlan_scan_sync();
+    if (scan_result)
+    {
+        int index, num;
+        char *security;
+
+        num = scan_result->num;
+//        rt_kprintf("             SSID                      MAC            security    rssi chn Mbps\n");
+//        rt_kprintf("------------------------------- -----------------  -------------- ---- --- ----\n");
+        for (index = 0; index < num; index ++)
+        {
+//            rt_kprintf("%-32.32s", &scan_result->info[index].ssid.val[0]);
+//            rt_kprintf("%02x:%02x:%02x:%02x:%02x:%02x  ",
+//                       scan_result->info[index].bssid[0],
+//                       scan_result->info[index].bssid[1],
+//                       scan_result->info[index].bssid[2],
+//                       scan_result->info[index].bssid[3],
+//                       scan_result->info[index].bssid[4],
+//                       scan_result->info[index].bssid[5]
+//                      );
+            switch (scan_result->info[index].security)
+            {
+            case SECURITY_OPEN:
+                security = "OPEN";
+                break;
+            case SECURITY_WEP_PSK:
+                security = "WEP_PSK";
+                break;
+            case SECURITY_WEP_SHARED:
+                security = "WEP_SHARED";
+                break;
+            case SECURITY_WPA_TKIP_PSK:
+                security = "WPA_TKIP_PSK";
+                break;
+            case SECURITY_WPA_AES_PSK:
+                security = "WPA_AES_PSK";
+                break;
+            case SECURITY_WPA2_AES_PSK:
+                security = "WPA2_AES_PSK";
+                break;
+            case SECURITY_WPA2_TKIP_PSK:
+                security = "WPA2_TKIP_PSK";
+                break;
+            case SECURITY_WPA2_MIXED_PSK:
+                security = "WPA2_MIXED_PSK";
+                break;
+            case SECURITY_WPS_OPEN:
+                security = "WPS_OPEN";
+                break;
+            case SECURITY_WPS_SECURE:
+                security = "WPS_SECURE";
+                break;
+            default:
+                security = "UNKNOWN";
+                break;
+            }
+//            rt_kprintf("%-14.14s ", security);
+//            rt_kprintf("%-4d ", scan_result->info[index].rssi);
+//            rt_kprintf("%3d ", scan_result->info[index].channel);
+//            rt_kprintf("%4d\n", scan_result->info[index].datarate / 1000000);
+            
+
+            mp_obj_tuple_t *t = mp_obj_new_tuple(6, NULL);
+            #if 1
+            // struct bss_info::ssid_len is not documented in SDK API Guide,
+            // but is present in SDK headers since 1.4.0
+            t->items[0] = mp_obj_new_bytes(&scan_result->info[index].ssid.val[0], strlen((char *)(&scan_result->info[index].ssid.val[0])));
+            #else
+            t->items[0] = mp_obj_new_bytes(bs->ssid, strlen((char*)bs->ssid));
+            #endif
+            t->items[1] = mp_obj_new_bytes(&scan_result->info[index].bssid[0], strlen((char *)(&scan_result->info[index].bssid[0])));
+            t->items[2] = MP_OBJ_NEW_SMALL_INT(scan_result->info[index].channel);
+            t->items[3] = MP_OBJ_NEW_SMALL_INT(scan_result->info[index].rssi);
+            t->items[4] = mp_obj_new_bytes((const byte *)security, strlen(security));
+            t->items[5] = MP_OBJ_NEW_SMALL_INT(0);
+            
+//            t->items[4] = MP_OBJ_NEW_SMALL_INT(bs->authmode);
+//            t->items[5] = MP_OBJ_NEW_SMALL_INT(bs->is_hidden);
+            mp_obj_list_append(*esp_scan_list, MP_OBJ_FROM_PTR(t));
+
+        }
+        rt_wlan_scan_result_clean();
+    }
+    else
+    {
+        rt_kprintf("wifi scan result is null\n");
+        *esp_scan_list = MP_OBJ_NULL;
+    }
+}
+
+STATIC mp_obj_t esp_scan(mp_obj_t self_in) {
+    require_if(self_in, STATION_IF);
 //    if ((wifi_get_opmode() & STATION_MODE) == 0) {
 //        nlr_raise(mp_obj_new_exception_msg(&mp_type_OSError,
 //            "STA must be active"));
 //    }
-//    mp_obj_t list = mp_obj_new_list(0, NULL);
-//    esp_scan_list = &list;
-//    wifi_station_scan(NULL, (scan_done_cb_t)esp_scan_cb);
-//    while (esp_scan_list != NULL) {
-//        // our esp_scan_cb is called via ets_loop_iter so it's safe to set the
-//        // esp_scan_list variable to NULL without disabling interrupts
-//        if (MP_STATE_VM(mp_pending_exception) != NULL) {
-//            esp_scan_list = NULL;
-//            mp_obj_t obj = MP_STATE_VM(mp_pending_exception);
-//            MP_STATE_VM(mp_pending_exception) = MP_OBJ_NULL;
-//            nlr_raise(obj);
-//        }
-//        ets_loop_iter();
-//    }
-//    if (list == MP_OBJ_NULL) {
-//        nlr_raise(mp_obj_new_exception_msg(&mp_type_OSError, "scan failed"));
-//    }
-//    return list;
-//}
-//STATIC MP_DEFINE_CONST_FUN_OBJ_1(esp_scan_obj, esp_scan);
+
+    mp_obj_t list = mp_obj_new_list(0, NULL);
+    esp_scan_list = &list;
+    wlan_station_scan();
+
+    if (list == MP_OBJ_NULL) {
+        nlr_raise(mp_obj_new_exception_msg(&mp_type_OSError, "scan failed"));
+    }
+    return list;
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(esp_scan_obj, esp_scan);
 
 /// \method isconnected()
 /// Return True if connected to an AP and an IP address has been assigned,
@@ -480,7 +571,7 @@ STATIC const mp_rom_map_elem_t wlan_if_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_connect), MP_ROM_PTR(&esp_connect_obj) },
     { MP_ROM_QSTR(MP_QSTR_disconnect), MP_ROM_PTR(&esp_disconnect_obj) },
     { MP_ROM_QSTR(MP_QSTR_status), MP_ROM_PTR(&esp_status_obj) },
-//    { MP_ROM_QSTR(MP_QSTR_scan), MP_ROM_PTR(&esp_scan_obj) },
+    { MP_ROM_QSTR(MP_QSTR_scan), MP_ROM_PTR(&esp_scan_obj) },
     { MP_ROM_QSTR(MP_QSTR_isconnected), MP_ROM_PTR(&esp_isconnected_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_config), MP_ROM_PTR(&esp_config_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_ifconfig), MP_ROM_PTR(&esp_ifconfig_obj) },
