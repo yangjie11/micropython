@@ -39,6 +39,8 @@
 #include <wlan_mgnt.h>
 #include <wlan_cfg.h>
 #include <wlan_prot.h>
+#include <arpa/inet.h>
+#include <netdev.h>     
 #include "modnetwork.h"
 
 typedef struct _wlan_if_obj_t {
@@ -274,22 +276,30 @@ STATIC mp_obj_t wlan_isconnected(mp_obj_t self_in) {
 
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(wlan_isconnected_obj, wlan_isconnected);
 
-//STATIC mp_obj_t wlan_ifconfig(size_t n_args, const mp_obj_t *args) {
-//    wlan_if_obj_t *self = MP_OBJ_TO_PTR(args[0]);
-//    struct ip_info info;
-//    ip_addr_t dns_addr;
-//    wifi_get_ip_info(self->if_id, &info);
-//    if (n_args == 1) {
-//        // get
-//        dns_addr = dns_getserver(0);
-//        mp_obj_t tuple[4] = {
-//            netutils_format_ipv4_addr((uint8_t*)&info.ip, NETUTILS_BIG),
-//            netutils_format_ipv4_addr((uint8_t*)&info.netmask, NETUTILS_BIG),
-//            netutils_format_ipv4_addr((uint8_t*)&info.gw, NETUTILS_BIG),
-//            netutils_format_ipv4_addr((uint8_t*)&dns_addr, NETUTILS_BIG),
-//        };
-//        return mp_obj_new_tuple(4, tuple);
-//    } else {
+STATIC mp_obj_t wlan_ifconfig(size_t n_args, const mp_obj_t *args) {
+    wlan_if_obj_t *self = MP_OBJ_TO_PTR(args[0]);
+
+    struct netdev *netdev = RT_NULL;
+    
+    netdev = netdev_get_by_name("w0");
+    if (netdev == RT_NULL)
+    {
+        rt_kprintf("not find wlan interface device name(%s).\n", "w0");
+        return MP_OBJ_NEW_SMALL_INT(-1);
+    }
+
+    if (n_args == 1) {
+        // get
+        mp_obj_t tuple[4] = {
+            mp_obj_new_str((const char *)inet_ntoa(netdev->ip_addr), strlen((char *)(inet_ntoa(netdev->ip_addr)))),
+            mp_obj_new_str((const char *)inet_ntoa(netdev->netmask), strlen((char *)(inet_ntoa(netdev->netmask)))),
+            mp_obj_new_str((const char *)inet_ntoa(netdev->gw), strlen((char *)(inet_ntoa(netdev->gw)))),
+            mp_obj_new_str((const char *)inet_ntoa(netdev->dns_servers), strlen((char *)(inet_ntoa(netdev->dns_servers)))),
+        };
+        return mp_obj_new_tuple(4, tuple);
+    } 
+//    else 
+//        {
 //        // set
 //        mp_obj_t *items;
 //        bool restart_dhcp_server = false;
@@ -324,8 +334,8 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(wlan_isconnected_obj, wlan_isconnected);
 //        }
 //        return mp_const_none;
 //    }
-//}
-//STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(wlan_ifconfig_obj, 1, 2, wlan_ifconfig);
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(wlan_ifconfig_obj, 1, 2, wlan_ifconfig);
 
 //STATIC mp_obj_t wlan_config(size_t n_args, const mp_obj_t *args, mp_map_t *kwargs) {
 //    if (n_args != 1 && kwargs->used != 0) {
@@ -491,7 +501,7 @@ STATIC const mp_rom_map_elem_t wlan_if_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_scan), MP_ROM_PTR(&wlan_scan_obj) },
     { MP_ROM_QSTR(MP_QSTR_isconnected), MP_ROM_PTR(&wlan_isconnected_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_config), MP_ROM_PTR(&wlan_config_obj) },
-//    { MP_ROM_QSTR(MP_QSTR_ifconfig), MP_ROM_PTR(&wlan_ifconfig_obj) },
+    { MP_ROM_QSTR(MP_QSTR_ifconfig), MP_ROM_PTR(&wlan_ifconfig_obj) },
     
 #if MODNETWORK_INCLUDE_CONSTANTS
 //    { MP_ROM_QSTR(MP_QSTR_STAT_IDLE), MP_ROM_INT(STATION_IDLE)},
