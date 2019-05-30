@@ -231,11 +231,11 @@
 #define MICROPY_SSL_MBEDTLS         (1)
 #endif
 
-#ifndef MICROPY_PY_NETWORK
+#ifdef MICROPYTHON_USING_NETWORK
 #define MICROPY_PY_NETWORK          (1)
 #endif
 
-#ifndef MICROPY_PY_WLAN
+#ifdef MICROPYTHON_USING_WLAN
 #define MICROPY_PY_WLAN             (1)
 #endif
 
