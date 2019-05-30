@@ -298,42 +298,51 @@ STATIC mp_obj_t wlan_ifconfig(size_t n_args, const mp_obj_t *args) {
         };
         return mp_obj_new_tuple(4, tuple);
     } 
-//    else 
-//        {
-//        // set
-//        mp_obj_t *items;
-//        bool restart_dhcp_server = false;
-//        mp_obj_get_array_fixed_n(args[1], 4, &items);
-//        netutils_parse_ipv4_addr(items[0], (void*)&info.ip, NETUTILS_BIG);
-//        if (mp_obj_is_integer(items[1])) {
-//            // allow numeric netmask, i.e.:
-//            // 24 -> 255.255.255.0
-//            // 16 -> 255.255.0.0
-//            // etc...
-//            uint32_t* m = (uint32_t*)&info.netmask;
-//            *m = htonl(0xffffffff << (32 - mp_obj_get_int(items[1])));
-//        } else {
-//            netutils_parse_ipv4_addr(items[1], (void*)&info.netmask, NETUTILS_BIG);
-//        }
-//        netutils_parse_ipv4_addr(items[2], (void*)&info.gw, NETUTILS_BIG);
-//        netutils_parse_ipv4_addr(items[3], (void*)&dns_addr, NETUTILS_BIG);
-//        // To set a static IP we have to disable DHCP first
-//        if (self->if_id == STATION_IF) {
-//            wifi_station_dhcpc_stop();
-//        } else {
-//            restart_dhcp_server = wifi_softap_dhcps_status();
-//            wifi_softap_dhcps_stop();
-//        }
-//        if (!wifi_set_ip_info(self->if_id, &info)) {
-//          nlr_raise(mp_obj_new_exception_msg(&mp_type_OSError,
-//            "wifi_set_ip_info() failed"));
-//        }
-//        dns_setserver(0, &dns_addr);
-//        if (restart_dhcp_server) {
-//            wifi_softap_dhcps_start();
-//        }
-//        return mp_const_none;
-//    }
+    else 
+    {
+        // set
+        mp_obj_t *items;
+        bool restart_dhcp_server = false;
+
+        uint8_t ip_addr[4];
+        uint8_t netmask[4];
+        uint8_t gw[4];
+        uint8_t dns_server[4];
+        
+        mp_obj_get_array_fixed_n(args[1], 4, &items);
+
+        netutils_parse_ipv4_addr(items[0], (uint8_t *)ip_addr,    NETUTILS_BIG);
+        netutils_parse_ipv4_addr(items[1], (uint8_t *)netmask,    NETUTILS_BIG);
+        netutils_parse_ipv4_addr(items[2], (uint8_t *)gw     ,    NETUTILS_BIG);
+        netutils_parse_ipv4_addr(items[3], (uint8_t *)dns_server, NETUTILS_BIG);
+
+        // To set a static IP we have to disable DHCP first
+        if (self->if_id == STATION_IF) {
+            if(netdev_dhcp_enabled(netdev, 0) == RT_EOK)
+            {
+                if (netdev_set_ipaddr(netdev, (const ip_addr_t *)ip_addr) != RT_EOK)
+                {
+                    nlr_raise(mp_obj_new_exception_msg(&mp_type_OSError, "netdev_set_ipaddr() failed"));         
+                }
+            }
+            else
+            {
+                nlr_raise(mp_obj_new_exception_msg(&mp_type_OSError, "netdev_dhcp_enabled() failed"));  
+            }
+        }
+        else 
+        {
+            // TODO modify IP netmask gw under AP mode
+            netdev_set_dns_server(netdev, 0, (const ip_addr_t *)dns_server);
+            return mp_const_none;
+        }
+
+        netdev_set_netmask(netdev, (const ip_addr_t *)netmask);
+        netdev_set_gw(netdev, (const ip_addr_t *)gw);
+        netdev_set_dns_server(netdev, 0, (const ip_addr_t *)dns_server);
+    }
+    
+    return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(wlan_ifconfig_obj, 1, 2, wlan_ifconfig);
 
