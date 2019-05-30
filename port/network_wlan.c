@@ -79,41 +79,22 @@ STATIC mp_obj_t get_wlan(size_t n_args, const mp_obj_t *args) {
 MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(get_wlan_obj, 0, 1, get_wlan);
 
 STATIC mp_obj_t wlan_active(size_t n_args, const mp_obj_t *args) {
-// TODO
 
-//    wlan_if_obj_t *self = MP_OBJ_TO_PTR(args[0]);
+    wlan_if_obj_t *self = MP_OBJ_TO_PTR(args[0]);
 
-//    uint32_t mode = wifi_get_opmode();
-//    if (n_args > 1) {
-//        int mask = self->if_id == STATION_IF ? STATION_MODE : SOFTAP_MODE;
-//        if (mp_obj_get_int(args[1]) != 0) {
-//            mode |= mask;
-//        } else {
-//            mode &= ~mask;
-//        }
-//        if (mode != NULL_MODE) {
-//            wifi_fpm_do_wakeup();
-//            wifi_fpm_close();
-//        }
-//        error_check(wifi_set_opmode(mode), "Cannot update i/f status");
-//        if (mode == NULL_MODE) {
-//            // Wait for the interfaces to go down before forcing power management
-//            while (wifi_get_opmode() != NULL_MODE) {
-//                ets_loop_iter();
-//            }
-//            wifi_fpm_open();
-//            wifi_fpm_do_sleep(0xfffffff);
-//        }
-//        return mp_const_none;
-//    }
+    if (n_args > 1) {
+        return mp_const_none;
+    }
 
-//    // Get active status
-//    if (self->if_id == STATION_IF) {
-//        return mp_obj_new_bool(mode & STATION_MODE);
-//    } else {
-//        return mp_obj_new_bool(mode & SOFTAP_MODE);
-//    }
-
+    if (self->if_id == STATION_IF)
+    {
+        return mp_obj_new_bool(rt_wlan_get_mode("wlan0") == RT_WLAN_STATION);
+    }
+    else
+    {
+        return mp_obj_new_bool(rt_wlan_get_mode("wlan1") == RT_WLAN_AP);
+    }
+    
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(wlan_active_obj, 1, 2, wlan_active);
