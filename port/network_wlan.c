@@ -182,44 +182,6 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(esp_status_obj, 1, 2, esp_status);
 
 STATIC mp_obj_t *esp_scan_list = NULL;
 
-//STATIC void esp_scan_cb(void *result, STATUS status) {
-//    if (esp_scan_list == NULL) {
-//        // called unexpectedly
-//        return;
-//    }
-//    if (result && status == 0) {
-//        // we need to catch any memory errors
-//        nlr_buf_t nlr;
-//        if (nlr_push(&nlr) == 0) {
-//            for (struct bss_info *bs = result; bs; bs = STAILQ_NEXT(bs, next)) {
-//                mp_obj_tuple_t *t = mp_obj_new_tuple(6, NULL);
-//                #if 1
-//                // struct bss_info::ssid_len is not documented in SDK API Guide,
-//                // but is present in SDK headers since 1.4.0
-//                t->items[0] = mp_obj_new_bytes(bs->ssid, bs->ssid_len);
-//                #else
-//                t->items[0] = mp_obj_new_bytes(bs->ssid, strlen((char*)bs->ssid));
-//                #endif
-//                t->items[1] = mp_obj_new_bytes(bs->bssid, sizeof(bs->bssid));
-//                t->items[2] = MP_OBJ_NEW_SMALL_INT(bs->channel);
-//                t->items[3] = MP_OBJ_NEW_SMALL_INT(bs->rssi);
-//                t->items[4] = MP_OBJ_NEW_SMALL_INT(bs->authmode);
-//                t->items[5] = MP_OBJ_NEW_SMALL_INT(bs->is_hidden);
-//                mp_obj_list_append(*esp_scan_list, MP_OBJ_FROM_PTR(t));
-//            }
-//            nlr_pop();
-//        } else {
-//            mp_obj_print_exception(&mp_plat_print, MP_OBJ_FROM_PTR(nlr.ret_val));
-//            // indicate error
-//            *esp_scan_list = MP_OBJ_NULL;
-//        }
-//    } else {
-//        // indicate error
-//        *esp_scan_list = MP_OBJ_NULL;
-//    }
-//    esp_scan_list = NULL;
-//}
-
 void wlan_station_scan(void)
 {
     if (esp_scan_list == NULL) {
@@ -237,19 +199,8 @@ void wlan_station_scan(void)
         char *security;
 
         num = scan_result->num;
-//        rt_kprintf("             SSID                      MAC            security    rssi chn Mbps\n");
-//        rt_kprintf("------------------------------- -----------------  -------------- ---- --- ----\n");
         for (index = 0; index < num; index ++)
         {
-//            rt_kprintf("%-32.32s", &scan_result->info[index].ssid.val[0]);
-//            rt_kprintf("%02x:%02x:%02x:%02x:%02x:%02x  ",
-//                       scan_result->info[index].bssid[0],
-//                       scan_result->info[index].bssid[1],
-//                       scan_result->info[index].bssid[2],
-//                       scan_result->info[index].bssid[3],
-//                       scan_result->info[index].bssid[4],
-//                       scan_result->info[index].bssid[5]
-//                      );
             switch (scan_result->info[index].security)
             {
             case SECURITY_OPEN:
@@ -286,28 +237,15 @@ void wlan_station_scan(void)
                 security = "UNKNOWN";
                 break;
             }
-//            rt_kprintf("%-14.14s ", security);
-//            rt_kprintf("%-4d ", scan_result->info[index].rssi);
-//            rt_kprintf("%3d ", scan_result->info[index].channel);
-//            rt_kprintf("%4d\n", scan_result->info[index].datarate / 1000000);
-            
 
             mp_obj_tuple_t *t = mp_obj_new_tuple(6, NULL);
-            #if 1
-            // struct bss_info::ssid_len is not documented in SDK API Guide,
-            // but is present in SDK headers since 1.4.0
             t->items[0] = mp_obj_new_bytes(&scan_result->info[index].ssid.val[0], strlen((char *)(&scan_result->info[index].ssid.val[0])));
-            #else
-            t->items[0] = mp_obj_new_bytes(bs->ssid, strlen((char*)bs->ssid));
-            #endif
             t->items[1] = mp_obj_new_bytes(&scan_result->info[index].bssid[0], strlen((char *)(&scan_result->info[index].bssid[0])));
             t->items[2] = MP_OBJ_NEW_SMALL_INT(scan_result->info[index].channel);
             t->items[3] = MP_OBJ_NEW_SMALL_INT(scan_result->info[index].rssi);
             t->items[4] = mp_obj_new_bytes((const byte *)security, strlen(security));
-            t->items[5] = MP_OBJ_NEW_SMALL_INT(0);
+            t->items[5] = MP_OBJ_NEW_SMALL_INT(scan_result->info[index].hidden);
             
-//            t->items[4] = MP_OBJ_NEW_SMALL_INT(bs->authmode);
-//            t->items[5] = MP_OBJ_NEW_SMALL_INT(bs->is_hidden);
             mp_obj_list_append(*esp_scan_list, MP_OBJ_FROM_PTR(t));
 
         }
