@@ -183,7 +183,15 @@ STATIC mp_obj_t wlan_status(size_t n_args, const mp_obj_t *args) {
     if (n_args == 1) {
         // Get link status
         if (self->if_id == STATION_IF) {
-            return MP_OBJ_NEW_SMALL_INT(rt_wlan_is_connected() == RT_TRUE);
+            
+            if(rt_wlan_is_ready() == RT_EOK)
+            {
+                return MP_OBJ_NEW_SMALL_INT(STATION_GOT_IP);
+            }
+            else
+            {
+                return MP_OBJ_NEW_SMALL_INT(STATION_IDLE);
+            }
         }
         return MP_OBJ_NEW_SMALL_INT(-1);
     } else {
