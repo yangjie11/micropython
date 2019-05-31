@@ -34,7 +34,6 @@
 #include "lib/netutils/netutils.h"
 
 #if MICROPY_PY_WLAN
-
 #include <rtthread.h>
 #include <wlan_mgnt.h>
 #include <wlan_cfg.h>
@@ -49,6 +48,8 @@ typedef struct _wlan_if_obj_t {
 } wlan_if_obj_t;
 
 const mp_obj_type_t wlan_if_type;
+STATIC struct rt_wlan_info _ap_info;
+STATIC char _ap_password[RT_WLAN_PASSWORD_MAX_LENGTH];
 
 STATIC void error_check(bool status, const char *msg) {
     if (!status) {
@@ -85,6 +86,30 @@ STATIC mp_obj_t wlan_active(size_t n_args, const mp_obj_t *args) {
     wlan_if_obj_t *self = MP_OBJ_TO_PTR(args[0]);
 
     if (n_args > 1) {
+
+        if (self->if_id == STATION_IF)
+        {
+            if (mp_obj_get_int(args[1]) == RT_TRUE)
+            {
+                //TODO
+            }
+            else
+            {
+                error_check(rt_wlan_disconnect() == RT_EOK, "Cannot disconnect from AP");
+            }
+        }
+        else
+        {
+            if (mp_obj_get_int(args[1]) == RT_TRUE)
+            {
+                error_check(rt_wlan_start_ap((char *)&_ap_info.ssid.val, _ap_password) == RT_EOK, "Cannot start AP");
+            }
+            else
+            {
+                error_check(rt_wlan_ap_stop() == RT_EOK, "Cannot stop AP");
+            }
+        }
+
         return mp_const_none;
     }
 
@@ -259,7 +284,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(wlan_scan_obj, wlan_scan);
 
 /// \method isconnected()
 /// Return True if connected to an AP and an IP address has been assigned,
-///     false otherwise.
+/// false otherwise.
 STATIC mp_obj_t wlan_isconnected(mp_obj_t self_in) {
     wlan_if_obj_t *self = MP_OBJ_TO_PTR(self_in);
     if (self->if_id == STATION_IF) {
@@ -346,6 +371,153 @@ STATIC mp_obj_t wlan_ifconfig(size_t n_args, const mp_obj_t *args) {
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(wlan_ifconfig_obj, 1, 2, wlan_ifconfig);
 
+STATIC mp_obj_t wlan_config(size_t n_args, const mp_obj_t *args, mp_map_t *kwargs) {
+    if (n_args != 1 && kwargs->used != 0) {
+        mp_raise_TypeError("either pos or kw args are allowed");
+    }
+
+    wlan_if_obj_t *self = MP_OBJ_TO_PTR(args[0]);
+    struct rt_wlan_info cfg = {0};
+
+    if (self->if_id == STATION_IF) {
+        error_check(rt_wlan_get_info(&cfg) == RT_EOK, "can't get STA config");
+    } else {
+        error_check(rt_wlan_ap_get_info(&cfg) == RT_EOK, "can't get AP config");
+    }
+
+    int req_if = -1;
+
+    if (kwargs->used != 0) {
+
+        for (mp_uint_t i = 0; i < kwargs->alloc; i++) {
+            if (mp_map_slot_is_filled(kwargs, i)) {
+                #define QS(x) (uintptr_t)MP_OBJ_NEW_QSTR(x)
+                switch ((uintptr_t)kwargs->table[i].key) {
+                    case QS(MP_QSTR_mac): {
+                        mp_buffer_info_t bufinfo;
+                        mp_get_buffer_raise(kwargs->table[i].value, &bufinfo, MP_BUFFER_READ);
+                        if (bufinfo.len != 6) {
+                            mp_raise_ValueError("invalid buffer length");
+                        }
+                        error_check(rt_wlan_set_mac((rt_uint8_t *)bufinfo.buf) == RT_EOK, "can't set MAC");
+
+                        break;
+                    }
+                    case QS(MP_QSTR_essid): { 
+                        req_if = SOFTAP_IF;
+                        size_t len;
+                        const char *s = mp_obj_str_get_data(kwargs->table[i].value, &len);
+                        len = MIN(len, sizeof(_ap_info.ssid.val));
+                        memcpy(_ap_info.ssid.val, s, len);
+                        _ap_info.ssid.len = len;
+                        break;
+                    }
+                    case QS(MP_QSTR_hidden): {
+                        req_if = SOFTAP_IF;
+                        _ap_info.hidden = mp_obj_is_true(kwargs->table[i].value);
+                        break;
+                    }
+//                    case QS(MP_QSTR_authmode): {
+//                        req_if = SOFTAP_IF;
+//                        cfg.ap.authmode = mp_obj_get_int(kwargs->table[i].value);
+//                        break;
+//                    }
+                    case QS(MP_QSTR_password): {
+                        req_if = SOFTAP_IF;
+                        size_t len;
+                        const char *s = mp_obj_str_get_data(kwargs->table[i].value, &len);
+                        len = MIN(len, sizeof(_ap_password) - 1);
+                        memcpy(_ap_password, s, len);
+                        _ap_password[len] = 0;
+                        break;
+                    }
+                    case QS(MP_QSTR_channel): {
+                        req_if = SOFTAP_IF;
+                        _ap_info.channel = mp_obj_get_int(kwargs->table[i].value);
+                        break;
+                    }
+//                    case QS(MP_QSTR_dhcp_hostname): {
+//                        req_if = STATION_IF;
+//                        if (self->if_id == STATION_IF) {
+//                            const char *s = mp_obj_str_get_str(kwargs->table[i].value);
+//                            wifi_station_set_hostname((char*)s);
+//                        }
+//                        break;
+//                    }
+                    default:
+                        goto unknown;
+                }
+                #undef QS
+            }
+        }
+
+        // We post-check interface requirements to save on code size
+        if (req_if >= 0) {
+            require_if(args[0], req_if);
+        }
+
+        return mp_const_none;
+    }
+
+    // Get config
+    if (n_args != 2) {
+        mp_raise_TypeError("can query only one param");
+    }
+
+    mp_obj_t val;
+
+    qstr key = mp_obj_str_get_qstr(args[1]);
+    switch (key) {
+        case MP_QSTR_mac: {
+            uint8_t mac[6];
+            error_check(rt_wlan_get_mac(mac) == RT_EOK, "can't get mac config");
+            return mp_obj_new_bytes(mac, sizeof(mac));
+        }
+        case MP_QSTR_essid:
+            if (self->if_id == STATION_IF) {
+                val = mp_obj_new_str((char*)cfg.ssid.val, strlen((char*)cfg.ssid.val));
+            } else {
+                val = mp_obj_new_str((char*)_ap_info.ssid.val, _ap_info.ssid.len);
+            }
+            break;
+        case MP_QSTR_hidden:
+            req_if = SOFTAP_IF;
+            val = mp_obj_new_bool(cfg.hidden);
+            break;
+//        case MP_QSTR_authmode:
+//            req_if = SOFTAP_IF;
+//            val = MP_OBJ_NEW_SMALL_INT(cfg.ap.authmode);
+//            break;
+        case MP_QSTR_channel:
+            req_if = SOFTAP_IF;
+            val = MP_OBJ_NEW_SMALL_INT(cfg.channel);
+            break;
+//        case MP_QSTR_dhcp_hostname: {
+//            req_if = STATION_IF;
+//            char* s = wifi_station_get_hostname();
+//            if (s == NULL) {
+//                val = MP_OBJ_NEW_QSTR(MP_QSTR_);
+//            } else {
+//                val = mp_obj_new_str(s, strlen(s));
+//            }
+//            break;
+//        }
+        default:
+            goto unknown;
+    }
+
+    // We post-check interface requirements to save on code size
+    if (req_if >= 0) {
+        require_if(args[0], req_if);
+    }
+
+    return val;
+
+unknown:
+    mp_raise_ValueError("unknown config param");
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_KW(wlan_config_obj, 1, wlan_config);
+
 STATIC const mp_rom_map_elem_t wlan_if_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_active), MP_ROM_PTR(&wlan_active_obj) },
     { MP_ROM_QSTR(MP_QSTR_connect), MP_ROM_PTR(&wlan_connect_obj) },
@@ -353,6 +525,7 @@ STATIC const mp_rom_map_elem_t wlan_if_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_status), MP_ROM_PTR(&wlan_status_obj) },
     { MP_ROM_QSTR(MP_QSTR_scan), MP_ROM_PTR(&wlan_scan_obj) },
     { MP_ROM_QSTR(MP_QSTR_isconnected), MP_ROM_PTR(&wlan_isconnected_obj) },
+    { MP_ROM_QSTR(MP_QSTR_config), MP_ROM_PTR(&wlan_config_obj) },
     { MP_ROM_QSTR(MP_QSTR_ifconfig), MP_ROM_PTR(&wlan_ifconfig_obj) },
     
 #if MODNETWORK_INCLUDE_CONSTANTS
