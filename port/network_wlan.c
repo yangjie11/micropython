@@ -42,6 +42,8 @@
 #include <netdev.h>     
 #include "modnetwork.h"
 
+extern struct netdev *netdev_default;
+
 typedef struct _wlan_if_obj_t {
     mp_obj_base_t base;
     int if_id;
@@ -315,18 +317,15 @@ STATIC mp_obj_t wlan_isconnected(mp_obj_t self_in) {
     }
     return mp_const_false;
 }
-
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(wlan_isconnected_obj, wlan_isconnected);
 
 STATIC mp_obj_t wlan_ifconfig(size_t n_args, const mp_obj_t *args) {
     wlan_if_obj_t *self = MP_OBJ_TO_PTR(args[0]);
-
-    struct netdev *netdev = RT_NULL;
     
-    netdev = netdev_get_by_name("w0");
+    struct netdev *netdev = netdev_default;
     if (netdev == RT_NULL)
     {
-        rt_kprintf("not find wlan interface device name(%s).\n", "w0");
+        rt_kprintf("not find wlan interface device.\n");
         return MP_OBJ_NEW_SMALL_INT(-1);
     }
 
