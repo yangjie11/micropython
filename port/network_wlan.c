@@ -102,11 +102,11 @@ STATIC mp_obj_t wlan_active(size_t n_args, const mp_obj_t *args) {
         {
             if (mp_obj_get_int(args[1]) == RT_TRUE)
             {
-                //TODO
+                error_check(netdev_set_up(netdev_default) == RT_EOK, "Cannot active wlan device");
             }
             else
             {
-                error_check(rt_wlan_disconnect() == RT_EOK, "Cannot disconnect from AP");
+                error_check(netdev_set_down(netdev_default) == RT_EOK, "Cannot disable wlan device");
             }
         }
         else
