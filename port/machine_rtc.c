@@ -28,19 +28,18 @@
 #include <stdint.h>
 #include <string.h>
 
-#include <rtthread.h>
-#include <drivers/rtc.h>
-#include <time.h>
-
 #include "py/nlr.h"
 #include "py/obj.h"
 #include "py/runtime.h"
 #include "py/mphal.h"
 #include "lib/timeutils/timeutils.h"
-
 #include "modmachine.h"
 
 #ifdef MICROPYTHON_USING_MACHINE_RTC
+
+#include <rtthread.h>
+#include <drivers/rtc.h>
+#include <time.h>
 
 #define MP_YEAR_BASE   1900
 
@@ -48,6 +47,12 @@ const mp_obj_type_t machine_rtc_type;
 
 // singleton RTC object
 STATIC const mp_obj_base_t machine_rtc_obj = {&machine_rtc_type};
+
+STATIC void error_check(bool status, const char *msg) {
+    if (!status) {
+        nlr_raise(mp_obj_new_exception_msg(&mp_type_OSError, msg));
+    }
+}
 
 STATIC mp_obj_t machine_rtc_make_new(const mp_obj_type_t *type, size_t n_args, size_t n_kw, const mp_obj_t *args) {
 #define MP_RTC_DEV_NAME "rtc"
@@ -59,7 +64,6 @@ STATIC mp_obj_t machine_rtc_make_new(const mp_obj_type_t *type, size_t n_args, s
     // check RTC device
     rtc_deivce = rt_device_find(MP_RTC_DEV_NAME);
     if (rtc_deivce == RT_NULL || rtc_deivce->type != RT_Device_Class_RTC) {
-        rt_kprintf("ERROR: RTC device %s not found!\n", MP_RTC_DEV_NAME);
         nlr_raise(mp_obj_new_exception_msg_varg(&mp_type_ValueError, "RTC(%s) don't exist", MP_RTC_DEV_NAME)); 
     }
 
@@ -74,8 +78,6 @@ STATIC mp_obj_t machine_rtc_datetime_helper(mp_uint_t n_args, const mp_obj_t *ar
         // Get time
         t = time(RT_NULL);
         tblock = localtime(&t);
-
-        //printf("%d %d %d %d %d %d\n", tblock->tm_year + MP_YEAR_BASE, tblock->tm_mon + 1, tblock->tm_mday, tblock->tm_hour, tblock->tm_min, tblock->tm_sec);
 
         mp_uint_t seconds = timeutils_mktime(tblock->tm_year + MP_YEAR_BASE, tblock->tm_mon + 1, tblock->tm_mday,
                                              tblock->tm_hour, tblock->tm_min, tblock->tm_sec);
@@ -96,11 +98,14 @@ STATIC mp_obj_t machine_rtc_datetime_helper(mp_uint_t n_args, const mp_obj_t *ar
         return mp_obj_new_tuple(8, tuple);
     } else {
         // Set time
-
+        rt_err_t result;
         mp_obj_t *items;
+
         mp_obj_get_array_fixed_n(args[1], 8, &items);
-        set_date(mp_obj_get_int(items[0]), mp_obj_get_int(items[1]), mp_obj_get_int(items[2]));
-        set_time(mp_obj_get_int(items[4]), mp_obj_get_int(items[5]), mp_obj_get_int(items[6]));
+        result = set_date(mp_obj_get_int(items[0]), mp_obj_get_int(items[1]), mp_obj_get_int(items[2]));
+        error_check(result == RT_EOK, "Set date error");
+        result = set_time(mp_obj_get_int(items[4]), mp_obj_get_int(items[5]), mp_obj_get_int(items[6]));
+        error_check(result == RT_EOK, "Set time error");
         return mp_const_none;
     }
 }
@@ -116,15 +121,19 @@ STATIC mp_obj_t machine_rtc_init(mp_uint_t n_args, const mp_obj_t *args) {
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_rtc_init_obj, 1, 2, machine_rtc_init);
 
 STATIC mp_obj_t machine_rtc_deinit(mp_uint_t n_args, const mp_obj_t *args) {
+    rt_err_t result;
     struct tm tblock;
+
     tblock.tm_year = 2015 - MP_YEAR_BASE;
     tblock.tm_mon = 0;
     tblock.tm_mday = 1;
     tblock.tm_hour = 0;
     tblock.tm_min = 0;
     tblock.tm_sec = 0;
-    set_date(tblock.tm_year + MP_YEAR_BASE, tblock.tm_mon + 1, tblock.tm_mday);
-    set_time(tblock.tm_hour, tblock.tm_min, tblock.tm_sec);
+    result = set_date(tblock.tm_year + MP_YEAR_BASE, tblock.tm_mon + 1, tblock.tm_mday);
+    error_check(result == RT_EOK, "Set date error");
+    result = set_time(tblock.tm_hour, tblock.tm_min, tblock.tm_sec);
+    error_check(result == RT_EOK, "Set time error");
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_rtc_deinit_obj, 0, 1, machine_rtc_deinit);
