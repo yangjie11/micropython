@@ -50,11 +50,6 @@ STATIC void error_check(bool status, const char *msg) {
 /// Construct an LCD object in the given skin position.  `skin_position` can be 'X' or 'Y', and
 /// should match the position where the LCD pyskin is plugged in.
 STATIC mp_obj_t machine_lcd_make_new(const mp_obj_type_t *type, size_t n_args, size_t n_kw, const mp_obj_t *args) {
-    // check arguments
-    mp_arg_check_num(n_args, n_kw, 1, 1, false);
-
-    // get LCD position
-    const char *lcd_id = mp_obj_str_get_str(args[0]);
 
     // create lcd object
     machine_lcd_obj_t *lcd = m_new_obj(machine_lcd_obj_t);
