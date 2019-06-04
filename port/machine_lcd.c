@@ -56,14 +56,14 @@ typedef struct _machine_lcd_obj_t {
 //    const pin_obj_t *pin_bl;
 
     // character buffer for stdout-like output
-    char char_buffer[LCD_CHAR_BUF_W * LCD_CHAR_BUF_H];
-    int line;
-    int column;
-    int next_line;
+//    char char_buffer[LCD_CHAR_BUF_W * LCD_CHAR_BUF_H];
+//    int line;
+//    int column;
+//    int next_line;
 
     // double buffering for pixel buffer
-    byte pix_buf[LCD_PIX_BUF_BYTE_SIZE];
-    byte pix_buf2[LCD_PIX_BUF_BYTE_SIZE];
+//    byte pix_buf[LCD_PIX_BUF_BYTE_SIZE];
+//    byte pix_buf2[LCD_PIX_BUF_BYTE_SIZE];
 } machine_lcd_obj_t;
 
 STATIC void lcd_delay(void) {
@@ -87,8 +87,8 @@ STATIC void lcd_out(machine_lcd_obj_t *lcd, int instr_data, uint8_t i) {
 // write a string to the LCD at the current cursor location
 // output it straight away (doesn't use the pixel buffer)
 STATIC void lcd_write_strn(machine_lcd_obj_t *lcd, const char *str, unsigned int len) {
-    int redraw_min = lcd->line * LCD_CHAR_BUF_W + lcd->column;
-    int redraw_max = redraw_min;
+//    int redraw_min = lcd->line * LCD_CHAR_BUF_W + lcd->column;
+//    int redraw_max = redraw_min;
 //    for (; len > 0; len--, str++) {
 //        // move to next line if needed
 //        if (lcd->next_line) {
@@ -163,110 +163,6 @@ STATIC mp_obj_t machine_lcd_make_new(const mp_obj_type_t *type, size_t n_args, s
     // create lcd object
     machine_lcd_obj_t *lcd = m_new_obj(machine_lcd_obj_t);
     lcd->base.type = &machine_lcd_type;
-
-//    // configure pins
-//    // TODO accept an SPI object and pin objects for full customisation
-//    if ((lcd_id[0] | 0x20) == 'x' && lcd_id[1] == '\0') {
-//        lcd->spi = &spi_obj[0];
-//        lcd->pin_cs1 = machine_pin_X3;
-//        lcd->pin_rst = machine_pin_X4;
-//        lcd->pin_a0 = machine_pin_X5;
-//        lcd->pin_bl = machine_pin_X12;
-//    } else if ((lcd_id[0] | 0x20) == 'y' && lcd_id[1] == '\0') {
-//        lcd->spi = &spi_obj[1];
-//        lcd->pin_cs1 = machine_pin_Y3;
-//        lcd->pin_rst = machine_pin_Y4;
-//        lcd->pin_a0 = machine_pin_Y5;
-//        lcd->pin_bl = machine_pin_Y12;
-//    } else {
-//        nlr_raise(mp_obj_new_exception_msg_varg(&mp_type_ValueError, "LCD(%s) doesn't exist", lcd_id));
-//    }
-
-//    // init the SPI bus
-//    SPI_InitTypeDef *init = &lcd->spi->spi->Init;
-//    init->Mode = SPI_MODE_MASTER;
-
-//    // compute the baudrate prescaler from the desired baudrate
-//    // select a prescaler that yields at most the desired baudrate
-//    uint spi_clock;
-//    if (lcd->spi->spi->Instance == SPI1) {
-//        // SPI1 is on APB2
-//        spi_clock = HAL_RCC_GetPCLK2Freq();
-//    } else {
-//        // SPI2 and SPI3 are on APB1
-//        spi_clock = HAL_RCC_GetPCLK1Freq();
-//    }
-//    uint br_prescale = spi_clock / 16000000; // datasheet says LCD can run at 20MHz, but we go for 16MHz
-//    if (br_prescale <= 2) { init->BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2; }
-//    else if (br_prescale <= 4) { init->BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4; }
-//    else if (br_prescale <= 8) { init->BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8; }
-//    else if (br_prescale <= 16) { init->BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16; }
-//    else if (br_prescale <= 32) { init->BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32; }
-//    else if (br_prescale <= 64) { init->BaudRatePrescaler = SPI_BAUDRATEPRESCALER_64; }
-//    else if (br_prescale <= 128) { init->BaudRatePrescaler = SPI_BAUDRATEPRESCALER_128; }
-//    else { init->BaudRatePrescaler = SPI_BAUDRATEPRESCALER_256; }
-
-//    // data is sent bigendian, latches on rising clock
-//    init->CLKPolarity = SPI_POLARITY_HIGH;
-//    init->CLKPhase = SPI_PHASE_2EDGE;
-//    init->Direction = SPI_DIRECTION_2LINES;
-//    init->DataSize = SPI_DATASIZE_8BIT;
-//    init->NSS = SPI_NSS_SOFT;
-//    init->FirstBit = SPI_FIRSTBIT_MSB;
-//    init->TIMode = SPI_TIMODE_DISABLED;
-//    init->CRCCalculation = SPI_CRCCALCULATION_DISABLED;
-//    init->CRCPolynomial = 0;
-
-//    // init the SPI bus
-//    spi_init(lcd->spi, false);
-
-//    // set the pins to default values
-//    mp_hal_pin_high(lcd->pin_cs1);
-//    mp_hal_pin_high(lcd->pin_rst);
-//    mp_hal_pin_high(lcd->pin_a0);
-//    mp_hal_pin_low(lcd->pin_bl);
-
-//    // init the pins to be push/pull outputs
-//    mp_hal_pin_output(lcd->pin_cs1);
-//    mp_hal_pin_output(lcd->pin_rst);
-//    mp_hal_pin_output(lcd->pin_a0);
-//    mp_hal_pin_output(lcd->pin_bl);
-
-//    // init the LCD
-//    mp_hal_delay_ms(1); // wait a bit
-//    mp_hal_pin_low(lcd->pin_rst); // RST=0; reset
-//    mp_hal_delay_ms(1); // wait for reset; 2us min
-//    mp_hal_pin_high(lcd->pin_rst); // RST=1; enable
-//    mp_hal_delay_ms(1); // wait for reset; 2us min
-//    lcd_out(lcd, LCD_INSTR, 0xa0); // ADC select, normal
-//    lcd_out(lcd, LCD_INSTR, 0xc0); // common output mode select, normal (this flips the display)
-//    lcd_out(lcd, LCD_INSTR, 0xa2); // LCD bias set, 1/9 bias
-//    lcd_out(lcd, LCD_INSTR, 0x2f); // power control set, 0b111=(booster on, vreg on, vfollow on)
-//    lcd_out(lcd, LCD_INSTR, 0x21); // v0 voltage regulator internal resistor ratio set, 0b001=small
-//    lcd_out(lcd, LCD_INSTR, 0x81); // electronic volume mode set
-//    lcd_out(lcd, LCD_INSTR, 0x28); // electronic volume register set
-//    lcd_out(lcd, LCD_INSTR, 0x40); // display start line set, 0
-//    lcd_out(lcd, LCD_INSTR, 0xaf); // LCD display, on
-
-//    // clear LCD RAM
-//    for (int page = 0; page < 4; page++) {
-//        lcd_out(lcd, LCD_INSTR, 0xb0 | page); // page address set
-//        lcd_out(lcd, LCD_INSTR, 0x10); // column address set upper
-//        lcd_out(lcd, LCD_INSTR, 0x00); // column address set lower
-//        for (int i = 0; i < 128; i++) {
-//            lcd_out(lcd, LCD_DATA, 0x00);
-//        }
-//    }
-
-//    // clear local char buffer
-//    memset(lcd->char_buffer, ' ', LCD_CHAR_BUF_H * LCD_CHAR_BUF_W);
-//    lcd->line = 0;
-//    lcd->column = 0;
-//    lcd->next_line = 0;
-
-//    // clear local pixel buffer
-//    memset(lcd->pix_buf, 0, LCD_PIX_BUF_BYTE_SIZE);
-//    memset(lcd->pix_buf2, 0, LCD_PIX_BUF_BYTE_SIZE);
 
     return MP_OBJ_FROM_PTR(lcd);
 }
@@ -348,10 +244,15 @@ STATIC mp_obj_t machine_lcd_fill(mp_obj_t self_in, mp_obj_t col_in) {
     machine_lcd_obj_t *self = MP_OBJ_TO_PTR(self_in);
     int col = mp_obj_get_int(col_in);
     if (col) {
-        col = 0xff;
+        col = BLACK;
     }
-    memset(self->pix_buf, col, LCD_PIX_BUF_BYTE_SIZE);
-    memset(self->pix_buf2, col, LCD_PIX_BUF_BYTE_SIZE);
+    else
+    {
+        col = WHITE;
+    }
+    
+    lcd_clear(col);
+
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(machine_lcd_fill_obj, machine_lcd_fill);
@@ -363,14 +264,14 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(machine_lcd_fill_obj, machine_lcd_fill);
 /// This method reads from the visible buffer.
 STATIC mp_obj_t machine_lcd_get(mp_obj_t self_in, mp_obj_t x_in, mp_obj_t y_in) {
     machine_lcd_obj_t *self = MP_OBJ_TO_PTR(self_in);
-    int x = mp_obj_get_int(x_in);
-    int y = mp_obj_get_int(y_in);
-    if (0 <= x && x <= 127 && 0 <= y && y <= 31) {
-        uint byte_pos = x + 128 * ((uint)y >> 3);
-        if (self->pix_buf[byte_pos] & (1 << (y & 7))) {
-            return mp_obj_new_int(1);
-        }
-    }
+//    int x = mp_obj_get_int(x_in);
+//    int y = mp_obj_get_int(y_in);
+//    if (0 <= x && x <= 127 && 0 <= y && y <= 31) {
+//        uint byte_pos = x + 128 * ((uint)y >> 3);
+//        if (self->pix_buf[byte_pos] & (1 << (y & 7))) {
+//            return mp_obj_new_int(1);
+//        }
+//    }
     return mp_obj_new_int(0);
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_3(machine_lcd_get_obj, machine_lcd_get);
@@ -382,16 +283,16 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_3(machine_lcd_get_obj, machine_lcd_get);
 /// This method writes to the hidden buffer.  Use `show()` to show the buffer.
 STATIC mp_obj_t machine_lcd_pixel(size_t n_args, const mp_obj_t *args) {
     machine_lcd_obj_t *self = MP_OBJ_TO_PTR(args[0]);
-    int x = mp_obj_get_int(args[1]);
-    int y = mp_obj_get_int(args[2]);
-    if (0 <= x && x <= 127 && 0 <= y && y <= 31) {
-        uint byte_pos = x + 128 * ((uint)y >> 3);
-        if (mp_obj_get_int(args[3]) == 0) {
-            self->pix_buf2[byte_pos] &= ~(1 << (y & 7));
-        } else {
-            self->pix_buf2[byte_pos] |= 1 << (y & 7);
-        }
-    }
+//    int x = mp_obj_get_int(args[1]);
+//    int y = mp_obj_get_int(args[2]);
+//    if (0 <= x && x <= 127 && 0 <= y && y <= 31) {
+//        uint byte_pos = x + 128 * ((uint)y >> 3);
+//        if (mp_obj_get_int(args[3]) == 0) {
+//            self->pix_buf2[byte_pos] &= ~(1 << (y & 7));
+//        } else {
+//            self->pix_buf2[byte_pos] |= 1 << (y & 7);
+//        }
+//    }
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_pixel_obj, 4, 4, machine_lcd_pixel);
@@ -450,15 +351,15 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_text_obj, 5, 5, machine_l
 /// Show the hidden buffer on the screen.
 STATIC mp_obj_t machine_lcd_show(mp_obj_t self_in) {
     machine_lcd_obj_t *self = MP_OBJ_TO_PTR(self_in);
-    memcpy(self->pix_buf, self->pix_buf2, LCD_PIX_BUF_BYTE_SIZE);
-    for (uint page = 0; page < 4; page++) {
-        lcd_out(self, LCD_INSTR, 0xb0 | page); // page address set
-        lcd_out(self, LCD_INSTR, 0x10); // column address set upper; 0
-        lcd_out(self, LCD_INSTR, 0x00); // column address set lower; 0
-        for (uint i = 0; i < 128; i++) {
-            lcd_out(self, LCD_DATA, self->pix_buf[128 * page + 127 - i]);
-        }
-    }
+//    memcpy(self->pix_buf, self->pix_buf2, LCD_PIX_BUF_BYTE_SIZE);
+//    for (uint page = 0; page < 4; page++) {
+//        lcd_out(self, LCD_INSTR, 0xb0 | page); // page address set
+//        lcd_out(self, LCD_INSTR, 0x10); // column address set upper; 0
+//        lcd_out(self, LCD_INSTR, 0x00); // column address set lower; 0
+//        for (uint i = 0; i < 128; i++) {
+//            lcd_out(self, LCD_DATA, self->pix_buf[128 * page + 127 - i]);
+//        }
+//    }
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(machine_lcd_show_obj, machine_lcd_show);
