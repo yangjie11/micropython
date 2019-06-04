@@ -66,6 +66,12 @@ typedef struct _machine_lcd_obj_t {
 //    byte pix_buf2[LCD_PIX_BUF_BYTE_SIZE];
 } machine_lcd_obj_t;
 
+STATIC void error_check(bool status, const char *msg) {
+    if (!status) {
+        nlr_raise(mp_obj_new_exception_msg(&mp_type_ValueError, msg));
+    }
+}
+
 STATIC void lcd_delay(void) {
     __asm volatile ("nop\nnop");
 }
@@ -297,50 +303,22 @@ STATIC mp_obj_t machine_lcd_pixel(size_t n_args, const mp_obj_t *args) {
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_pixel_obj, 4, 4, machine_lcd_pixel);
 
-/// \method text(str, x, y, colour)
+/// \method text(str, x, y, size)
 ///
-/// Draw the given text to the position `(x, y)` using the given colour (0 or 1).
+/// Draw the given text to the position `(x, y)` using the given size (16 24 32).
 ///
-/// This method writes to the hidden buffer.  Use `show()` to show the buffer.
 STATIC mp_obj_t machine_lcd_text(size_t n_args, const mp_obj_t *args) {
     // extract arguments
-//    machine_lcd_obj_t *self = MP_OBJ_TO_PTR(args[0]);
-//    size_t len;
-//    const char *data = mp_obj_str_get_data(args[1], &len);
-//    int x0 = mp_obj_get_int(args[2]);
-//    int y0 = mp_obj_get_int(args[3]);
-//    int col = mp_obj_get_int(args[4]);
-
-//    // loop over chars
-//    for (const char *top = data + len; data < top; data++) {
-//        // get char and make sure its in range of font
-//        uint chr = *(byte*)data;
-//        if (chr < 32 || chr > 127) {
-//            chr = 127;
-//        }
-//        // get char data
-//        const uint8_t *chr_data = &font_petme128_8x8[(chr - 32) * 8];
-//        // loop over char data
-//        for (uint j = 0; j < 8; j++, x0++) {
-//            if (0 <= x0 && x0 < LCD_PIX_BUF_W) { // clip x
-//                uint vline_data = chr_data[j]; // each byte of char data is a vertical column of 8 pixels, LSB at top
-//                for (int y = y0; vline_data; vline_data >>= 1, y++) { // scan over vertical column
-//                    if (vline_data & 1) { // only draw if pixel set
-//                        if (0 <= y && y < LCD_PIX_BUF_H) { // clip y
-//                            uint byte_pos = x0 + LCD_PIX_BUF_W * ((uint)y >> 3);
-//                            if (col == 0) {
-//                                // clear pixel
-//                                self->pix_buf2[byte_pos] &= ~(1 << (y & 7));
-//                            } else {
-//                                // set pixel
-//                                self->pix_buf2[byte_pos] |= 1 << (y & 7);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
+    machine_lcd_obj_t *self = MP_OBJ_TO_PTR(args[0]);
+    size_t len;
+    const char *data = mp_obj_str_get_data(args[1], &len);
+    int x0 = mp_obj_get_int(args[2]);
+    int y0 = mp_obj_get_int(args[3]);
+    int size = mp_obj_get_int(args[4]);
+    
+    error_check(size == 16 || size == 24 || size == 32, "lcd only support font size 16 24 32");
+    
+    lcd_show_string(x0, y0, size, data);
 
     return mp_const_none;
 }
