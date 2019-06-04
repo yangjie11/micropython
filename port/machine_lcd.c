@@ -90,7 +90,6 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(machine_lcd_fill_obj, machine_lcd_fill);
 ///
 /// Set the pixel at `(x, y)` to the given colour.
 ///
-/// This method writes to the hidden buffer.  Use `show()` to show the buffer.
 STATIC mp_obj_t machine_lcd_pixel(size_t n_args, const mp_obj_t *args) {
     machine_lcd_obj_t *self = MP_OBJ_TO_PTR(args[0]);
     int x = mp_obj_get_int(args[1]);
