@@ -54,6 +54,12 @@ typedef struct _machine_pwm_obj_t {
     uint32_t freq;
 } machine_pwm_obj_t;
 
+STATIC void error_check(bool status, const char *msg) {
+    if (!status) {
+        nlr_raise(mp_obj_new_exception_msg(&mp_type_OSError, msg));
+    }
+}
+
 STATIC void machine_pwm_init_helper(machine_pwm_obj_t *self,
                                  size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args) {
     rt_err_t result = RT_EOK;
@@ -105,16 +111,11 @@ STATIC void machine_pwm_init_helper(machine_pwm_obj_t *self,
     pulse = MP_PWM_PULSE_GET(period, self->duty);
 
     result = rt_pwm_set(pwm_device, self->channel, period, pulse);
-    if (result != RT_EOK) {
-        nlr_raise(mp_obj_new_exception_msg_varg(&mp_type_OSError, 
-                                                "PWM(%s) set information error", pwm_dev_name));
-    }
+    error_check(result == RT_EOK, "PWM set information error");
 
     result = rt_pwm_enable(pwm_device, self->channel);
-    if (result != RT_EOK) {
-        nlr_raise(mp_obj_new_exception_msg_varg(&mp_type_OSError, 
-                                                "PWM(%s) enable error", pwm_dev_name));
-    }
+    error_check(result == RT_EOK, "PWM enable error");
+
     self->is_init = RT_TRUE;
 }
 
@@ -147,8 +148,11 @@ MP_DEFINE_CONST_FUN_OBJ_KW(machine_pwm_init_obj, 1, machine_pwm_init);
 
 STATIC mp_obj_t machine_pwm_deinit(mp_obj_t self_in) {
     machine_pwm_obj_t *self = MP_OBJ_TO_PTR(self_in);
+    rt_err_t result = RT_EOK;
+
     if (self->is_init == RT_TRUE) {
-        rt_pwm_disable(self->pwm_device, self->channel);
+        result = rt_pwm_disable(self->pwm_device, self->channel);
+        error_check(result == RT_EOK, "PWM disable error");
         self->is_init = RT_FALSE;
     }
     return mp_const_none;
@@ -158,11 +162,9 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(machine_pwm_deinit_obj, machine_pwm_deinit);
 STATIC mp_obj_t machine_pwm_freq(size_t n_args, const mp_obj_t *args) {
     machine_pwm_obj_t *self = MP_OBJ_TO_PTR(args[0]);
     uint32_t period = 0, pulse = 0;
+    rt_err_t result = RT_EOK;
 
-    if (self->is_init == RT_FALSE) {
-        nlr_raise(mp_obj_new_exception_msg_varg(&mp_type_OSError, 
-                                                "PWM device don't initialized"));
-    }
+    error_check(self->is_init == RT_TRUE, "PWM device uninitialized");
 
     if (n_args == 1) {
         // get
@@ -181,8 +183,10 @@ STATIC mp_obj_t machine_pwm_freq(size_t n_args, const mp_obj_t *args) {
     // get pulse number by duty
     pulse = MP_PWM_PULSE_GET(period, self->duty);
     
-    rt_pwm_set(self->pwm_device, self->channel, period, pulse);
+    result = rt_pwm_set(self->pwm_device, self->channel, period, pulse);
+    error_check(result == RT_EOK, "PWM set information error");
     self->freq = tval;
+    
     return mp_const_none;
 }
 
@@ -191,11 +195,9 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_pwm_freq_obj, 1, 2, machine_p
 STATIC mp_obj_t machine_pwm_duty(size_t n_args, const mp_obj_t *args) {
     machine_pwm_obj_t *self = MP_OBJ_TO_PTR(args[0]);
     uint32_t period = 0, pulse = 0;
+    rt_err_t result = RT_EOK;
 
-    if (self->is_init == RT_FALSE) {
-        nlr_raise(mp_obj_new_exception_msg_varg(&mp_type_OSError, 
-                                                "PWM device don't initialized"));
-    }
+    error_check(self->is_init == RT_TRUE, "PWM device uninitialized");
 
     if (n_args == 1) {
         // get
@@ -214,8 +216,10 @@ STATIC mp_obj_t machine_pwm_duty(size_t n_args, const mp_obj_t *args) {
     // get pulse number by duty
     pulse = MP_PWM_PULSE_GET(period, tval);
     
-    rt_pwm_set(self->pwm_device, self->channel, period, pulse);
+    result = rt_pwm_set(self->pwm_device, self->channel, period, pulse);
+    error_check(result == RT_EOK, "PWM set information error");
     self->duty = tval;
+
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_pwm_duty_obj,
