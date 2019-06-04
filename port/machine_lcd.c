@@ -129,9 +129,9 @@ STATIC mp_obj_t machine_lcd_text(size_t n_args, const mp_obj_t *args) {
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_text_obj, 5, 5, machine_lcd_text);
 
-/// \method text(str, x, y, size)
+/// \method line(x1, y1, x2, y2)
 ///
-/// Draw the given text to the position `(x, y)` using the given size (16 24 32).
+/// display a line on the lcd, from (x1, y1) to (x2, y2).
 ///
 STATIC mp_obj_t machine_lcd_line(size_t n_args, const mp_obj_t *args) {
     // extract arguments
@@ -147,6 +147,24 @@ STATIC mp_obj_t machine_lcd_line(size_t n_args, const mp_obj_t *args) {
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_line_obj, 5, 5, machine_lcd_line);
 
+/// \method rectangle(x1, y1, x2, y2)
+///
+/// display a rectangle on the lcd, from (x1, y1) to (x2, y2).
+///
+STATIC mp_obj_t machine_lcd_rectangle(size_t n_args, const mp_obj_t *args) {
+    // extract arguments
+    machine_lcd_obj_t *self = MP_OBJ_TO_PTR(args[0]);
+
+    int x1 = mp_obj_get_int(args[1]);
+    int y1 = mp_obj_get_int(args[2]);
+    int x2 = mp_obj_get_int(args[3]);
+    int y2 = mp_obj_get_int(args[4]);
+
+    lcd_draw_rectangle(x1, y1, x2, y2);
+    return mp_const_none;
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_rectangle_obj, 5, 5, machine_lcd_rectangle);
+
 STATIC const mp_rom_map_elem_t machine_lcd_locals_dict_table[] = {
     // instance methods
     { MP_ROM_QSTR(MP_QSTR_light), MP_ROM_PTR(&machine_lcd_light_obj) },
@@ -154,7 +172,7 @@ STATIC const mp_rom_map_elem_t machine_lcd_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_pixel), MP_ROM_PTR(&machine_lcd_pixel_obj) },
     { MP_ROM_QSTR(MP_QSTR_text),  MP_ROM_PTR(&machine_lcd_text_obj)  },
     { MP_ROM_QSTR(MP_QSTR_line),  MP_ROM_PTR(&machine_lcd_line_obj)  },
-//    { MP_ROM_QSTR(MP_QSTR_rectangle), MP_ROM_PTR(&machine_lcd_rectangle_obj) },
+    { MP_ROM_QSTR(MP_QSTR_rectangle), MP_ROM_PTR(&machine_lcd_rectangle_obj) },
 //    { MP_ROM_QSTR(MP_QSTR_circle), MP_ROM_PTR(&machine_lcd_circle_obj) }, 
     // color
     { MP_ROM_QSTR(MP_QSTR_WHITE), MP_ROM_INT(WHITE) },
