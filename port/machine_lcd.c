@@ -245,7 +245,6 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(machine_lcd_write_obj, machine_lcd_write);
 ///
 /// Fill the screen with the given colour (0 or 1 for white or black).
 ///
-/// This method writes to the hidden buffer.  Use `show()` to show the buffer.
 STATIC mp_obj_t machine_lcd_fill(mp_obj_t self_in, mp_obj_t col_in) {
     machine_lcd_obj_t *self = MP_OBJ_TO_PTR(self_in);
     int col = mp_obj_get_int(col_in);
@@ -289,16 +288,20 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_3(machine_lcd_get_obj, machine_lcd_get);
 /// This method writes to the hidden buffer.  Use `show()` to show the buffer.
 STATIC mp_obj_t machine_lcd_pixel(size_t n_args, const mp_obj_t *args) {
     machine_lcd_obj_t *self = MP_OBJ_TO_PTR(args[0]);
-//    int x = mp_obj_get_int(args[1]);
-//    int y = mp_obj_get_int(args[2]);
-//    if (0 <= x && x <= 127 && 0 <= y && y <= 31) {
-//        uint byte_pos = x + 128 * ((uint)y >> 3);
-//        if (mp_obj_get_int(args[3]) == 0) {
-//            self->pix_buf2[byte_pos] &= ~(1 << (y & 7));
-//        } else {
-//            self->pix_buf2[byte_pos] |= 1 << (y & 7);
-//        }
-//    }
+    int x = mp_obj_get_int(args[1]);
+    int y = mp_obj_get_int(args[2]);
+    int col = mp_obj_get_int(args[3]);
+
+    if (col) {
+        col = BLACK;
+    }
+    else
+    {
+        col = WHITE;
+    }
+
+    lcd_draw_point_color(x, y, col);
+
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_pixel_obj, 4, 4, machine_lcd_pixel);
@@ -353,8 +356,26 @@ STATIC const mp_rom_map_elem_t machine_lcd_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_pixel), MP_ROM_PTR(&machine_lcd_pixel_obj) },
     { MP_ROM_QSTR(MP_QSTR_text), MP_ROM_PTR(&machine_lcd_text_obj) },
     { MP_ROM_QSTR(MP_QSTR_show), MP_ROM_PTR(&machine_lcd_show_obj) },
+    // color
+    { MP_ROM_QSTR(MP_QSTR_WHITE), MP_ROM_INT(WHITE) },
+    { MP_ROM_QSTR(MP_QSTR_BLACK), MP_ROM_INT(BLACK) },
+    { MP_ROM_QSTR(MP_QSTR_BLUE), MP_ROM_INT(BLUE) },
+    { MP_ROM_QSTR(MP_QSTR_BRED), MP_ROM_INT(BRED) },
+    { MP_ROM_QSTR(MP_QSTR_GRED), MP_ROM_INT(GRED) },
+    { MP_ROM_QSTR(MP_QSTR_GBLUE), MP_ROM_INT(GBLUE) },
+    { MP_ROM_QSTR(MP_QSTR_RED), MP_ROM_INT(RED) },
+    { MP_ROM_QSTR(MP_QSTR_MAGENTA), MP_ROM_INT(MAGENTA) },
+    { MP_ROM_QSTR(MP_QSTR_GREEN), MP_ROM_INT(GREEN) },
+    { MP_ROM_QSTR(MP_QSTR_CYAN), MP_ROM_INT(CYAN) },
+    { MP_ROM_QSTR(MP_QSTR_YELLOW), MP_ROM_INT(YELLOW) },
+    { MP_ROM_QSTR(MP_QSTR_BROWN), MP_ROM_INT(BROWN) },
+    { MP_ROM_QSTR(MP_QSTR_BRRED), MP_ROM_INT(BRRED) },
+    { MP_ROM_QSTR(MP_QSTR_GRAY), MP_ROM_INT(GRAY) },
+    { MP_ROM_QSTR(MP_QSTR_GRAY175), MP_ROM_INT(GRAY175) },
+    { MP_ROM_QSTR(MP_QSTR_GRAY151), MP_ROM_INT(GRAY151) },
+    { MP_ROM_QSTR(MP_QSTR_GRAY187), MP_ROM_INT(GRAY187) },
+    { MP_ROM_QSTR(MP_QSTR_GRAY240), MP_ROM_INT(GRAY240) },
 };
-
 STATIC MP_DEFINE_CONST_DICT(machine_lcd_locals_dict, machine_lcd_locals_dict_table);
 
 const mp_obj_type_t machine_lcd_type = {
