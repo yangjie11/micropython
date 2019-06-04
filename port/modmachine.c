@@ -38,6 +38,7 @@
 #include "extmod/machine_spi.h"
 #include "modmachine.h"
 #include "machine_uart.h"
+#include "machine_adc.h"
 
 #include <rthw.h>
 
@@ -204,7 +205,9 @@ STATIC const mp_rom_map_elem_t machine_module_globals_table[] = {
 #if MICROPY_PY_MACHINE_UART
     { MP_ROM_QSTR(MP_QSTR_UART),                MP_ROM_PTR(&machine_uart_type ) },
 #endif
-
+#if MICROPY_PY_MACHINE_ADC
+    { MP_ROM_QSTR(MP_QSTR_ADC),                 MP_ROM_PTR(&machine_adc_type) },
+#endif
 };
 
 STATIC MP_DEFINE_CONST_DICT(machine_module_globals, machine_module_globals_table);
