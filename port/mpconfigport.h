@@ -143,6 +143,10 @@
 #define MICROPY_PY_MACHINE_UART      (1)
 #endif
 
+#ifdef MICROPYTHON_USING_MACHINE_LCD
+#define MICROPY_PY_MACHINE_LCD      (1)
+#endif
+
 /*****************************************************************************/
 /* System Module                                                             */
 
