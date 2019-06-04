@@ -79,7 +79,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(machine_lcd_light_obj, machine_lcd_light);
 
 /// \method fill(colour)
 ///
-/// Fill the screen with the given colour (0 or 1 for white or black).
+/// Fill the screen with the given colour.
 ///
 STATIC mp_obj_t machine_lcd_fill(mp_obj_t self_in, mp_obj_t col_in) {
     machine_lcd_obj_t *self = MP_OBJ_TO_PTR(self_in);
@@ -93,23 +93,15 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(machine_lcd_fill_obj, machine_lcd_fill);
 
 /// \method pixel(x, y, colour)
 ///
-/// Set the pixel at `(x, y)` to the given colour (0 or 1).
+/// Set the pixel at `(x, y)` to the given colour.
 ///
 /// This method writes to the hidden buffer.  Use `show()` to show the buffer.
 STATIC mp_obj_t machine_lcd_pixel(size_t n_args, const mp_obj_t *args) {
     machine_lcd_obj_t *self = MP_OBJ_TO_PTR(args[0]);
     int x = mp_obj_get_int(args[1]);
     int y = mp_obj_get_int(args[2]);
+    
     int col = mp_obj_get_int(args[3]);
-
-    if (col) {
-        col = BLACK;
-    }
-    else
-    {
-        col = WHITE;
-    }
-
     lcd_draw_point_color(x, y, col);
 
     return mp_const_none;
@@ -137,12 +129,33 @@ STATIC mp_obj_t machine_lcd_text(size_t n_args, const mp_obj_t *args) {
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_text_obj, 5, 5, machine_lcd_text);
 
+/// \method text(str, x, y, size)
+///
+/// Draw the given text to the position `(x, y)` using the given size (16 24 32).
+///
+STATIC mp_obj_t machine_lcd_line(size_t n_args, const mp_obj_t *args) {
+    // extract arguments
+    machine_lcd_obj_t *self = MP_OBJ_TO_PTR(args[0]);
+
+    int x1 = mp_obj_get_int(args[1]);
+    int y1 = mp_obj_get_int(args[2]);
+    int x2 = mp_obj_get_int(args[3]);
+    int y2 = mp_obj_get_int(args[4]);
+
+    lcd_draw_line(x1, y1, x2, y2);
+    return mp_const_none;
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_line_obj, 5, 5, machine_lcd_line);
+
 STATIC const mp_rom_map_elem_t machine_lcd_locals_dict_table[] = {
     // instance methods
     { MP_ROM_QSTR(MP_QSTR_light), MP_ROM_PTR(&machine_lcd_light_obj) },
-    { MP_ROM_QSTR(MP_QSTR_fill), MP_ROM_PTR(&machine_lcd_fill_obj) },
+    { MP_ROM_QSTR(MP_QSTR_fill),  MP_ROM_PTR(&machine_lcd_fill_obj)  },
     { MP_ROM_QSTR(MP_QSTR_pixel), MP_ROM_PTR(&machine_lcd_pixel_obj) },
-    { MP_ROM_QSTR(MP_QSTR_text), MP_ROM_PTR(&machine_lcd_text_obj) },
+    { MP_ROM_QSTR(MP_QSTR_text),  MP_ROM_PTR(&machine_lcd_text_obj)  },
+    { MP_ROM_QSTR(MP_QSTR_line),  MP_ROM_PTR(&machine_lcd_line_obj)  },
+//    { MP_ROM_QSTR(MP_QSTR_rectangle), MP_ROM_PTR(&machine_lcd_rectangle_obj) },
+//    { MP_ROM_QSTR(MP_QSTR_circle), MP_ROM_PTR(&machine_lcd_circle_obj) }, 
     // color
     { MP_ROM_QSTR(MP_QSTR_WHITE), MP_ROM_INT(WHITE) },
     { MP_ROM_QSTR(MP_QSTR_BLACK), MP_ROM_INT(BLACK) },
