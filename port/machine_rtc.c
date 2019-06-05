@@ -50,7 +50,7 @@ STATIC const mp_obj_base_t machine_rtc_obj = {&machine_rtc_type};
 
 STATIC void error_check(bool status, const char *msg) {
     if (!status) {
-        nlr_raise(mp_obj_new_exception_msg(&mp_type_OSError, msg));
+        nlr_raise(mp_obj_new_exception_msg(&mp_type_ValueError, msg));
     }
 }
 
@@ -59,7 +59,7 @@ STATIC mp_obj_t machine_rtc_make_new(const mp_obj_type_t *type, size_t n_args, s
     rt_device_t rtc_deivce = RT_NULL;
 
     // check arguments
-    mp_arg_check_num(n_args, n_kw, 0, 1, false);
+    mp_arg_check_num(n_args, n_kw, 0, 0, false);
 
     // check RTC device
     rtc_deivce = rt_device_find(MP_RTC_DEV_NAME);
