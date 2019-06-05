@@ -97,7 +97,7 @@ STATIC mp_obj_t machine_lcd_pixel(size_t n_args, const mp_obj_t *args) {
     int x = mp_obj_get_int(args[1]);
     int y = mp_obj_get_int(args[2]);
     
-    error_check((x >= 0 && x <= 240) && (y >= 0 && y <= 240) , "The min/max X/Y coordinates is 0/240");
+    error_check((x >= 0 && x <= 239) && (y >= 0 && y <= 239) , "The min/max X/Y coordinates is 0/239");
 
     int col = mp_obj_get_int(args[3]);
     lcd_draw_point_color(x, y, col);
@@ -119,7 +119,7 @@ STATIC mp_obj_t machine_lcd_text(size_t n_args, const mp_obj_t *args) {
     int y = mp_obj_get_int(args[3]);
     int size = mp_obj_get_int(args[4]);
     
-    error_check((x >= 0 && x <= 240) && (y >= 0 && y <= 240) , "The min/max X/Y coordinates is 0/240");
+    error_check((x >= 0 && x <= 239) && (y >= 0 && y <= 239) , "The min/max X/Y coordinates is 0/239");
     
     error_check(size == 16 || size == 24 || size == 32, "lcd only support font size 16 24 32");
     
@@ -142,8 +142,8 @@ STATIC mp_obj_t machine_lcd_line(size_t n_args, const mp_obj_t *args) {
     int x2 = mp_obj_get_int(args[3]);
     int y2 = mp_obj_get_int(args[4]);
     
-    error_check((x1 >= 0 && x1 <= 240) && (y1 >= 0 && y1 <= 240) , "The min/max X/Y coordinates is 0/240");
-    error_check((x2 >= 0 && x2 <= 240) && (y2 >= 0 && y2 <= 240) , "The min/max X/Y coordinates is 0/240");
+    error_check((x1 >= 0 && x1 <= 239) && (y1 >= 0 && y1 <= 239) , "The min/max X/Y coordinates is 0/239");
+    error_check((x2 >= 0 && x2 <= 239) && (y2 >= 0 && y2 <= 239) , "The min/max X/Y coordinates is 0/239");
 
     lcd_draw_line(x1, y1, x2, y2);
     return mp_const_none;
@@ -163,8 +163,8 @@ STATIC mp_obj_t machine_lcd_rectangle(size_t n_args, const mp_obj_t *args) {
     int x2 = mp_obj_get_int(args[3]);
     int y2 = mp_obj_get_int(args[4]);
 
-    error_check((x1 >= 0 && x1 <= 240) && (y1 >= 0 && y1 <= 240) , "The min/max X/Y coordinates is 0/240");
-    error_check((x2 >= 0 && x2 <= 240) && (y2 >= 0 && y2 <= 240) , "The min/max X/Y coordinates is 0/240");
+    error_check((x1 >= 0 && x1 <= 239) && (y1 >= 0 && y1 <= 239) , "The min/max X/Y coordinates is 0/239");
+    error_check((x2 >= 0 && x2 <= 239) && (y2 >= 0 && y2 <= 239) , "The min/max X/Y coordinates is 0/239");
 
     lcd_draw_rectangle(x1, y1, x2, y2);
     return mp_const_none;
@@ -183,7 +183,7 @@ STATIC mp_obj_t machine_lcd_circle(size_t n_args, const mp_obj_t *args) {
     int y1 = mp_obj_get_int(args[2]);
     int r  = mp_obj_get_int(args[3]);
 
-    error_check((x1 >= 0 && x1 <= 240) && (y1 >= 0 && y1 <= 240) , "The min/max X/Y coordinates is 0/240");
+    error_check((x1 >= 0 && x1 <= 239) && (y1 >= 0 && y1 <= 239) , "The min/max X/Y coordinates is 0/239");
 
     lcd_draw_circle(x1, y1, r);
     return mp_const_none;
