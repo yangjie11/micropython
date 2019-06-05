@@ -10,9 +10,7 @@
 
 #### **class machine.RTC**()
 
-目前 RT-Thread 系统内只允许存在一个 RTC 设备，其名称为 "rtc"。
-
-所以在给定的总线上结构一个 `RTC` 对象，无入参对象，默认初始化设备名称为 “rtc” 的设备，初始化方式可参考 [示例](#_3)。 
+所以在给定的总线上构造一个 `RTC` 对象，无入参对象，初始化方式可参考 [示例](#_3)。 
 
 ### 方法
 
@@ -45,12 +43,10 @@
 
 ```
 >>> from machine import RTC
->>>
 >>> rtc = RTC()                        # create rtc device object
 >>> rtc.init((2019,6,5,2,10,22,30,0))  # set init time 
 >>> rtc.now()                          # get local time
 (2019, 6, 5, 2, 10, 22, 40, 0)
->>>
 >>> rtc.deinit()                       # reset time to 2015.1.1
 >>> rtc.now()                          # get local time
 (2015, 1, 1, 3, 0, 0, 1, 0)
