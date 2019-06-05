@@ -56,7 +56,7 @@ typedef struct _machine_pwm_obj_t {
 
 STATIC void error_check(bool status, const char *msg) {
     if (!status) {
-        nlr_raise(mp_obj_new_exception_msg(&mp_type_OSError, msg));
+        nlr_raise(mp_obj_new_exception_msg(&mp_type_ValueError, msg));
     }
 }
 
