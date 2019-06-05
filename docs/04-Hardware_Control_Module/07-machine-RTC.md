@@ -10,26 +10,29 @@
 
 #### **class machine.RTC**()
 
-所以在给定的总线上构造一个 `RTC` 对象，无入参对象，初始化方式可参考 [示例](#_3)。 
+所以在给定的总线上构造一个 `RTC` 对象，无入参对象，使用方式可参考 [示例](#_3)。 
 
 ### 方法
 
 #### **RTC.init**(datetime)
 
-根据传入的参数初始化 RTC 设备起始时间。入参 `datatime` 为一个时间元组，格式如下：
+根据传入的参数初始化 RTC 设备起始时间。入参 `datetime` 为一个时间元组，格式如下：
 
-```c
-(year, month, data[, wdata[, hour[, minute[, second[, yday]]]])
 ```
+(year, month, day, wday, hour, minute, second, yday)
+```
+参数介绍如下所示：
 
 - **year**：年份；
 - **month**：月份，范围 [1, 12]；
-- **data**：日期，范围 [1, 31]；
-- **wdata**：星期，范围 [0, 6]，0 表示星期一，以此类推；
+- **day**：日期，范围 [1, 31]；
+- **wday**：星期，范围 [0, 6]，0 表示星期一，以此类推；
 - **hour**：小时，范围 [0, 23]；
 - **minute**：分钟，范围[0, 59]；
 - **second**：秒，范围[0, 59]；
 - **yday**：从当前年份 1 月 1 日开始的天数，范围 [0, 365]，一般置位 0 未实现。
+
+使用的方式可参考 [示例](#_3)。
 
 #### **RTC.deinit**()
 
@@ -37,17 +40,17 @@
 
 #### **RTC.now**()
 
-获取当前时间，返回值为上述 `datatime` 时间元组格式。
+获取当前时间，返回值为上述 `datetime` 时间元组格式。
 
 ### 示例
 
-```
+```python
 >>> from machine import RTC
->>> rtc = RTC()                        # create rtc device object
->>> rtc.init((2019,6,5,2,10,22,30,0))  # set init time 
->>> rtc.now()                          # get local time
+>>> rtc = RTC()                        # 创建 RTC 设备对象
+>>> rtc.init((2019,6,5,2,10,22,30,0))  # 设置初始化时间
+>>> rtc.now()                          # 获取当前时间
 (2019, 6, 5, 2, 10, 22, 40, 0)
->>> rtc.deinit()                       # reset time to 2015.1.1
->>> rtc.now()                          # get local time
+>>> rtc.deinit()                       # 重置时间到2015年1月1日
+>>> rtc.now()                          # 获取当前时间
 (2015, 1, 1, 3, 0, 0, 1, 0)
 ```
