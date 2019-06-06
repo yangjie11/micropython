@@ -3,7 +3,7 @@
  *
  * The MIT License (MIT)
  *
- * Copyright (c) 2013, 2014 Damien P. George
+ * Copyright (c) 2019 ChenYong (chenyong@rt-thread.com)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,14 +23,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef MICROPY_INCLUDED_MODNETWORK_H
-#define MICROPY_INCLUDED_MODNETWORK_H
 
-#define STATION_IF   0
-#define SOFTAP_IF    1
+#ifndef MICROPY_INCLUDED_MACHINE_RTC_H
+#define MICROPY_INCLUDED_MACHINE_RTC_H
 
-#define MODNETWORK_INCLUDE_CONSTANTS (1)
+#include "py/obj.h"
+#include <rtthread.h>
 
-MP_DECLARE_CONST_FUN_OBJ_KW(get_wlan_obj);
+extern const mp_obj_type_t machine_rtc_type;
 
-#endif // MICROPY_INCLUDED_MODNETWORK_H
+#endif // MICROPY_INCLUDED_MACHINE_RTC_H

@@ -30,57 +30,20 @@
 
 #include "py/objlist.h"
 #include "py/runtime.h"
+#include "py/mphal.h"
+#include "lib/netutils/netutils.h"
 #include "modnetwork.h"
 
 #if MICROPY_PY_NETWORK
 
-/// \module network - network configuration
-///
-/// This module provides network drivers and routing configuration.
-
-void mod_network_init(void) {
-    mp_obj_list_init(&MP_STATE_PORT(mod_network_nic_list), 0);
-}
-
-void mod_network_register_nic(mp_obj_t nic) {
-    for (mp_uint_t i = 0; i < MP_STATE_PORT(mod_network_nic_list).len; i++) {
-        if (MP_STATE_PORT(mod_network_nic_list).items[i] == nic) {
-            // nic already registered
-            return;
-        }
-    }
-    // nic not registered so add to list
-    mp_obj_list_append(&MP_STATE_PORT(mod_network_nic_list), nic);
-}
-
-mp_obj_t mod_network_find_nic(const uint8_t *ip) {
-    // find a NIC that is suited to given IP address
-    for (mp_uint_t i = 0; i < MP_STATE_PORT(mod_network_nic_list).len; i++) {
-        mp_obj_t nic = MP_STATE_PORT(mod_network_nic_list).items[i];
-        // TODO check IP suitability here
-        //mod_network_nic_type_t *nic_type = (mod_network_nic_type_t*)mp_obj_get_type(nic);
-        return nic;
-    }
-
-    nlr_raise(mp_obj_new_exception_msg(&mp_type_OSError, "no available NIC"));
-}
-
-STATIC mp_obj_t network_route(void) {
-    return &MP_STATE_PORT(mod_network_nic_list);
-}
-STATIC MP_DEFINE_CONST_FUN_OBJ_0(network_route_obj, network_route);
-
 STATIC const mp_rom_map_elem_t mp_module_network_globals_table[] = {
     { MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_network) },
-
-    #if MICROPY_PY_WIZNET5K
-    { MP_ROM_QSTR(MP_QSTR_WIZNET5K), MP_ROM_PTR(&mod_network_nic_type_wiznet5k) },
-    #endif
-    #if MICROPY_PY_CC3K
-    { MP_ROM_QSTR(MP_QSTR_CC3K), MP_ROM_PTR(&mod_network_nic_type_cc3k) },
-    #endif
-
-    { MP_ROM_QSTR(MP_QSTR_route), MP_ROM_PTR(&network_route_obj) },
+    
+#if defined(MICROPY_PY_WLAN)
+    { MP_ROM_QSTR(MP_QSTR_WLAN), MP_ROM_PTR(&get_wlan_obj) },
+    { MP_ROM_QSTR(MP_QSTR_STA_IF), MP_ROM_INT(STATION_IF)},
+    { MP_ROM_QSTR(MP_QSTR_AP_IF), MP_ROM_INT(SOFTAP_IF)},
+#endif
 };
 
 STATIC MP_DEFINE_CONST_DICT(mp_module_network_globals, mp_module_network_globals_table);
