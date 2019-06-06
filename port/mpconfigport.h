@@ -144,7 +144,11 @@
 #endif
 
 #ifdef MICROPYTHON_USING_MACHINE_LCD
-#define MICROPY_PY_MACHINE_LCD      (1)
+#define MICROPY_PY_MACHINE_LCD       (1)
+#endif
+
+#ifdef MICROPYTHON_USING_MACHINE_RTC
+#define MICROPY_PY_MACHINE_RTC       (1)
 #endif
 
 /*****************************************************************************/
