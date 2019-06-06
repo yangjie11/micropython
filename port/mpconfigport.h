@@ -143,8 +143,21 @@
 #define MICROPY_PY_MACHINE_UART      (1)
 #endif
 
+
 #ifdef MICROPYTHON_USING_MACHINE_ADC
 #define MICROPY_PY_MACHINE_ADC       (1)
+#endif
+
+#ifdef MICROPYTHON_USING_MACHINE_PWM
+#define MICROPY_PY_MACHINE_PWM       (1)
+#endif
+
+#ifdef MICROPYTHON_USING_MACHINE_LCD
+#define MICROPY_PY_MACHINE_LCD       (1)
+#endif
+
+#ifdef MICROPYTHON_USING_MACHINE_RTC
+#define MICROPY_PY_MACHINE_RTC       (1)
 #endif
 
 /*****************************************************************************/
@@ -235,6 +248,14 @@
 #define MICROPY_SSL_MBEDTLS         (1)
 #endif
 
+#ifdef MICROPYTHON_USING_NETWORK
+#define MICROPY_PY_NETWORK          (1)
+#endif
+
+#ifdef MICROPYTHON_USING_WLAN
+#define MICROPY_PY_WLAN             (1)
+#endif
+
 #if MICROPY_PY_THREAD
 #define MICROPY_EVENT_POLL_HOOK \
     do { \
@@ -323,6 +344,7 @@ extern const struct _mp_obj_module_t mp_module_usocket;
 extern const struct _mp_obj_module_t mp_module_io;
 extern const struct _mp_obj_fun_builtin_fixed_t machine_soft_reset_obj;
 extern const struct _mp_obj_module_t mp_module_ffi;
+extern const struct _mp_obj_module_t mp_module_network;
 
 #if MICROPY_PY_RTTHREAD
 #define RTTHREAD_PORT_BUILTIN_MODULES { MP_ROM_QSTR(MP_QSTR_rtthread), MP_ROM_PTR(&mp_module_rtthread) },
@@ -441,6 +463,12 @@ extern const struct _mp_obj_module_t mp_module_ffi;
 #define MODFFI_PORT_BUILTIN_MODULES
 #endif
 
+#if MICROPY_PY_NETWORK
+#define MODNETWORK_PORT_BUILTIN_MODULES                    { MP_ROM_QSTR(MP_QSTR_network), MP_ROM_PTR(&mp_module_network) },
+#else
+#define MODNETWORK_PORT_BUILTIN_MODULES
+#endif
+
 // extra built in names to add to the global namespace
 #define MICROPY_PORT_BUILTINS \
     { MP_ROM_QSTR(MP_QSTR_exit), MP_ROM_PTR(&machine_soft_reset_obj) }, \
@@ -455,6 +483,7 @@ extern const struct _mp_obj_module_t mp_module_ffi;
     SOCKET_PORT_BUILTIN_MODULES \
     MODUTIME_PORT_BUILTIN_MODULES \
     MODFFI_PORT_BUILTIN_MODULES \
+    MODNETWORK_PORT_BUILTIN_MODULES \
 
 #define MICROPY_PORT_BUILTIN_MODULE_WEAK_LINKS \
     MODUTIME_PORT_BUILTIN_MODULE_WEAK_LINKS \

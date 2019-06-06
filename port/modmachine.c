@@ -39,6 +39,9 @@
 #include "modmachine.h"
 #include "machine_uart.h"
 #include "machine_adc.h"
+#include "machine_pwm.h"
+#include "machine_lcd.h"
+#include "machine_rtc.h"
 
 #include <rthw.h>
 
@@ -177,9 +180,8 @@ STATIC mp_obj_t machine_reset_cause(void) {
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_0(machine_reset_cause_obj, machine_reset_cause);
 
-
 STATIC const mp_rom_map_elem_t machine_module_globals_table[] = {
-    { MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_umachine) },
+    { MP_ROM_QSTR(MP_QSTR___name__),            MP_ROM_QSTR(MP_QSTR_umachine) },
     { MP_ROM_QSTR(MP_QSTR_info),                MP_ROM_PTR(&machine_info_obj) },
     { MP_ROM_QSTR(MP_QSTR_unique_id),           MP_ROM_PTR(&machine_unique_id_obj) },
     { MP_ROM_QSTR(MP_QSTR_reset),               MP_ROM_PTR(&machine_reset_obj) },
@@ -203,7 +205,16 @@ STATIC const mp_rom_map_elem_t machine_module_globals_table[] = {
     { MP_ROM_QSTR(MP_QSTR_SPI),                 MP_ROM_PTR(&mp_machine_soft_spi_type) },
 #endif
 #if MICROPY_PY_MACHINE_UART
-    { MP_ROM_QSTR(MP_QSTR_UART),                MP_ROM_PTR(&machine_uart_type ) },
+    { MP_ROM_QSTR(MP_QSTR_UART),                MP_ROM_PTR(&machine_uart_type) },
+#endif
+#if MICROPY_PY_MACHINE_RTC
+    { MP_ROM_QSTR(MP_QSTR_RTC),                MP_ROM_PTR(&machine_rtc_type) },
+#endif
+#if MICROPY_PY_MACHINE_LCD
+    { MP_ROM_QSTR(MP_QSTR_LCD),                 MP_ROM_PTR(&machine_lcd_type ) },
+#endif
+#if MICROPY_PY_MACHINE_PWM
+    { MP_ROM_QSTR(MP_QSTR_PWM),                 MP_ROM_PTR(&machine_pwm_type) },
 #endif
 #if MICROPY_PY_MACHINE_ADC
     { MP_ROM_QSTR(MP_QSTR_ADC),                 MP_ROM_PTR(&machine_adc_type) },
