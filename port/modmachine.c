@@ -38,6 +38,7 @@
 #include "extmod/machine_spi.h"
 #include "modmachine.h"
 #include "machine_uart.h"
+#include "machine_adc.h"
 #include "machine_pwm.h"
 #include "machine_lcd.h"
 #include "machine_rtc.h"
@@ -214,6 +215,9 @@ STATIC const mp_rom_map_elem_t machine_module_globals_table[] = {
 #endif
 #if MICROPY_PY_MACHINE_PWM
     { MP_ROM_QSTR(MP_QSTR_PWM),                 MP_ROM_PTR(&machine_pwm_type) },
+#endif
+#if MICROPY_PY_MACHINE_ADC
+    { MP_ROM_QSTR(MP_QSTR_ADC),                 MP_ROM_PTR(&machine_adc_type) },
 #endif
 };
 
