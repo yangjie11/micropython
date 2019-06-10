@@ -132,8 +132,6 @@ STATIC mp_obj_t wlan_active(size_t n_args, const mp_obj_t *args) {
     {
         return mp_obj_new_bool(rt_wlan_get_mode("wlan1") == RT_WLAN_AP);
     }
-    
-    return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(wlan_active_obj, 1, 2, wlan_active);
 
@@ -343,8 +341,6 @@ STATIC mp_obj_t wlan_ifconfig(size_t n_args, const mp_obj_t *args) {
     {
         // set
         mp_obj_t *items;
-        bool restart_dhcp_server = false;
-
         uint8_t ip_addr[4];
         uint8_t netmask[4];
         uint8_t gw[4];
