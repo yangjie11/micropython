@@ -36,7 +36,7 @@ void gc_collect(void) {
     mp_thread_gc_others();
 #else
     // gc the main thread stack
-    gc_collect_root(rt_thread_self()->stack_addr, ((mp_uint_t)((void *)MP_STATE_THREAD(stack_top) - rt_thread_self()->stack_addr)) / 4);
+    gc_collect_root(rt_thread_self()->stack_addr, ((mp_uint_t)MP_STATE_THREAD(stack_top) - (mp_uint_t)rt_thread_self()->stack_addr) / 4);
 #endif
 
     gc_collect_end();
