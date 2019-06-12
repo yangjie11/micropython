@@ -266,46 +266,46 @@ Usage Model::
         ...
 
 
-class Signal(object):
-    def __init__(self, pin_obj: Pin, invert: bool = False) -> None:
-        """Create a Signal object.
+# class Signal(object):
+#     def __init__(self, pin_obj: Pin, invert: bool = False) -> None:
+#         """Create a Signal object.
 
-        :param pin_obj: Existing Pin object.
-        :param invert: If True, the signal will be inverted (active low).
-        """
-        ...
+#         :param pin_obj: Existing Pin object.
+#         :param invert: If True, the signal will be inverted (active low).
+#         """
+#         ...
 
-    def value(self, x: Optional[bool]) -> None:
-        """This method allows to set and get the value of the signal, depending
-        on whether the argument x is supplied or not.
+#     def value(self, x: Optional[bool]) -> None:
+#         """This method allows to set and get the value of the signal, depending
+#         on whether the argument x is supplied or not.
 
-        If the argument is omitted then this method gets the signal level, 1
-        meaning signal is asserted (active) and 0 - signal inactive.
+#         If the argument is omitted then this method gets the signal level, 1
+#         meaning signal is asserted (active) and 0 - signal inactive.
 
-        If the argument is supplied then this method sets the signal level.
-        The argument x can be anything that converts to a boolean. If it
-        converts to True, the signal is active, otherwise it is inactive.
+#         If the argument is supplied then this method sets the signal level.
+#         The argument x can be anything that converts to a boolean. If it
+#         converts to True, the signal is active, otherwise it is inactive.
 
-        Correspondence between signal being active and actual logic level
-        on the underlying pin depends on whether signal is inverted
-        (active-low) or not. For non-inverted signal, active status
-        corresponds to logical 1, inactive - to logical 0. For
-        inverted/active-low signal, active status corresponds to
-        logical 0, while inactive - to logical 1.
+#         Correspondence between signal being active and actual logic level
+#         on the underlying pin depends on whether signal is inverted
+#         (active-low) or not. For non-inverted signal, active status
+#         corresponds to logical 1, inactive - to logical 0. For
+#         inverted/active-low signal, active status corresponds to
+#         logical 0, while inactive - to logical 1.
 
-        :param x: Signal level (active or not).
-        :return: Signal level.
-        :rtype: int
-        """
-        ...
+#         :param x: Signal level (active or not).
+#         :return: Signal level.
+#         :rtype: int
+#         """
+#         ...
 
-    def on(self) -> None:
-        """Activate signal."""
-        ...
+#     def on(self) -> None:
+#         """Activate signal."""
+#         ...
 
-    def off(self) -> None:
-        """Deactivate signal."""
-        ...
+#     def off(self) -> None:
+#         """Deactivate signal."""
+#         ...
 
 
 class UART(object):
@@ -682,6 +682,34 @@ class Timer(object):
         """
         ...
 
+class ADC(object):
+    """
+    - id：使用的 ADC 设备编号，id = 1 表示编号为 1 的 ADC 设备;
+    - channel：使用的 ADC 设备通道号，每个 ADC 设备对应多个通道;
+    - 例如：ADC(1,4) 表示当前使用编号为 1 的 ADC 设备的 4 通道;
+    """
+
+    def __init__(self, id: int, channel: int) -> None:
+        """
+        """
+
+    def init(channel) -> None:
+        """
+        根据输入的层参数初始化 ADC 对象，入参为使用的 ADC 对象通道号；
+        """
+        ...
+
+    def deinit(self) -> None:
+        """
+        用于关闭 ADC 对象，ADC 对象 deinit 之后需要重新 init 才能使用。
+        """
+        ...
+
+    def read() -> None:
+        """
+        用于获取并返回当前 ADC 对象的采样值。例如当前采样值为 2048，对应设备的分辨率为 12位，当前设备参考电压为 3.3V ，则该 ADC 对象通道上实际电压值的计算公式为：采样值 * 参考电压  /  （1 <<  分辨率位数），即 vol = 2048 / 4096 * 3.3 V = 1.15V。
+        """
+        ...
 
 def reset() -> None:
     """Resets the device in a manner similar to pushing the external RESET button."""
