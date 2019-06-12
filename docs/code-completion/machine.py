@@ -756,6 +756,24 @@ class LCD(object):
     在给定总线上构造一个 LCD 对象，无入参，初始化的对象取决于特定硬件。
     """
 
+    WHITE = ...  # type: int
+    BLACK = ...  # type: int 
+    BLUE  = ...  # type: int
+    BRED  = ...  # type: int
+    GRED  = ...  # type: int
+    GBLUE  = ...  # type: int
+    RED  = ...  # type: int
+    MAGENTA  = ...  # type: int
+    GREEN  = ...  # type: int
+    CYAN  = ...  # type: int
+    YELLOW  = ...  # type: int
+    BROWN  = ...  # type: int
+    BRRED  = ...  # type: int
+    GRAY = ...  # type: int 
+    GRAY175 = ...  # type: int 
+    GRAY151  = ...  # type: int
+    GRAY240 = ...  # type: int
+
     def __init__(self) -> None:
         """
         """
