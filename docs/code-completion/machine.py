@@ -681,7 +681,7 @@ class Timer(object):
         Deinitialises the timer. Stops the timer, and disables the timer peripheral.
         """
         ...
-
+  
 class ADC(object):
     """
     - id：使用的 ADC 设备编号，id = 1 表示编号为 1 的 ADC 设备;
@@ -708,6 +708,46 @@ class ADC(object):
     def read() -> None:
         """
         用于获取并返回当前 ADC 对象的采样值。例如当前采样值为 2048，对应设备的分辨率为 12位，当前设备参考电压为 3.3V ，则该 ADC 对象通道上实际电压值的计算公式为：采样值 * 参考电压  /  （1 <<  分辨率位数），即 vol = 2048 / 4096 * 3.3 V = 1.15V。
+        """
+        ...
+
+class PWM(object):
+    """
+    在给定的总线上构建一个 PWM 对象，参数介绍如下：
+
+    - id：使用的 PWM 设备编号，如  id = 1 表示编号为 1 的 PWM 设备；
+    - channel：使用的 PWM 设备通道号，每个 PWM 设备包含多个通道，范围为 [0, 4]；
+    - freq：初始化频率，范围 [1, 156250]；
+    - duty：初始化占空比数值，范围 [0 255]；
+
+    例如：PWM(1,4,100,100) 表示当前使用 编号为 1 的 PWM 设备的 4 通道，初始化频率为 1000 Hz，初始化占空比的数值为 100。
+    """
+
+    def __init__(self, id: int, channel: int, freq: int, duty: int) -> None:
+        """
+        """
+
+    def init(channel, freq, duty) -> None:
+        """
+        根据输入的参数初始化 PWM 对象。
+        """
+        ...
+
+    def deinit(self) -> None:
+        """
+        用于关闭 PWM 对象，对象 deinit 之后需要重新 init 才能使用。
+        """
+        ...
+
+    def freq(freq)-> None:
+        """
+        用于获取或者设置 PWM 对象的频率，频率的范围为 [1, 156250]。如果参数为空，返回当前 PWM 对象的频率；如果参数非空，则使用该参数设置当前 PWM 对象的频率。
+        """
+        ...
+
+    def duty(duty) -> None:
+        """
+        用于获取或者设置 PWM 对象的占空比数值，占空比数值的范围为 [0, 255]，例如 duty = 100，表示当前设备占空比为 100/255 = 39.22% 。如果参数为空，返回当前 PWM 对象的占空比数值；如果参数非空，则使用该参数设置当前 PWM 对象的占空比数值。
         """
         ...
 
