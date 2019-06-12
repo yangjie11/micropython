@@ -202,14 +202,17 @@ def sinh(x) -> None:
     ...
 
 def sqrt(x) -> None:
-    """计算平方根。 示例：
+    """
+    计算平方根。 
+    示例：
     - x = math.sqrt(9)
     - print(x)
     3.0"""
     ...
 
 def tan(x) -> None:
-    """传入弧度值，计算正切。 示例：计算tan60°
+    """
+    传入弧度值，计算正切。 示例：计算tan60°
     - math.tan(math.radians(60))
     1.732051"""
     ...
@@ -219,7 +222,9 @@ def tanh(x) -> None:
     ...
 
 def trunc(x) -> None:
-    """取整。 示例：
+    """
+    取整。 
+    示例：
     - x = math.trunc(5.12)
     - print(x)
     5

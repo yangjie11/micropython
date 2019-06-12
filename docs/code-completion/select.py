@@ -3,7 +3,8 @@ uselect 模块提供了等待数据流的事件功能。
 """
 
 def select(rlist, wlist, xlist) -> None:
-    """监控对象何时可读或可写，一旦监控的对象状态改变，返回结果（阻塞线程）。这个函数是为了兼容，效率不高，推荐用 poll 函数 。
+    """
+    监控对象何时可读或可写，一旦监控的对象状态改变，返回结果（阻塞线程）。这个函数是为了兼容，效率不高，推荐用 poll 函数 。
 
     - select.select(rlist, wlist, xlist[, timeout])
 
@@ -27,7 +28,8 @@ def select(rlist, wlist, xlist) -> None:
     ...
 
 class poll(string):
-    """创建 poll 实例。
+    """
+    创建 poll 实例。
 
     示例：
 
@@ -53,9 +55,11 @@ class poll(string):
         ...
 
     def unregister(obj) -> None:
-        """解除监控的对象的注册。
+        """
+        解除监控的对象的注册。
 
-        obj：注册过的对象
+        - obj：注册过的对象
+
         示例：
 
         - READ_ONLY = select.POLLIN | select.POLLHUP | select.POLLERR
@@ -66,7 +70,8 @@ class poll(string):
         ...
 
     def modify(obj, eventmask) -> None:
-        """修改已注册的对象监控标志。
+        """
+        修改已注册的对象监控标志。
 
         - obj：已注册的被监控对象
         - flag：修改为的监控标志
@@ -83,7 +88,9 @@ class poll(string):
     def poll(timeout) -> None:
         """
         - poll([timeout])
-        等待至少一个已注册的对象准备就绪。返回 (obj, event, ...) 元组, event 元素指定了一个流发生的事件，是上面所描述的 select.POLL*常量组合。 根据平台和版本的不同，在元组中可能有其他元素，所以不要假定元组的大小是 2 。如果超时，则返回空列表。
+        等待至少一个已注册的对象准备就绪。
+        返回 (obj, event, ...) 元组, event 元素指定了一个流发生的事件，是上面所描述的 select.POLL*常量组合。 
+        根据平台和版本的不同，在元组中可能有其他元素，所以不要假定元组的大小是 2 。如果超时，则返回空列表。
         """
         ...
 

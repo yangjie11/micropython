@@ -142,14 +142,21 @@ class socket(family, type, protocol) -> None:
     def read(size) -> None:
         """
         - read([size])
-        Read up to size bytes from the socket. Return a bytes object. If size is not given, it reads all data available from the socket until EOF; as such the method will not return until the socket is closed. This function tries to read as much data as requested (no “short reads”). This may be not possible with non-blocking socket though, and then less data will be returned.
+        Read up to size bytes from the socket. 
+        Return a bytes object. If size is not given, it reads all data available from the socket until EOF; 
+        as such the method will not return until the socket is closed. This function tries to read as much data as requested (no “short reads”). 
+        This may be not possible with non-blocking socket though, and then less data will be returned.
         """
         ...
 
     def readinto(buf) -> None:
         """
         readinto(buf[, nbytes])
-        Read bytes into the buf. If nbytes is specified then read at most that many bytes. Otherwise, read at most len(buf) bytes. Just as read(), this method follows “no short reads” policy. Return value: number of bytes read and stored into buf.
+        Read bytes into the buf. 
+        If nbytes is specified then read at most that many bytes. 
+        Otherwise, read at most len(buf) bytes. 
+        Just as read(), this method follows “no short reads” policy. 
+        Return value: number of bytes read and stored into buf.
         """
         ...
         

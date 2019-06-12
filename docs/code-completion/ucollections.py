@@ -3,7 +3,8 @@ ucollections 模块实现了专门的容器数据类型，它提供了 Python �
 """
 
 class namedtuple(name, fields):
-    """这是工厂函数创建一个新的 namedtuple 型与一个特定的字段名称和集合。namedtuple 是元组允许子类要访问它的字段不仅是数字索引，而且还具有属性使用符号字段名访问语法。 字段是字符串序列指定字段名称。为了兼容的实现也可以用空间分隔的字符串命名的字段（但效率较低） 。
+    """
+    这是工厂函数创建一个新的 namedtuple 型与一个特定的字段名称和集合。namedtuple 是元组允许子类要访问它的字段不仅是数字索引，而且还具有属性使用符号字段名访问语法。 字段是字符串序列指定字段名称。为了兼容的实现也可以用空间分隔的字符串命名的字段（但效率较低） 。
     代码示例：
 
     - from ucollections import namedtuple
@@ -17,7 +18,8 @@ class namedtuple(name, fields):
     ...
 
 class OrderedDict(...):
-    """字典类型的子类，会记住并保留键/值的追加顺序。当有序的字典被迭代输出时，键/值 会按照他们被添加的顺序返回 :
+    """
+    字典类型的子类，会记住并保留键/值的追加顺序。当有序的字典被迭代输出时，键/值 会按照他们被添加的顺序返回 :
     from ucollections import OrderedDict
 
     # To make benefit of ordered keys, OrderedDict should be initialized

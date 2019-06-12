@@ -6,7 +6,8 @@ ustruct 模块在 Python 值和以 Python 字节对象表示的 C 结构之间�
 """
 
 def calcsize(fmt) -> None:
-    """返回存放某一类型数据 fmt 需要的字节数。
+    """
+    返回存放某一类型数据 fmt 需要的字节数。
     - fmt：数据类型
     -     b — 字节型
     -     B — 无符号字节型
@@ -31,7 +32,8 @@ def calcsize(fmt) -> None:
     ...
 
 def pack(fmt, v1, v2, ...) -> None:
-    """按照格式字符串 fmt 打包参数 v1, v2, ... 。返回值是参数打包后的字节对象。
+    """
+    按照格式字符串 fmt 打包参数 v1, v2, ... 。返回值是参数打包后的字节对象。
     fmt：同 calcsize。
     示例：
 
@@ -55,7 +57,9 @@ def pack_into(fmt, buffer, offset, v1, v2, ...) -> None:
     ...
 
 def unpack_from(fmt, data, offset=0) -> None:
-    """以 fmt 作为规则从 data 的 offset 位置开始解包数据，如果 offset 是负数就是从缓冲区末尾开始计算。返回值是解包后的参数元组。
+    """
+    以 fmt 作为规则从 data 的 offset 位置开始解包数据，如果 offset 是负数就是从缓冲区末尾开始计算。
+    返回值是解包后的参数元组。
     - buf = struct.pack("bb", 1, 2)
     - print(struct.unpack("bb", buf))
     - (1, 2)

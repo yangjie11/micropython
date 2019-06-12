@@ -26,7 +26,8 @@ def hexlify(data]) -> None:
     ...
 
 def unhexlify(data) -> None:
-    """转换十六进制字符串为二进制字符串，功能和 hexlify 相反。
+    """
+    转换十六进制字符串为二进制字符串，功能和 hexlify 相反。
 
     示例：
 

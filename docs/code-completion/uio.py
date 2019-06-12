@@ -19,7 +19,10 @@ class StringIO(string):
     ...
 
 class BytesIO(string):
-    """内存文件对象。StringIO 用于文本模式 I/O (用 “t” 打开文件)，BytesIO 用于二进制方式 (用 “b” 方式)。文件对象的初始内容可以用字符串参数指定（stringio用普通字符串，bytesio用bytes对象）。所有的文件方法，如 read(), write(), seek(), flush(), close() 都可以用在这些对象上。
+    """
+    内存文件对象。StringIO 用于文本模式 I/O (用 “t” 打开文件)，BytesIO 用于二进制方式 (用 “b” 方式)。
+    文件对象的初始内容可以用字符串参数指定（stringio用普通字符串，bytesio用bytes对象）。
+    所有的文件方法，如 read(), write(), seek(), flush(), close() 都可以用在这些对象上。
     """
     def __init__(self) -> None:
     ...

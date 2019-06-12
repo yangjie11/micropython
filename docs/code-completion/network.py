@@ -7,7 +7,10 @@ AP_IF = ...  # type: int
 
 class WLAN(object):
     """
-    创建一个 WLAN 网络接口对象。支持的接口是 network.STA_IF（STA 模式，可以连接到上游的 WiFi 热点上） 和 network.AP_IF（AP 模式，允许其他 WiFi 客户端连接到自身的热点)。下面方法的可用性取决于接口的类型。例如，只有STA 接口可以使用 WLAN.connect()  方法连接到 AP 热点上。
+    创建一个 WLAN 网络接口对象。
+    支持的接口是 network.STA_IF（STA 模式，可以连接到上游的 WiFi 热点上） 和 network.AP_IF（AP 模式，允许其他 WiFi 客户端连接到自身的热点)。
+    下面方法的可用性取决于接口的类型。
+    例如，只有STA 接口可以使用 WLAN.connect() 方法连接到 AP 热点上。
     """
 
     STAT_IDLE = ...  # type: int

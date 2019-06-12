@@ -7,7 +7,8 @@ BIG_ENDIAN  = ...  # type: int
 NATIVE  = ...  # type: int
 
 class struct(addr, descriptor, type):
-    """将内存中以 c 形式打包的结构体或联合体转换为字典，并返回该字典。
+    """
+    将内存中以 c 形式打包的结构体或联合体转换为字典，并返回该字典。
 
     - addr：开始转换的地址
     - descriptor：转换描述符
@@ -44,7 +45,8 @@ class struct(addr, descriptor, type):
         ...
 
     def addressof(obj) -> None:
-        """返回对象地址。参数需要是 bytes, bytearray 。 示例：
+        """
+        返回对象地址。参数需要是 bytes, bytearray 。 示例：
 
         - a = b"0123"
         - print(uctypes.addressof(a))
@@ -53,7 +55,8 @@ class struct(addr, descriptor, type):
         ...
 
     def bytes_at(addr, size)-> None:
-        """捕捉从 addr 开始到 size 个地址偏移量结束的内存数据为 bytearray 对象并返回。 示例：
+        """
+        捕捉从 addr 开始到 size 个地址偏移量结束的内存数据为 bytearray 对象并返回。 示例：
 
         - a = b"0123"
         - print( uctypes.bytes_at(uctypes.addressof(a), 4))
