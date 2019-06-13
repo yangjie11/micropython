@@ -17,4 +17,3 @@ uos.getcwd()
 uos.listdir()
 uos.rmdir("11")
 uos.listdir()
-

@@ -17,3 +17,4 @@ spi = SPI(-1, 500000, polarity = 0, phase = 0, bits = 8, firstbit = 0, sck = clk
 print(spi)
 spi.write("hello rt-thread!")
 spi.read(10)
+
