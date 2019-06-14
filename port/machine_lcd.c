@@ -51,7 +51,6 @@ STATIC void error_check(bool status, const char *msg) {
 ///
 /// Construct an LCD object.  
 STATIC mp_obj_t machine_lcd_make_new(const mp_obj_type_t *type, size_t n_args, size_t n_kw, const mp_obj_t *args) {
-
     // check arguments
     mp_arg_check_num(n_args, n_kw, 0, 0, false);
     
@@ -66,7 +65,6 @@ STATIC mp_obj_t machine_lcd_make_new(const mp_obj_type_t *type, size_t n_args, s
 ///
 /// Turn the backlight on/off.  True or 1 turns it on, False or 0 turns it off.
 STATIC mp_obj_t machine_lcd_light(mp_obj_t self_in, mp_obj_t value) {
-    machine_lcd_obj_t *self = MP_OBJ_TO_PTR(self_in);
     if (mp_obj_is_true(value)) {
         lcd_display_on(); // set pin high to turn backlight on
     } else {
@@ -81,8 +79,6 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(machine_lcd_light_obj, machine_lcd_light);
 /// Fill the screen with the given colour.
 ///
 STATIC mp_obj_t machine_lcd_fill(mp_obj_t self_in, mp_obj_t col_in) {
-    machine_lcd_obj_t *self = MP_OBJ_TO_PTR(self_in);
-    
     int col = mp_obj_get_int(col_in);
     lcd_clear(col);
     
@@ -95,7 +91,6 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(machine_lcd_fill_obj, machine_lcd_fill);
 /// Set the pixel at `(x, y)` to the given colour.
 ///
 STATIC mp_obj_t machine_lcd_pixel(size_t n_args, const mp_obj_t *args) {
-    machine_lcd_obj_t *self = MP_OBJ_TO_PTR(args[0]);
     int x = mp_obj_get_int(args[1]);
     int y = mp_obj_get_int(args[2]);
     
@@ -113,8 +108,6 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_pixel_obj, 4, 4, machine_
 /// Draw the given text to the position `(x, y)` using the given size (16 24 32).
 ///
 STATIC mp_obj_t machine_lcd_text(size_t n_args, const mp_obj_t *args) {
-    // extract arguments
-    machine_lcd_obj_t *self = MP_OBJ_TO_PTR(args[0]);
     size_t len;
     const char *data = mp_obj_str_get_data(args[1], &len);
     int x = mp_obj_get_int(args[2]);
@@ -136,9 +129,6 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_text_obj, 5, 5, machine_l
 /// display a line on the lcd, from (x1, y1) to (x2, y2).
 ///
 STATIC mp_obj_t machine_lcd_line(size_t n_args, const mp_obj_t *args) {
-    // extract arguments
-    machine_lcd_obj_t *self = MP_OBJ_TO_PTR(args[0]);
-
     int x1 = mp_obj_get_int(args[1]);
     int y1 = mp_obj_get_int(args[2]);
     int x2 = mp_obj_get_int(args[3]);
@@ -157,9 +147,6 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_line_obj, 5, 5, machine_l
 /// display a rectangle on the lcd, from (x1, y1) to (x2, y2).
 ///
 STATIC mp_obj_t machine_lcd_rectangle(size_t n_args, const mp_obj_t *args) {
-    // extract arguments
-    machine_lcd_obj_t *self = MP_OBJ_TO_PTR(args[0]);
-
     int x1 = mp_obj_get_int(args[1]);
     int y1 = mp_obj_get_int(args[2]);
     int x2 = mp_obj_get_int(args[3]);
@@ -178,9 +165,6 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_rectangle_obj, 5, 5, mach
 /// display a circle on the lcd, center(x1, y1) R = r.
 ///
 STATIC mp_obj_t machine_lcd_circle(size_t n_args, const mp_obj_t *args) {
-    // extract arguments
-    machine_lcd_obj_t *self = MP_OBJ_TO_PTR(args[0]);
-
     int x1 = mp_obj_get_int(args[1]);
     int y1 = mp_obj_get_int(args[2]);
     int r  = mp_obj_get_int(args[3]);
