@@ -18,18 +18,18 @@ PIN_LED_B = 40
 LED_ON  = 0
 LED_OFF = 1
 
-led_r = Pin(("LED RED", PIN_LED_R), Pin.OUT_PP) 
-led_g = Pin(("LED GREEN", PIN_LED_G), Pin.OUT_PP) 
-led_b = Pin(("LED BLUE", PIN_LED_B), Pin.OUT_PP) 
+led_r = Pin(("LED RED", PIN_LED_R), Pin.OUT_PP)
+led_g = Pin(("LED GREEN", PIN_LED_G), Pin.OUT_PP)
+led_b = Pin(("LED BLUE", PIN_LED_B), Pin.OUT_PP)
 
-blink_tab = [(LED_ON,LED_ON,LED_ON),
-             (LED_OFF,LED_ON,LED_ON),
-             (LED_ON,LED_OFF,LED_ON),
-             (LED_ON,LED_ON,LED_OFF),          
-             (LED_OFF,LED_OFF,LED_ON),
-             (LED_ON,LED_OFF,LED_OFF),
-             (LED_OFF,LED_ON,LED_OFF),
-             (LED_ON,LED_OFF,LED_OFF)]
+blink_tab = [(LED_ON, LED_ON, LED_ON),
+             (LED_OFF, LED_ON, LED_ON),
+             (LED_ON, LED_OFF, LED_ON),
+             (LED_ON, LED_ON, LED_OFF),
+             (LED_OFF, LED_OFF, LED_ON),
+             (LED_ON, LED_OFF, LED_OFF),
+             (LED_OFF, LED_ON, LED_OFF),
+             (LED_ON, LED_OFF, LED_OFF)]
 
 count = 0
 

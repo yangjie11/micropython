@@ -13,11 +13,12 @@ from machine import Pin
 
 PIN_BEEPER = 37
 
-beeper = Pin(("beep", PIN_BEEPER), Pin.OUT_PP)        # create beeper object from pin PIN_BEEPER, Set pin PIN_BEEPER to output mode
+# create beeper object from pin PIN_BEEPER, Set pin PIN_BEEPER to output mode
+beeper = Pin(("beep", PIN_BEEPER), Pin.OUT_PP)
 
-beeper.value(1)            # trun the buzzer on 
+beeper.value(1)            # trun the buzzer on
 time.sleep(0.5)
-beeper.value(0)            # trun the buzzer off 
+beeper.value(0)            # trun the buzzer off
 time.sleep(0.5)
 beeper.value(1)
 time.sleep(0.5)

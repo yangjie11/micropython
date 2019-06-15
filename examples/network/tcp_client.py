@@ -10,7 +10,7 @@
 
 import usocket
 
-s = usocket.socket(usocket.AF_INET,usocket.SOCK_STREAM)
-s.connect(("192.168.10.110",6000))  
-s.send("micropython")               
-s.close()
+client = usocket.socket(usocket.AF_INET, usocket.SOCK_STREAM)
+client.connect(("192.168.10.110", 6000))
+client.send("rt-thread micropython!")
+client.close()
