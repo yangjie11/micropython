@@ -12,5 +12,5 @@ import network
 
 wlan = network.WLAN(network.STA_IF)
 wlan.scan()
-wlan.connect("rtthread","02188888888")
+wlan.connect("rtthread", "02188888888")
 wlan.isconnected()

@@ -10,10 +10,15 @@
 
 import usocket
 
-s = usocket.socket(usocket.AF_INET,usocket.SOCK_STREAM)  # Create STREAM TCP socket
-s.bind(('192.168.12.32', 6001))   
-s.listen(5)
-s.setblocking(True)
-sock,addr=s.accept()              
-sock.recv(10)                    
-s.close()
+# Create STREAM TCP socket
+server = usocket.socket(usocket.AF_INET, usocket.SOCK_STREAM)
+server.bind(('192.168.12.203', 6001))
+server.listen(5)
+server.setblocking(True)
+
+while True:
+    # 等待客户端连接
+    clientsocket, addr = server.accept()
+    print("connect address: %s" % str(addr))
+    clientsocket.send('welcome to rt-thread micropython!')
+    clientsocket.close()
