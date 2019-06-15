@@ -31,9 +31,14 @@ blink_tab = [(LED_ON,LED_ON,LED_ON),
              (LED_OFF,LED_ON,LED_OFF),
              (LED_ON,LED_OFF,LED_OFF)]
 
+count = 0
 
 while True:
-    led.value(0)            #Set led turn on
-    time.sleep(0.5)
-    led.value(1)            #Set led turn off
+    group_num = count % len(blink_tab)
+
+    led_r.value(blink_tab[group_num][0])           # set led status
+    led_g.value(blink_tab[group_num][1])
+    led_b.value(blink_tab[group_num][2])
+
+    count += 1
     time.sleep(0.5)
