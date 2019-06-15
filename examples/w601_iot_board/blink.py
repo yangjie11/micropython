@@ -10,7 +10,10 @@
 
 import utime as time
 from machine import Pin
-led = Pin(("X1", 38), Pin.OUT_PP)        #create led object from pin 38, Set pin 38 to output mode
+
+PIN_LED_R = 38
+
+led = Pin(("led_red", PIN_LED_R), Pin.OUT_PP)        #create led object from pin PIN_LED_R, Set pin PIN_LED_R to output mode
 
 while True:
     led.value(0)            #Set led turn on
