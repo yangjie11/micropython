@@ -17,7 +17,7 @@ server.listen(5)
 server.setblocking(True)
 
 while True:
-    # 等待客户端连接
+    # Wait for client connection
     clientsocket, addr = server.accept()
     print("connect address: %s" % str(addr))
     clientsocket.send('welcome to rt-thread micropython!')

@@ -8,20 +8,20 @@
 # 2019-06-13     SummerGift   first version
 #
 
-from machine import LCD     # 从 machine 导入 LCD 类
+from machine import LCD     # Import the LCD class from machine
 
-lcd = LCD()                             # 创建一个 lcd 对象
-lcd.light(False)                        # 关闭背光
-lcd.light(True)                         # 打开背光
-lcd.fill(lcd.BLACK)                     # 将整个 LCD 填充为黑色
-lcd.fill(lcd.RED)                       # 将整个 LCD 填充为红色
-lcd.fill(lcd.GRAY)                      # 将整个 LCD 填充为灰色
-lcd.fill(lcd.WHITE)                     # 将整个 LCD 填充为白色
-lcd.pixel(50, 50, lcd.BLUE)             # 将（50,50）位置的像素填充为蓝色
-lcd.text("hello RT-Thread", 0, 0, 16)   # 在（0, 0） 位置以 16 字号打印字符串
-lcd.text("hello RT-Thread", 0, 16, 24)  # 在（0, 16）位置以 24 字号打印字符串
-lcd.text("hello RT-Thread", 0, 48, 32)  # 在（0, 48）位置以 32 字号打印字符串
-lcd.line(0, 50, 239, 50)                # 以起点（0，50），终点（239，50）画一条线
-lcd.line(0, 50, 239, 50)                # 以起点（0，50），终点（239，50）画一条线
-lcd.rectangle(100, 100, 200, 200)       # 以左上角为（100,100），右下角（200,200）画矩形
-lcd.circle(150, 150, 80)                # 以圆心位置（150,150），半径为 80 画圆
+lcd = LCD()                             # Create a LCD object
+lcd.light(False)                        # Close the backlight
+lcd.light(True)                         # Open the backlight
+lcd.fill(lcd.BLACK)                     # Fill the entire LCD with black
+lcd.fill(lcd.RED)                       # Fill the entire LCD with red
+lcd.fill(lcd.GRAY)                      # Fill the entire LCD with gray
+lcd.fill(lcd.WHITE)                     # Fill the entire LCD with white
+lcd.pixel(50, 50, lcd.BLUE)             # fills the pixels in the (50,50) position with blue
+lcd.text("hello RT-Thread", 0, 0, 16)   # prints the string at 16 font size at position (0, 0)
+lcd.text("hello RT-Thread", 0, 16, 24)  # prints the string at 24 font size at position (0, 16)
+lcd.text("hello RT-Thread", 0, 48, 32)  # prints the string at 32 font size at position (0, 48)
+lcd.line(0, 50, 239, 50)                # Draw a line starting at (0,50) and ending at (239,50)
+lcd.line(0, 50, 239, 50)                # Draw a line starting at (0,50) and ending at (239,50)
+lcd.rectangle(100, 100, 200, 200)       # Draw a rectangle with the top left corner (100,100) and the bottom right corner (200,200)
+lcd.circle(150, 150, 80)                # Draw a circle with a radius of 80 at the center (150,150)

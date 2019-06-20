@@ -8,9 +8,9 @@
 # 2019-06-13     SummerGift   first version
 #
 
-from machine import ADC     # 从 machine 导入 ADC 类
+from machine import ADC     # Import the ADC class from machine
 
-adc = ADC(2, 5)             # 创建 ADC 对象，当前使用编号为 2 的 ADC 设备的 5 通道
-adc.read()                  # 获取 ADC 对象采样值
-adc.deinit()                # 关闭 ADC 对象
-adc.init(5)                 # 开启并重新配置 ADC 对象
+adc = ADC(2, 5)             # Creates an ADC object that currently uses the 5 channels of an ADC device numbered 2
+adc.read()                  # Gets the ADC object sampling value
+adc.deinit()                # Close ADC object
+adc.init(5)                 # Open and reconfigure the ADC object
