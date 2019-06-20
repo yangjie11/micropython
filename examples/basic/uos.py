@@ -10,32 +10,32 @@
 
 import uos
 
-print("获得当前所在目录：")
+print("Get the current directory:")
 print(uos.getcwd())
 
-print("创建文件夹 ：rtthread")
+print("Create folder: rtthread")
 uos.mkdir("rtthread")
 
-print("列出当前目录下的文件列表：")
+print("List the files in the current directory:")
 print(uos.listdir())
 
-print("移动当前目录到 rtthread 文件夹下：")
+print("Move the current directory to the rtthread folder:")
 uos.chdir("rtthread")
 
-print("获得当前所在目录：")
+print("Get the current directory:")
 print(uos.getcwd())
 
-print("切换到上一级目录：")
+print("Switch to the previous directory:")
 uos.chdir("..")
 
-print("获得当前所在目录：")
+print("Get the current directory:")
 print(uos.getcwd())
 
-print("列出当前目录下的文件列表：")
+print("List the files in the current directory:")
 print(uos.listdir())
 
-print("删除 rtthread 文件夹：")
+print("Delete the rtthread folder:")
 uos.rmdir("rtthread")
 
-print("列出当前目录下的文件列表：")
+print("List the files in the current directory:")
 print(uos.listdir())
