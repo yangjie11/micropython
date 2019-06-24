@@ -1,11 +1,22 @@
 # VSCode 最好用的 MicroPython 插件
 
+VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大的开发环境，主要特性如下：
+
+- 支持通过网络、USB 或串口的方式连接开发板
+- 支持 MicroPython REPL 交互环境
+- 提供丰富的示例代码
+- 支持自动同步工程代码
+- 支持在设备上运行示例代码
+- 支持运行选中的代码片段
+- 支持多款 MicroPython 开发板
+- 支持基于 MicroPython 的代码智能补全
+
 ## 准备工作
 
 本插件依赖 Microsoft Python 插件，并且使用 Python 脚本，因此需要做如下准备：
 
 1. 安装 Microsoft Python 插件
-2. 按照 Python 插件的提示在 PC 上安装 Python3 并加入系统环境
+2. 按照 Python 插件的提示在 PC 上安装 Python3 并加入到系统环境变量中
 
 ![Python plug](assets/install_python_plug.png)
 
@@ -32,7 +43,7 @@
 - 提供丰富的 MicroPython 代码示例程序
 
 ![example_code](assets/example_code.png)
-  
+
 - 支持在设备上直接运行示例代码
 
 ![run_example_code](assets/run_example_code.png)
@@ -50,5 +61,6 @@
 ## 注意事项
 
 - 请选择 PowerShell 作为默认终端
+
 在 PowerShell 终端中输入 `Set-ItemProperty HKCU:\Console VirtualTerminalLevel -Type DWORD 1` 可以解决退格键等显示乱码的问题。
 
