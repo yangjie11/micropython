@@ -21,7 +21,7 @@
 
 ### 方法
 
-#### **Timer.init**(mode = Timer.PERIODIC, period = -1, callback = None)
+#### **Timer.init**(mode = Timer.PERIODIC, period = 0, callback = None)
 
 - **mode**：设置 Timer 定时器模式，可以设置两种模式：`ONE_SHOT`（执行一次）、`PERIOD`（周期性执行），默认设置的模式为 `PERIOD` 模式；
 
@@ -30,17 +30,15 @@
 - **callback**：设置 Timer 定义器超时回调函数，默认设置的函数为 None 空函数，设置的函数格式如下所示：
 
 ```python
-def callback_test(device):         // 回调函数有且只有一个入参，为创建的 Timer 对象
+def callback_test(device):         # 回调函数有且只有一个入参，为创建的 Timer 对象
     print("Timer callback test")
-    print(device)                  // 打印 Timer 对象配置信息
+    print(device)                  # 打印 Timer 对象配置信息
 ```
 
-该函数入参个数为 **1 - 3 **个，当只有一个入参时，参数用于设置超时时间；当有两个入参时，参数用于设置定时器模式和超时时间；当有三个入参时，参数用于设置超时模式、超时时间和超时回调函数。如下示例所示：
+该函数使用方式如下示例所示：
 
 ```python
-wdt.init(5000)                     // 设置超时时间为 5 秒
-wdt.init(wdt.PERIOD,5000)          // 设置定时器模式为周期性执行，超时时间为 5 秒
-wdt.init(wdt.PERIOD,5000,None)     // 设置定时器模式为周期性执行，超时时间为 5 秒, 超时函数为 None
+timer.init(wdt.PERIOD,5000,callback_test)   # 设置定时器模式为周期性执行，超时时间为 5 秒, 超时函数为 callback_test
 ```
 #### **Timer.deinit**()
 
@@ -57,19 +55,19 @@ wdt.init(wdt.PERIOD,5000,None)     // 设置定时器模式为周期性执行，
 ### 示例
 
 ```python
->>> from machine import Timer                    // 从 machine 导入 Timer 类
->>> timer = Timer(11)                            // 创建 Timer 对象，当前设备编号为 11
->>>                                              // 进入粘贴模式
+>>> from machine import Timer                       # 从 machine 导入 Timer 类
+>>> timer = Timer(11)                               # 创建 Timer 对象，当前设备编号为 11
+>>>                                                 # 进入粘贴模式
 paste mode; Ctrl-C to cancel, Ctrl-D to finish
-=== def callback_test(device):                   // 定义超时回调函数 
+=== def callback_test(device):                      # 定义超时回调函数 
 ===     print("Timer callback test")
->>> timer.init(timer.PERIODIC,5000,callback_test)// 初始化 Timer 对象，设置定时器模式为循环执行，超时时间为 5 秒，超时回调函数 callback_test
->>> Timer callback test                          // 5 秒超时循环执行回调函数，打印日志
+>>> timer.init(timer.PERIODIC, 5000, callback_test) # 初始化 Timer 对象，设置定时器模式为循环执行，超时时间为 5 秒，超时回调函数 callback_test
+>>> Timer callback test                             # 5 秒超时循环执行回调函数，打印日志
 >>> Timer callback test
 >>> Timer callback test
->>> timer.init(timer.ONE_SHOT,5000,callback_test)// 设置定时器模式为只执行一次，超时时间为 5 秒，超时回调函数为 callback_test
->>> Timer callback test                          // 5 秒超时后执行一次回调函数，打印日志
->>> timer.deinit()                               // 停止并关闭 Timer 定时器
+>>> timer.init(timer.ONE_SHOT, 5000, callback_test) # 设置定时器模式为只执行一次，超时时间为 5 秒，超时回调函数为 callback_test
+>>> Timer callback test                             # 5 秒超时后执行一次回调函数，打印日志
+>>> timer.deinit()                                  # 停止并关闭 Timer 定时器
 ```
 
-更多内容可参考 [machine.Timer](http://docs.micropython.org/en/latest/library/machine.Timer.html)  。
+更多内容可参考 [machine.Timer](http://docs.micropython.org/en/latest/library/machine.Timer.html)。
