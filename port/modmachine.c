@@ -42,6 +42,8 @@
 #include "machine_pwm.h"
 #include "machine_lcd.h"
 #include "machine_rtc.h"
+#include "machine_wdt.h"
+#include "machine_timer.h"
 
 #include <rthw.h>
 
@@ -208,7 +210,7 @@ STATIC const mp_rom_map_elem_t machine_module_globals_table[] = {
     { MP_ROM_QSTR(MP_QSTR_UART),                MP_ROM_PTR(&machine_uart_type) },
 #endif
 #if MICROPY_PY_MACHINE_RTC
-    { MP_ROM_QSTR(MP_QSTR_RTC),                MP_ROM_PTR(&machine_rtc_type) },
+    { MP_ROM_QSTR(MP_QSTR_RTC),                 MP_ROM_PTR(&machine_rtc_type) },
 #endif
 #if MICROPY_PY_MACHINE_LCD
     { MP_ROM_QSTR(MP_QSTR_LCD),                 MP_ROM_PTR(&machine_lcd_type ) },
@@ -218,6 +220,12 @@ STATIC const mp_rom_map_elem_t machine_module_globals_table[] = {
 #endif
 #if MICROPY_PY_MACHINE_ADC
     { MP_ROM_QSTR(MP_QSTR_ADC),                 MP_ROM_PTR(&machine_adc_type) },
+#endif
+#if MICROPY_PY_MACHINE_WDT
+    { MP_ROM_QSTR(MP_QSTR_WDT),                 MP_ROM_PTR(&machine_wdt_type) },
+#endif
+#if MICROPY_PY_MACHINE_TIMER
+    { MP_ROM_QSTR(MP_QSTR_Timer),               MP_ROM_PTR(&machine_timer_type) },
 #endif
 };
 
