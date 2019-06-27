@@ -676,12 +676,18 @@ class Timer(object):
         :param id: Timer ID.
         """
 
+    def init(mode : Timer.PERIODIC, period : int, callback : func) -> None:
+        """
+        Init the timer. Start the timer, and enable the timer peripheral.
+        """
+        ...
+
     def deinit(self) -> None:
         """
         Deinitialises the timer. Stops the timer, and disables the timer peripheral.
         """
         ...
-  
+
 class ADC(object):
     """
     - id：使用的 ADC 设备编号，id = 1 表示编号为 1 的 ADC 设备;
@@ -823,6 +829,20 @@ class LCD(object):
         """
         ...
 
+
+class WDT(object):
+
+    def __init__(self) -> None:
+        """
+        Construct a new watchdog object.
+        """
+
+    def feed(self) -> None:
+        """
+        Perform the dog feed operation and clear the watchdog counter.
+        """
+        ...
+
 def reset() -> None:
     """Resets the device in a manner similar to pushing the external RESET button."""
     ...
@@ -931,3 +951,4 @@ def time_pulse_us(pin: Pin, pulse_level: int, timeout_us: int = 1000000) -> int:
     :return: Result code (-1 or -2)
     """
     ...
+
