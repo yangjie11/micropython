@@ -159,6 +159,14 @@
 #define MICROPY_PY_MACHINE_RTC       (1)
 #endif
 
+#ifdef MICROPYTHON_USING_MACHINE_WDT
+#define MICROPY_PY_MACHINE_WDT       (1)
+#endif
+
+#ifdef MICROPYTHON_USING_MACHINE_TIMER
+#define MICROPY_PY_MACHINE_TIMER     (1)
+#endif
+
 /*****************************************************************************/
 /* System Module                                                             */
 
