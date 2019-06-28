@@ -14,33 +14,13 @@ def get_pin_num(pin_index):
     """
 
     if pin_index[0] != 'P':
-        print("ERROR : Please pass in the correct parameters")
+        print("ERROR : Please pass in the correct parameters P + <A~K> + number, such as PE11")
         return
 
-    if pin_index[1] == 'A':
-        pin_num = pin_index[2:]
-    elif pin_index[1] == 'B':
-        pin_num = (16 + int(pin_index[2:]))
-    elif pin_index[1] == 'C':
-        pin_num = (32 + int(pin_index[2:]))
-    elif pin_index[1] == 'D':
-        pin_num = (48 + int(pin_index[2:]))
-    elif pin_index[1] == 'E':
-        pin_num = (64 + int(pin_index[2:]))
-    elif pin_index[1] == 'F':
-        pin_num = (80 + int(pin_index[2:]))
-    elif pin_index[1] == 'G':
-        pin_num = (96 + int(pin_index[2:]))
-    elif pin_index[1] == 'H':
-        pin_num = (112 + int(pin_index[2:]))
-    elif pin_index[1] == 'I':
-        pin_num = (128 + int(pin_index[2:]))
-    elif pin_index[1] == 'J':
-        pin_num = (144 + int(pin_index[2:]))
-    elif pin_index[1] == 'K':
-        pin_num = (160 + int(pin_index[2:]))
+    if not pin_index[1].isupper():
+        print("ERROR : Please pass in the correct parameters P + <A~K> + number, such as PE11")
+        return
 
-    return pin_num
+    return (ord(pin_index[1]) - ord('A')) * 16 + int(pin_index[2:])
 
-pin_num = get_pin_num("PE11")   # Get the pin number for PE11
-print(pin_num)
+print(get_pin_num("PE11")) # Get the pin number for PE11
