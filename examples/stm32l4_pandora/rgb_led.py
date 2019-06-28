@@ -11,9 +11,9 @@
 import utime as time
 from machine import Pin
 
-PIN_LED_R = 38
-PIN_LED_G = 39
-PIN_LED_B = 40
+PIN_LED_R = 71    # PE7, get the pin number from get_pin_number.py
+PIN_LED_G = 72    # PE8
+PIN_LED_B = 73    # PE9
 
 LED_ON  = 0
 LED_OFF = 1

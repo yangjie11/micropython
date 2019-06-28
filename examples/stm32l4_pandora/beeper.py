@@ -11,7 +11,7 @@
 import utime as time
 from machine import Pin
 
-PIN_BEEPER = 37
+PIN_BEEPER = 18    # PB2, get the pin number from get_pin_number.py
 
 # create beeper object from pin PIN_BEEPER, Set pin PIN_BEEPER to output mode
 beeper = Pin(("beep", PIN_BEEPER), Pin.OUT_PP)
