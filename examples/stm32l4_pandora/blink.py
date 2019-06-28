@@ -11,7 +11,7 @@
 import utime as time
 from machine import Pin
 
-PIN_LED_R = 38
+PIN_LED_R = 71    # PE7, get the pin number from get_pin_number.py
 
 # create led object from pin PIN_LED_R, Set pin PIN_LED_R to output mode
 led = Pin(("led_red", PIN_LED_R), Pin.OUT_PP)
