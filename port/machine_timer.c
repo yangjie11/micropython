@@ -87,12 +87,15 @@ STATIC mp_obj_t machine_timer_make_new(const mp_obj_type_t *type, size_t n_args,
     self->base.type = &machine_timer_type;
     self->timerid = device_id;
     self->timeout = 0;
+    self->timeout_cb = RT_NULL;
     self->is_repeat = RT_TRUE;
     self->is_init = RT_FALSE;
     
     // return constant object
     return MP_OBJ_FROM_PTR(self);
 }
+
+static machine_timer_obj_t *timer_self = RT_NULL;
 
 STATIC mp_obj_t machine_timer_deinit(mp_obj_t self_in) {
     machine_timer_obj_t *self = self_in;
@@ -102,13 +105,12 @@ STATIC mp_obj_t machine_timer_deinit(mp_obj_t self_in) {
         result = rt_device_close(self->timer_device);
         error_check(result == RT_EOK, "Timer device close error");
         self->is_init = RT_FALSE;
+        timer_self = RT_NULL;
     }
 
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(machine_timer_deinit_obj, machine_timer_deinit);
-
-static machine_timer_obj_t *timer_self = RT_NULL;
 
 STATIC rt_err_t timer_event_handler(rt_device_t dev, rt_size_t size) {
     machine_timer_obj_t *self = timer_self;
