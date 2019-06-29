@@ -54,6 +54,16 @@ typedef struct _machine_pwm_obj_t {
     uint32_t freq;
 } machine_pwm_obj_t;
 
+STATIC void machine_pwm_print(const mp_print_t *print, mp_obj_t self_in, mp_print_kind_t kind) {
+    machine_pwm_obj_t *self = self_in;
+
+    mp_printf(print, "PWM(%p; ", self);
+    mp_printf(print, "id=%d, ", self->id);
+    mp_printf(print, "channel=%d, ", self->channel);
+    mp_printf(print, "freq=%d, ", self->freq);
+    mp_printf(print, "duty=%d)", self->duty);
+}
+
 STATIC void error_check(bool status, const char *msg) {
     if (!status) {
         nlr_raise(mp_obj_new_exception_msg(&mp_type_ValueError, msg));
@@ -238,6 +248,7 @@ STATIC MP_DEFINE_CONST_DICT(machine_pwm_locals_dict,
 const mp_obj_type_t machine_pwm_type = {
     { &mp_type_type },
     .name = MP_QSTR_PWM,
+    .print = machine_pwm_print,
     .make_new = machine_pwm_make_new,
     .locals_dict = (mp_obj_dict_t *) &machine_pwm_locals_dict,
 };
