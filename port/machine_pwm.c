@@ -58,13 +58,11 @@ STATIC void machine_pwm_print(const mp_print_t *print, mp_obj_t self_in, mp_prin
     machine_pwm_obj_t *self = self_in;
 
     mp_printf(print, "PWM(%p; ", self);
-
     mp_printf(print, "id=%d, ", self->id);
     mp_printf(print, "channel=%d, ", self->channel);
     mp_printf(print, "freq=%d, ", self->freq);
     mp_printf(print, "duty=%d)", self->duty);
 }
-
 
 STATIC void error_check(bool status, const char *msg) {
     if (!status) {
