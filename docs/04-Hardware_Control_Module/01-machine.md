@@ -58,10 +58,16 @@
 
 ### 类
 
-#### [class Pin](02-machine-Pin.md) - 控制 I/O 引脚  
-#### [class I2C](03-machine-I2C.md) - I2C 协议  
-#### [class SPI](04-machine-SPI.md) - SPI 协议  
-#### [class UART](05-machine-UART.md) - 串口
+#### [class Pin](02-machine-Pin.md)     - 控制 I/O 引脚
+#### [class I2C](03-machine-I2C.md)     - I2C 协议
+#### [class SPI](04-machine-SPI.md)     - SPI 协议
+#### [class UART](05-machine-UART.md)   - 串口
+#### [class LCD](06-machine-LCD.md)     - LCD
+#### [class RTC](07-machine-RTC.md)     - RTC
+#### [class PWM](08-machine-PWM.md)     - PWM
+#### [class ADC](09-machine-ADC.md)     - ADC
+#### [class WDT](10-machine-WDT.md)     - 看门狗
+#### [class TIMER](11-machine-Timer.md) - 定时器
 
 ### 示例 
 
@@ -95,7 +101,7 @@ GC:
   1=14 2=6 m=3
 >>> machine.enable_irq()        # enable interrupt
 >>> machine.disable_irq()       # disable interrupt, WARNING: this operation is dangerous
->>> machine.reset()        # hard reset, like push RESET button
+>>> machine.reset()             # hard reset, like push RESET button
 ```
 
 更多内容可参考 [machine](http://docs.micropython.org/en/latest/pyboard/library/machine.html) 。
