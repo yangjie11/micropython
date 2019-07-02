@@ -20,7 +20,7 @@
 
 ### 方法
 
-#### **SPI.init**(baudrate=1000000, *, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=None, mosi=None, miso=None)
+#### **SPI.init**(baudrate=1000000, \*, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=None, mosi=None, miso=None)
 
 用给定的参数初始化`SPI`总线：
 
@@ -62,7 +62,7 @@
 
 ### 示例
 
-#### `软件模拟 SPI `
+#### 软件模拟 SPI
 ```
 >>> from machine import Pin, SPI
 >>> clk = Pin(("clk", 26), Pin.OUT_PP)
@@ -76,7 +76,7 @@ SoftSPI(baudrate=500000, polarity=0, phase=0, sck=clk, mosi=mosi, miso=miso)
 b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
 ```
 
-#### `硬件 SPI `
+#### 硬件 SPI
 
 需要先开启 `SPI` 设备驱动，查找设备可以在 `msh` 中输入`list_device` 命令。  
 在构造函数的第一个参数传入 `50`，系统就会搜索名为 `spi50` 的设备，找到之后使用这个设备来构建 `SPI` 对象：

@@ -27,7 +27,8 @@
 
 ### 方法
 
-#### **Pin.init**(mode= -1, pull= -1, *, value, drive, alt)
+#### **Pin.init**(mode= -1, pull= -1, \*, value, drive, alt)
+
 根据输入的参数重新初始化引脚。只有那些被指定的参数才会被设置，其余引脚的状态将保持不变，详细的参数可以参考上面的构造函数。
 
 #### **Pin.value**([x])
