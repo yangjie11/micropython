@@ -78,10 +78,10 @@
 ### 示例
 
 #### `软件模拟 I2C `
-```
+```python
 >>> from machine import Pin, I2C
->>> clk = Pin(("clk", 43), Pin.OUT_OD)   # Select the 43 pin device as the clock
->>> sda = Pin(("sda", 44), Pin.OUT_OD)   # Select the 44 pin device as the data line
+>>> clk = Pin(("clk", 29), Pin.OUT_OD)   # Select the 29 pin device as the clock
+>>> sda = Pin(("sda", 30), Pin.OUT_OD)   # Select the 30 pin device as the data line
 >>> i2c = I2C(-1, clk, sda, freq=100000) # create I2C peripheral at frequency of 100kHz
 >>> i2c.scan()                        # scan for slaves, returning a list of 7-bit addresses
 [81]                                  # Decimal representation
@@ -100,11 +100,12 @@ b'\x12'                               # starting at memory-address 8 in the slav
 需要先开启 `I2C` 设备驱动，查找设备可以在 `msh` 中输入`list_device` 命令。  
 在构造函数的第一个参数传入 `0`，系统就会搜索名为 `i2c0` 的设备，找到之后使用这个设备来构建 `I2C` 对象：
 
-```
+```python
 >>> from machine import Pin, I2C
->>> i2c = I2C(0)           # create I2C peripheral at frequency of 100kHz
+>>> i2c = I2C(0)                      # create I2C peripheral at frequency of 100kHz
 >>> i2c.scan()                        # scan for slaves, returning a list of 7-bit addresses
 [81]                                  # Decimal representation
 ```
 
   更多内容可参考 [machine.I2C](http://docs.micropython.org/en/latest/pyboard/library/machine.I2C.html) 。
+

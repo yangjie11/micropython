@@ -65,9 +65,9 @@
 #### `软件模拟 SPI `
 ```
 >>> from machine import Pin, SPI
->>> clk = Pin(("clk", 43), Pin.OUT_PP)
->>> mosi = Pin(("mosi", 44), Pin.OUT_PP)
->>> miso = Pin(("miso", 45), Pin.IN)
+>>> clk = Pin(("clk", 26), Pin.OUT_PP)
+>>> mosi = Pin(("mosi", 27), Pin.OUT_PP)
+>>> miso = Pin(("miso", 28), Pin.IN)
 >>> spi = SPI(-1, 500000, polarity = 0, phase = 0, bits = 8, firstbit = 0, sck = clk, mosi = mosi, miso = miso)
 >>> print(spi)
 SoftSPI(baudrate=500000, polarity=0, phase=0, sck=clk, mosi=mosi, miso=miso)
