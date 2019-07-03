@@ -81,3 +81,8 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 在 PowerShell 终端中输入 `Set-ItemProperty HKCU:\Console VirtualTerminalLevel -Type DWORD 1` 可以解决退格键等显示乱码的问题。
 
+- 不要删除工程目录下的 `.mpyproject.json` 文件
+
+该文件是 MicroPython 工程的配置文件，删除后将无法正常运行 MicroPython 代码程序。
+
+  
