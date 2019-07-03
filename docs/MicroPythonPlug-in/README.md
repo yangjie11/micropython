@@ -31,7 +31,15 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 2. 将开发板接入网络或者通过 USB 连接到 PC 并点击左下角的设备连接按钮
 
+使用 USB 方式连接时，直接将开发板通过 USB 连接到 PC 机，将会自动通过 USB 连接设备：
+
+![usb_connect_device](assets/usb_connect.gif)
+
+使用网络方式连接时：
+
 ![connect_device](assets/connect_device.gif)
+
+第一次连接网络时请先用 USB 或者串口连接电脑，然后参考 network 例程进行网络连接。
 
 3. 运行示例代码并观察代码在开发板上的运行效果
 
