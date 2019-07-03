@@ -25,7 +25,7 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 ## 快速入门
 
-1. 打开一个文件夹作为工程的根目录
+1. 创建一个 MicroPython 工程
 
 ![open_dir](assets/open_dir.gif)
 
