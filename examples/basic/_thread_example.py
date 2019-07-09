@@ -10,12 +10,16 @@
 
 import _thread
 import utime as time
+import gc
 
 def testThread():
-    while True:
-        print("Hello from thread")
-        time.sleep(2)
+    count = 0
+    while (count < 9):
+        print("Hello rt-thread!")
+        count += 1
 
-_thread.start_new_thread(testThread, ())
-while True:
-    pass
+    print("Thread exit!")
+    gc.collect()    # Free the memory space requested by the thread
+
+# TestThread thread is created with an empty argument
+_thread.start_new_thread(testThread, ())  
