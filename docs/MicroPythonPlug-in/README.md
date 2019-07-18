@@ -17,9 +17,17 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 本插件依赖 Microsoft Python 插件，并且使用 Python 脚本，因此需要做如下准备：
 
 1. 安装 Microsoft Python 插件
+
 2. 按照 Python 插件的提示在 PC 上安装 Python3 并加入到系统环境变量中
 
 ![Python plug](assets/install_python_plug.png)
+
+3. 命令行中输入如下指令安装相应的依赖包：
+```
+python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple click pyserial python-dotenv
+```
+
+![1563437668112](assets/install_dep.png)
 
 如果在 PC 上已经安装过上述插件和程序，可以跳过此准备步骤。
 
@@ -32,6 +40,8 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 ### 连接开发板
 
 可以通过多种方式与开发板建立连接，现支持 USB 和网络连接方式。
+
+- 串口连接方式
 
 - USB 连接方式
 
