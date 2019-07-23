@@ -31,12 +31,10 @@
 #include <stdint.h>
 #include <string.h>
 #include <dfs_posix.h>
-
 #include "py/runtime.h"
 #include "py/objstr.h"
 #include "py/mperrno.h"
 #include "moduos_file.h"
-
 
 mp_obj_t mp_posix_mount(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args) {
 
@@ -141,7 +139,7 @@ mp_obj_t mp_posix_listdir(size_t n_args, const mp_obj_t *args) {
     }
     else
     {
-        rt_kprintf("No such directory\n");
+//        rt_kprintf("No such directory\n");
     }
     if (pathname == NULL)
         rt_free(path);
@@ -224,6 +222,60 @@ mp_obj_t mp_posix_stat(mp_obj_t path_in) {
     return MP_OBJ_FROM_PTR(t);
 }
 MP_DEFINE_CONST_FUN_OBJ_1(mp_posix_stat_obj, mp_posix_stat);
+
+static uint32_t calc_crc32(const char* pathname)
+{
+    #define CALC_BUFFER_SIZE 512
+    extern uint32_t mp_calc_crc32(uint32_t crc, const void *buf, size_t len);
+
+    int fd;
+    uint32_t temp_crc = 0;
+    void *buffer = malloc(CALC_BUFFER_SIZE);
+
+    if (buffer == RT_NULL)
+    {
+        mp_raise_OSError(MP_ENOMEM);
+    }
+
+    fd = open(pathname, O_RDONLY, 0);
+    if (fd < 0)
+    {
+        return -MP_EINVAL;
+    }
+
+    while (1)
+    {
+        int len = read(fd, buffer, CALC_BUFFER_SIZE);
+        if (len < 0)
+        {
+            close(fd);
+            return -MP_EIO;
+        }
+        else if (len == 0)
+            break;
+
+        temp_crc = mp_calc_crc32(temp_crc, buffer, len);
+    }
+
+    close(fd);
+    free(buffer);
+
+    return temp_crc;
+}
+
+mp_obj_t mp_posix_file_crc32(mp_obj_t path_in) {
+    extern void mp_hex_to_str(char *pbDest, char *pbSrc, int nLen);
+    
+    uint32_t value = 0;
+    char str[9];
+    const char *createpath = mp_obj_str_get_str(path_in);
+
+    value = calc_crc32((char *)createpath);
+    mp_hex_to_str(str,(char *)&value, 4);
+
+    return mp_obj_new_str(str, strlen(str));
+}
+MP_DEFINE_CONST_FUN_OBJ_1(mp_posix_file_crc32_obj, mp_posix_file_crc32);
 
 mp_import_stat_t mp_posix_import_stat(const char *path) {
 
