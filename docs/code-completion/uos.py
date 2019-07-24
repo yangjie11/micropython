@@ -37,3 +37,7 @@ def stat(path : str) -> None:
 def sync() -> None:
     """同步所有的文件系统。"""
     ...
+	
+def mkfs(fs_type : str, dev_name : str) -> None:
+    """在指定的设备上创建 fs_type 类型的文件系统。example: os.mkfs("elm", "fs")"""
+    ...
