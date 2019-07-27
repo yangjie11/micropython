@@ -54,7 +54,7 @@ void mp_hal_stdout_tx_strn(const char *str, mp_uint_t len) {
 }
 
 void mp_hal_stdout_tx_strn_stream(const char *str, size_t len) {
-    mp_putsn(str, len);
+    mp_putsn_stream(str, len);
 }
 
 mp_uint_t mp_hal_ticks_us(void) {

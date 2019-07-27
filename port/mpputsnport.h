@@ -30,5 +30,6 @@
 void mp_putsn_init(void);
 void mp_putsn_deinit(void);
 void mp_putsn(const char *str, size_t len);
+void mp_putsn_stream(const char *str, size_t len);
 
 #endif /* _MPPUTCHARPORT_H_ */
