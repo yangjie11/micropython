@@ -280,7 +280,7 @@ void wlan_station_scan(void)
     }
     else
     {
-        rt_kprintf("wifi scan result is null\n");
+        mp_printf(&mp_plat_print, ("wifi scan result is null\n");
         *wlan_scan_list = MP_OBJ_NULL;
     }
 }
@@ -323,7 +323,7 @@ STATIC mp_obj_t wlan_ifconfig(size_t n_args, const mp_obj_t *args) {
     struct netdev *netdev = netdev_default;
     if (netdev == RT_NULL)
     {
-        rt_kprintf("not find wlan interface device.\n");
+        mp_printf(&mp_plat_print, ("not find wlan interface device.\n");
         return MP_OBJ_NEW_SMALL_INT(-1);
     }
 

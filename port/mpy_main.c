@@ -74,7 +74,7 @@ void mpy_main(const char *filename) {
     mp_putsn_init();
 
     if (rt_thread_self()->stack_size < 4096) {
-        rt_kprintf("The stack (%.*s) size for executing MicroPython must be >=4096\n", RT_NAME_MAX, rt_thread_self()->name);
+        mp_printf(&mp_plat_print, "The stack (%.*s) size for executing MicroPython must be >=4096\n", RT_NAME_MAX, rt_thread_self()->name);
     }
 
 #if MICROPY_PY_THREAD
@@ -88,7 +88,7 @@ void mpy_main(const char *filename) {
 #if MICROPY_ENABLE_GC
     heap = rt_malloc(MICROPY_HEAP_SIZE);
     if (!heap) {
-        rt_kprintf("No memory for MicroPython Heap!\n");
+        mp_printf(&mp_plat_print, "No memory for MicroPython Heap!\n");
         return;
     }
     gc_init(heap, heap + MICROPY_HEAP_SIZE);
@@ -106,7 +106,7 @@ void mpy_main(const char *filename) {
 
     if (filename) {
 #ifndef MICROPYTHON_USING_UOS
-        rt_kprintf("Please enable uos module in sys module option first.\n");
+        mp_printf(&mp_plat_print, "Please enable uos module in sys module option first.\n");
 #else
         pyexec_file(filename);
 #endif
@@ -129,7 +129,7 @@ void mpy_main(const char *filename) {
         }
 #endif /* MICROPYTHON_USING_UOS */
 
-        rt_kprintf("\n");
+        mp_printf(&mp_plat_print, "\n");
         for (;;) {
             if (pyexec_mode_kind == PYEXEC_MODE_RAW_REPL) {
                 if (pyexec_raw_repl() != 0) {
@@ -164,13 +164,13 @@ mp_import_stat_t mp_import_stat(const char *path) {
 #endif
 
 NORETURN void nlr_jump_fail(void *val) {
-    DEBUG_printf("nlr_jump_fail\n");
+    mp_printf(MICROPY_ERROR_PRINTER, "nlr_jump_fail\n");
     while (1);
 }
 
 #ifndef NDEBUG
 void MP_WEAK __assert_func(const char *file, int line, const char *func, const char *expr) {
-    rt_kprintf("Assertion '%s' failed, at file %s:%d\n", expr, file, line);
+    mp_printf(MICROPY_ERROR_PRINTER, "Assertion '%s' failed, at file %s:%d\n", expr, file, line);
     RT_ASSERT(0);
 }
 #endif
@@ -186,7 +186,7 @@ int DEBUG_printf(const char *format, ...)
     va_start(args, format);
     /* must use vprintf to print */
     rt_vsprintf(log_buf, format, args);
-    rt_kprintf("%s", log_buf);
+    mp_printf(&mp_plat_print, "%s", log_buf);
     va_end(args);
 
     return 0;

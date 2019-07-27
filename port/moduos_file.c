@@ -74,7 +74,7 @@ MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mp_posix_mkfs_obj, 1, 2, mp_posix_mkfs);
 mp_obj_t mp_posix_chdir(mp_obj_t path_in) {
     const char *changepath = mp_obj_str_get_str(path_in);
     if (chdir(changepath) != 0) {
-        rt_kprintf("No such directory: %s\n", changepath);
+        mp_printf(&mp_plat_print, "No such directory: %s\n", changepath);
     }
     return mp_const_none;
 }
@@ -152,7 +152,7 @@ mp_obj_t mp_posix_listdir(size_t n_args, const mp_obj_t *args) {
                     mp_obj_get_array_fixed_n(next, 3, &items);
                     mp_obj_list_append(dir_list, items[0]);
                 } else {
-                    rt_kprintf("BAD file: %s\n", dirent.d_name);
+                    mp_printf(&mp_plat_print, "BAD file: %s\n", dirent.d_name);
                 }
                 rt_free(fullpath);
             }
@@ -162,7 +162,7 @@ mp_obj_t mp_posix_listdir(size_t n_args, const mp_obj_t *args) {
     }
     else
     {
-//        rt_kprintf("No such directory\n");
+//        mp_printf(&mp_plat_print, "No such directory\n");
     }
     if (pathname == NULL)
         rt_free(path);
@@ -184,12 +184,12 @@ MP_DEFINE_CONST_FUN_OBJ_1(mp_posix_mkdir_obj, mp_posix_mkdir);
 mp_obj_t mp_posix_remove(uint n_args, const mp_obj_t *arg) {
     int index;
     if (n_args == 0) {
-        rt_kprintf("Usage: rm FILE...\n");
-        rt_kprintf("Remove (unlink) the FILE(s).\n");
+        mp_printf(&mp_plat_print, "Usage: rm FILE...\n");
+        mp_printf(&mp_plat_print, "Remove (unlink) the FILE(s).\n");
         return mp_const_none;
     }
     for (index = 0; index < n_args; index++) {
-        //rt_kprintf("Remove %s.\n", mp_obj_str_get_str(arg[index]));
+        //mp_printf(&mp_plat_print, "Remove %s.\n", mp_obj_str_get_str(arg[index]));
         unlink(mp_obj_str_get_str(arg[index]));
     }
     // TODO  recursive deletion
@@ -211,12 +211,12 @@ MP_DEFINE_CONST_FUN_OBJ_2(mp_posix_rename_obj, mp_posix_rename);
 mp_obj_t mp_posix_rmdir(uint n_args, const mp_obj_t *arg) {
     int index;
     if (n_args == 0) {
-        rt_kprintf("Usage: rm FILE...\n");
-        rt_kprintf("Remove (unlink) the FILE(s).\n");
+        mp_printf(&mp_plat_print, "Usage: rm FILE...\n");
+        mp_printf(&mp_plat_print, "Remove (unlink) the FILE(s).\n");
         return mp_const_none;
     }
     for (index = 0; index < n_args; index++) {
-        //rt_kprintf("Remove %s.\n", mp_obj_str_get_str(arg[index]));
+        //mp_printf(&mp_plat_print, "Remove %s.\n", mp_obj_str_get_str(arg[index]));
         rmdir(mp_obj_str_get_str(arg[index]));
     }
     // TODO  recursive deletion

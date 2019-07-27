@@ -55,9 +55,9 @@ STATIC mp_obj_t machine_info(uint n_args, const mp_obj_t *args) {
 #endif
     // RT-Thread info
     {
-        rt_kprintf("---------------------------------------------\n");
-        rt_kprintf("RT-Thread\n");
-        rt_kprintf("---------------------------------------------\n");
+        mp_printf(&mp_plat_print, "---------------------------------------------\n");
+        mp_printf(&mp_plat_print, "RT-Thread\n");
+        mp_printf(&mp_plat_print, "---------------------------------------------\n");
 
 #ifdef RT_USING_FINSH
         extern void list_mem(void);
@@ -71,25 +71,25 @@ STATIC mp_obj_t machine_info(uint n_args, const mp_obj_t *args) {
 
         list_thread();
 #endif
-        rt_kprintf("---------------------------------------------\n");
+        mp_printf(&mp_plat_print, "---------------------------------------------\n");
     }
 
     // qstr info
     {
         mp_uint_t n_pool, n_qstr, n_str_data_bytes, n_total_bytes;
         qstr_pool_info(&n_pool, &n_qstr, &n_str_data_bytes, &n_total_bytes);
-        rt_kprintf("qstr:\n  n_pool=" UINT_FMT "\n  n_qstr=" UINT_FMT "\n  n_str_data_bytes=" UINT_FMT "\n  n_total_bytes=" UINT_FMT "\n", n_pool, n_qstr, n_str_data_bytes, n_total_bytes);
+        mp_printf(&mp_plat_print, "qstr:\n  n_pool=" UINT_FMT "\n  n_qstr=" UINT_FMT "\n  n_str_data_bytes=" UINT_FMT "\n  n_total_bytes=" UINT_FMT "\n", n_pool, n_qstr, n_str_data_bytes, n_total_bytes);
     }
-    rt_kprintf("---------------------------------------------\n");
+    mp_printf(&mp_plat_print, "---------------------------------------------\n");
 
     // GC info
     {
         gc_info_t info;
         gc_info(&info);
-        rt_kprintf("GC:\n");
-        rt_kprintf("  " UINT_FMT " total\n", info.total);
-        rt_kprintf("  " UINT_FMT " : " UINT_FMT "\n", info.used, info.free);
-        rt_kprintf("  1=" UINT_FMT " 2=" UINT_FMT " m=" UINT_FMT "\n", info.num_1block, info.num_2block, info.max_block);
+        mp_printf(&mp_plat_print, "GC:\n");
+        mp_printf(&mp_plat_print, "  " UINT_FMT " total\n", info.total);
+        mp_printf(&mp_plat_print, "  " UINT_FMT " : " UINT_FMT "\n", info.used, info.free);
+        mp_printf(&mp_plat_print, "  1=" UINT_FMT " 2=" UINT_FMT " m=" UINT_FMT "\n", info.num_1block, info.num_2block, info.max_block);
     }
 
     // free space on flash

@@ -50,7 +50,7 @@
  */
 
 void native_module_show(const char *str) {
-    rt_kprintf("Native module show: %s\n", str);
+    mp_printf(&mp_plat_print, "Native module show: %s\n", str);
 }
 RTM_EXPORT(native_module_show)
 
