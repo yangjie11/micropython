@@ -38,7 +38,6 @@
 #include "lib/timeutils/timeutils.h"
 #include "extmod/misc.h"
 #include "genhdr/mpversion.h"
-#include "portmodules.h"
 
 #if !MICROPY_VFS
 #if MICROPY_PY_MODUOS_FILE

@@ -34,6 +34,19 @@
 #include "mpgetcharport.h"
 #include "mpputsnport.h"
 
+const char rtthread_help_text[] =
+"Welcome to MicroPython on RT-Thread!\n"
+"\n"
+"Control commands:\n"
+"  CTRL-A        -- on a blank line, enter raw REPL mode\n"
+"  CTRL-B        -- on a blank line, enter normal REPL mode\n"
+"  CTRL-C        -- interrupt a running program\n"
+"  CTRL-D        -- on a blank line, do a soft reset of the board\n"
+"  CTRL-E        -- on a blank line, enter paste mode\n"
+"\n"
+"For further help on a specific object, type help(obj)\n"
+;
+
 int mp_hal_stdin_rx_chr(void) {
     char ch;
     while (1) {
@@ -46,7 +59,6 @@ int mp_hal_stdin_rx_chr(void) {
     }
     return ch;
 }
-
 
 // Send string of given length
 void mp_hal_stdout_tx_strn(const char *str, mp_uint_t len) {

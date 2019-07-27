@@ -9,6 +9,8 @@ src    += Glob('lib/mp-readline/*.c')
 src    += Glob('lib/utils/*.c')
 src    += Glob('extmod/*.c')
 src    += Glob('port/*.c')
+src    += Glob('port/modules/*.c')
+src    += Glob('port/modules/machine/*.c')
 src    += Glob('lib/netutils/*.c')
 src    += Glob('lib/timeutils/*.c')
 src    += Glob('drivers/bus/*.c')
@@ -16,6 +18,8 @@ src    += Glob('port/native/*.c')
 
 path    = [cwd + '/']
 path   += [cwd + '/port']
+path   += [cwd + '/port/modules']
+path   += [cwd + '/port/modules/machine']
 
 LOCAL_CCFLAGS = ''
 
