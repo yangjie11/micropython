@@ -43,7 +43,8 @@
 #include <py/frozenmod.h>
 #include <lib/mp-readline/readline.h>
 #include <lib/utils/pyexec.h>
-#include "rtt_getchar.h"
+#include "mpgetcharport.h"
+#include "mpputsnport.h"
 
 #if MICROPY_ENABLE_COMPILER
 void do_str(const char *src, mp_parse_input_kind_t input_kind) {
@@ -70,7 +71,8 @@ void mpy_main(const char *filename) {
     stack_top = (void *)&stack_dummy;
     rt_uint16_t old_flag;
 
-    rtt_getchar_init();
+    mp_getchar_init();
+    mp_putsn_init();
 
     if (rt_thread_self()->stack_size < 4096) {
         rt_kprintf("The stack (%.*s) size for executing MicroPython must be >=4096\n", RT_NAME_MAX, rt_thread_self()->name);
@@ -160,7 +162,8 @@ void mpy_main(const char *filename) {
 
     rt_free(heap);
 
-    rtt_getchar_deinit();
+    mp_putsn_deinit();
+    mp_getchar_deinit();
 }
 
 #if !MICROPY_PY_MODUOS_FILE

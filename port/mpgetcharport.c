@@ -28,8 +28,8 @@
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <rthw.h>
-#include "rtt_getchar.h"
 #include "lib/utils/interrupt_char.h"
+#include "mpgetcharport.h"
 
 #define UART_FIFO_SIZE 256
 
@@ -56,7 +56,7 @@ static rt_err_t getchar_rx_ind(rt_device_t dev, rt_size_t size) {
     return RT_EOK;
 }
 
-void rtt_getchar_init(void) {
+void mp_getchar_init(void) {
     rt_base_t int_lvl;
     rt_device_t console;
 
@@ -76,7 +76,7 @@ void rtt_getchar_init(void) {
 
 }
 
-void rtt_getchar_deinit(void) {
+void mp_getchar_deinit(void) {
     rt_base_t int_lvl;
     rt_device_t console;
 
@@ -91,7 +91,7 @@ void rtt_getchar_deinit(void) {
     rt_hw_interrupt_enable(int_lvl);
 }
 
-int rtt_getchar(void) {
+int mp_getchar(void) {
     uint8_t ch;
     rt_base_t int_lvl;
 

@@ -31,12 +31,13 @@
 #include <py/mpconfig.h>
 #include <py/runtime.h>
 #include "mphalport.h"
-#include "rtt_getchar.h"
+#include "mpgetcharport.h"
+#include "mpputsnport.h"
 
 int mp_hal_stdin_rx_chr(void) {
     char ch;
     while (1) {
-        ch = rtt_getchar();
+        ch = mp_getchar();
         if (ch != (char)0xFF) {
             break;
         }
@@ -46,18 +47,14 @@ int mp_hal_stdin_rx_chr(void) {
     return ch;
 }
 
+
 // Send string of given length
 void mp_hal_stdout_tx_strn(const char *str, mp_uint_t len) {
-    rt_device_t console;
-
-    console = rt_console_get_device();
-    if (console) {
-        rt_device_write(console, 0, str, len);
-    }
+    mp_putsn(str, len);
 }
 
 void mp_hal_stdout_tx_strn_stream(const char *str, size_t len) {
-    rt_kprintf("%.*s", len, str);
+    mp_putsn(str, len);
 }
 
 mp_uint_t mp_hal_ticks_us(void) {
