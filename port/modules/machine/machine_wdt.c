@@ -79,6 +79,9 @@ STATIC mp_obj_t machine_wdt_make_new(const mp_obj_type_t *type_in, size_t n_args
     result = rt_device_control(self->wdt_device, RT_DEVICE_CTRL_WDT_SET_TIMEOUT, (void *)&timeout);
     error_check(result == RT_EOK, "WDT set timout error");
 
+    result = rt_device_control(self->wdt_device, RT_DEVICE_CTRL_WDT_START, RT_NULL);
+    error_check(result == RT_EOK, "WDT start error");
+
     // return constant object
     return MP_OBJ_FROM_PTR(self);
 }
