@@ -62,6 +62,7 @@ void mp_putsn_init(void) {
     /* backup the console device */
     console_dev = rt_console_get_device();
     console_open_flag = console_dev->open_flag;
+    console_dev->open_flag = 0;
 
     /* set the new console device to dummy console */
     rt_console_set_device(dummy_console.parent.name);
