@@ -51,7 +51,7 @@ void mp_putsn_init(void) {
     {/* register dummy console device */
 #ifdef RT_USING_DEVICE_OPS
         static struct rt_device_ops _ops = {0};
-        dummy_console.ops = &_ops
+        dummy_console.ops = &_ops;
 #endif
 
         dummy_console.type = RT_Device_Class_Char;
