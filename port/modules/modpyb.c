@@ -32,7 +32,6 @@
 #include "py/builtin.h"
 #include "py/mphal.h"
 #include "lib/utils/pyexec.h"
-#include "portmodules.h"
 #include "modmachine.h"
 #include "extmod/vfs.h"
 #include "extmod/utime_mphal.h"

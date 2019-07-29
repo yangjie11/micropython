@@ -548,7 +548,7 @@ STATIC mp_obj_t mod_usocket_getaddrinfo(uint n_args, const mp_obj_t *arg) {
     ret = getaddrinfo(host, NULL, &hint, &res);
     MP_THREAD_GIL_ENTER();
     if (ret != 0) {
-        rt_kprintf("getaddrinfo err: %d '%s'\n", ret, host);
+        mp_printf(&mp_plat_print, "getaddrinfo err: %d '%s'\n", ret, host);
         nlr_raise(mp_obj_new_exception_msg(&mp_type_OSError, "no available netif"));
     }
 

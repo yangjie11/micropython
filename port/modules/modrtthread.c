@@ -55,7 +55,7 @@ STATIC mp_obj_t mod_stacks_analyze(void) {
     extern long list_thread(void);
     list_thread();
 #else
-    rt_kprintf("Not available when FINSH module disable\n");
+    mp_printf(&mp_plat_print, "Not available when FINSH module disable\n");
 #endif
 
     return mp_const_none;

@@ -24,11 +24,11 @@
  * THE SOFTWARE.
  */
 
-#ifndef _RTT_GETCHAR_H_
-#define _RTT_GETCHAR_H_
+#ifndef _MPGETCHARPORT_H_
+#define _MPGETCHARPORT_H_
 
-void rtt_getchar_init(void);
-void rtt_getchar_deinit(void);
-int rtt_getchar(void);
+void mp_getchar_init(void);
+void mp_getchar_deinit(void);
+int mp_getchar(void);
 
-#endif /* _RTT_GETCHAR_H_ */
+#endif /* _MPGETCHARPORT_H_ */

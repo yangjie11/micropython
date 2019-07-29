@@ -32,7 +32,6 @@
 #include "py/stream.h"
 #include "py/builtin.h"
 #include "py/mphal.h"
-#include "fdfile.h"
 
 #include <stdio.h>
 #include <unistd.h>
@@ -41,10 +40,14 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-
 #ifdef _WIN32
 #define fsync _commit
 #endif
+
+typedef struct _mp_obj_fdfile_t {
+    mp_obj_base_t base;
+    int fd;
+} mp_obj_fdfile_t;
 
 #ifdef MICROPY_CPYTHON_COMPAT
 STATIC void check_fd_is_open(const mp_obj_fdfile_t *o) {

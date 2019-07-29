@@ -3,7 +3,7 @@
  *
  * The MIT License (MIT)
  *
- * Copyright (c) 2017 Armink (armink.ztl@gmail.com)
+ * Copyright (c) 2019 Armink (armink.ztl@gmail.com)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,13 +24,12 @@
  * THE SOFTWARE.
  */
 
-#ifndef _PORTMODULES_H
-#define _PORTMODULES_H
+#ifndef _MPPUTCHARPORT_H_
+#define _MPPUTCHARPORT_H_
 
-MP_DECLARE_CONST_FUN_OBJ_1(time_sleep_ms_obj);
-MP_DECLARE_CONST_FUN_OBJ_1(time_sleep_us_obj);
+void mp_putsn_init(void);
+void mp_putsn_deinit(void);
+void mp_putsn(const char *str, size_t len);
+void mp_putsn_stream(const char *str, size_t len);
 
-MP_DECLARE_CONST_FUN_OBJ_0(mod_os_sync_obj);
-MP_DECLARE_CONST_FUN_OBJ_KW(mp_os_mount_obj);
-
-#endif // _PORTMODULES_H
+#endif /* _MPPUTCHARPORT_H_ */

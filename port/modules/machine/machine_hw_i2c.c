@@ -83,7 +83,7 @@ mp_obj_t machine_hard_i2c_make_new(const mp_obj_type_t *type, size_t n_args, siz
     struct rt_i2c_bus_device *i2c_bus = rt_i2c_bus_device_find(iic_device);
 
     if (i2c_bus == RT_NULL) {
-        rt_kprintf("can't find %s device\r\n", iic_device);
+        mp_printf(&mp_plat_print, "can't find %s device\r\n", iic_device);
         nlr_raise(mp_obj_new_exception_msg_varg(&mp_type_ValueError, "I2C(%s) doesn't exist", iic_device));
     }
 

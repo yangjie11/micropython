@@ -56,7 +56,7 @@ mp_obj_t machine_hard_spi_make_new(const mp_obj_type_t *type, size_t n_args, siz
 
     struct rt_spi_device *rt_spi_device = (struct rt_spi_device *) rt_device_find(spi_dev_name);
     if (rt_spi_device == RT_NULL || rt_spi_device->parent.type != RT_Device_Class_SPIDevice) {
-        rt_kprintf("ERROR: SPI device %s not found!\n", spi_dev_name);
+        mp_printf(&mp_plat_print, "ERROR: SPI device %s not found!\n", spi_dev_name);
         nlr_raise(mp_obj_new_exception_msg_varg(&mp_type_ValueError, "SPI(%s) doesn't exist", spi_dev_name));
     }
 

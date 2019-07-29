@@ -512,5 +512,5 @@ extern const struct _mp_obj_module_t mp_module_network;
     MODUZLIB_PORT_BUILTIN_MODULE_WEAK_LINKS \
     MODUSTRUCT_PORT_BUILTIN_MODULE_WEAK_LINKS \
 
-#define MP_RTT_NOT_IMPL_PRINT rt_kprintf("Not implement on %s:%ld, Please add for your board!\n", __FILE__, __LINE__)
+#define MP_RTT_NOT_IMPL_PRINT mp_printf(&mp_plat_print, "Not implement on %s:%ld, Please add for your board!\n", __FILE__, __LINE__)
 
