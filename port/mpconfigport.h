@@ -328,7 +328,8 @@ typedef long mp_off_t;
 #define MICROPY_PY_SYS_PLATFORM        "rt-thread"
 #define MICROPY_HW_BOARD_NAME          "Universal python platform"
 #define MICROPY_HW_MCU_NAME            "RT-Thread"
-#define MICROPY_PY_PATH                "/libs/mpy/"
+#define MICROPY_PY_PATH_FIRST          "/libs/mpy/"
+#define MICROPY_PY_PATH_SECOND         "/scripts/"
 
 #define MICROPY_BEGIN_ATOMIC_SECTION()     rt_hw_interrupt_disable()
 #define MICROPY_END_ATOMIC_SECTION(state)  rt_hw_interrupt_enable(state)
