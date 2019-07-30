@@ -115,7 +115,7 @@ void mpy_main(const char *filename) {
 #ifdef MICROPYTHON_USING_UOS
         // run boot-up scripts
         void *frozen_data;
-        const char *_boot_file = "_boot.py", *boot_file = "boot.py", *main_file = "main.py";
+        const char *_boot_file = "_boot.py", *boot_file = "boot.py", *main_file = MICROPY_MAIN_PY_PATH;
         if (mp_find_frozen_module(_boot_file, strlen(_boot_file), &frozen_data) != MP_FROZEN_NONE) {
             pyexec_frozen_module(_boot_file);
         }
