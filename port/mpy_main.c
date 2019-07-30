@@ -100,7 +100,8 @@ void mpy_main(const char *filename) {
     /* system path initialization */
     mp_obj_list_init(mp_sys_path, 0);
     mp_obj_list_append(mp_sys_path, MP_OBJ_NEW_QSTR(MP_QSTR_)); // current dir (or base dir of the script)
-    mp_obj_list_append(mp_sys_path, mp_obj_new_str(MICROPY_PY_PATH, strlen(MICROPY_PY_PATH)));
+    mp_obj_list_append(mp_sys_path, mp_obj_new_str(MICROPY_PY_PATH_FIRST, strlen(MICROPY_PY_PATH_FIRST)));
+    mp_obj_list_append(mp_sys_path, mp_obj_new_str(MICROPY_PY_PATH_SECOND, strlen(MICROPY_PY_PATH_SECOND)));
     mp_obj_list_init(mp_sys_argv, 0);
     readline_init0();
 
