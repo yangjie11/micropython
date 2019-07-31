@@ -1,10 +1,8 @@
-# 最好用的 MicroPython 开发环境来咯！！!
+# 最好用的 MicroPython 开发环境来了！！!
 
 ## 背景故事
 
-随着半导体技术的飞速发展，硬件的处理和存储性能对程序的限制越来越弱，对开发者来说程序开发的效率被放在了越来越重要的位置。与此同时 Python 语言逐渐成熟，它的运行速度、可靠性，以及效率大大满足了开发者的需求，无论在任何环境下使用或者部署 Python，它只会有可忽略不计的性能损失。
-
-而在嵌入式领域，由于有了 Damien George 的伟大贡献 MicroPython，我们得以在微控制器编程上使用 Python 语言。凭借 MicroPython 极简风格的编程语法，使得硬件开发变得通俗易懂，大量的封装库方便极客们快速地开发原型设计。
+随着半导体技术的飞速发展，硬件的处理和存储性能对程序的限制越来越弱，对开发者来说程序开发的效率被放在了越来越重要的位置上。Python 语言凭借着它的运行速度、可靠性，以及效率大大满足了开发者的需求。在嵌入式领域，由于有了 MicroPython，我们得以在微控制器编程上使用 Python 语言。凭借 MicroPython 极简风格的编程语法，使得硬件开发变得通俗易懂，大量的封装库使得开发者们可以快速地开发原型设计。
 
 MicroPython 的到来为嵌入式开发提供了新的可能，同时带来了新的开发方式，你将会获得如下体验：
 
@@ -20,43 +18,19 @@ MicroPython 的到来为嵌入式开发提供了新的可能，同时带来了�
 
 ## 功能示例
 
-RT-Thread MicroPython 开发环境十分强大，它到底能提供什么样的功能呢，让我们一起来看一看：
+RT-Thread MicroPython 开发环境十分强大，它到底能提供什么样的功能呢，让我们通过下面的视频来看一看。
 
-- 使用串口、USB 、网络的方式连接开发板
 
-  ![uart_connect](assets/uart_connect-1564540918166.gif)
-
-- 灵活的 MicroPython REPL 交互环境
-
-  ![use_repl](assets/use_repl.gif)
+除了视频里演示的特性，**RT-Thread MicroPython 开发环境** 还有下列强大功能：
 
 - 基于 MicroPython 的代码智能补全
 
-  ![auto_complete](assets/auto_complete-1564540931096.gif)
+  ![1564561581470](assets/1564561581470.png)
 
 - 提供丰富的代码示例（支持在线更新）
 
   ![example_code](assets/example_code-1564541003790.png)
-  
-- 可以直接在设备上运行示例代码
 
-  ![run_example](assets/run_example-1564541024332.gif)
-  
-  在潘多拉开发板上运行 LCD 控制示例：
-  
-  ![run_lcd](assets/run_lcd.gif)
-  
-  潘多拉开发板上的运行效果：
-  
-  ![pandora_lcd](assets/pandora_lcd.jpg)
-
-- 支持运行选中的代码片段
-
-  ![run_code_snippet](assets/run_code_snippet-1564540982864.gif)
-
-- 点击运行按钮时会自动同步工程代码
-
-  ![1564541185482](assets/1564541185482.png)
 
 ## 获取方式及使用方法
 
