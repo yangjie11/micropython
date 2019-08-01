@@ -14,7 +14,7 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 ## 准备工作
 
-本插件依赖 Microsoft Python 插件，并且使用 Python 脚本，因此需要做如下准备：
+如果想要使用 MicroPython 自动补全功能（如果暂时不需要自动补全功能，可以跳过这一步），需要安装依赖的 Microsoft Python 插件，准备工作如下：
 
 1. 安装 Microsoft Python 插件
 
