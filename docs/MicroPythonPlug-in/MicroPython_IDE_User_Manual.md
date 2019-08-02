@@ -2,17 +2,33 @@
 
 ## MicroPython 固件介绍
 
-MicroPython 固件指的是可以运行在特定板卡上，并且已经对该板卡做了 MicroPython 适配的固件程序。在这里适配的意思是，对 MicroPython 进行配置修改后，开发者可以通过编写 Python 程序来控制板卡上的硬件资源。 
+MicroPython 固件指的是可以运行在特定板卡上，并且已经对该板卡做了 MicroPython 适配的固件程序。在这里适配的意思是，对 MicroPython 进行配置修改后，开发者可以通过编写 Python 程序来控制板卡上的硬件资源。
 
-MicroPython 固件可以从 RT-Thread 官方直接获取，目前功能支持比较完备的是 IoT Board 潘多拉开发板，固件下载地址如下：
+### 获取固件源码 
+
+MicroPython 固件源码可以从 RT-Thread 官方直接获取，自行编译下载即可。目前功能支持比较完备的是 IoT Board 潘多拉开发板，源代码地址如下：
+
+- Github 下载地址
 
 ```
 https://github.com/RT-Thread/IoT_Board/tree/master/examples/31_micropython
 ```
 
-如果想要 DIY 属于自己的专属固件，也非常简单。只需要在 RT-Thread 工程中开启 MicroPython 软件包即可，详细的制作方式可以通过阅读 [《MicroPython 固件开发指南》]() 深入了解。
+- Gitee 下载地址
 
-通过以上两种方式之一获取固件，然后将 MicroPython 固件烧录到板卡之后，就可以使用 RT-Thread 推出的 MicroPython 开发环境来进行应用开发了。 
+```
+https://gitee.com/Armink/IoT_Board
+```
+
+### 直接下载 bin 文件
+
+如果不想要编译固件，想要直接体验的小伙伴也可以在 RT-Thread 论坛 [MicroPython 固件汇总贴](https://www.rt-thread.org/qa/forum.php?mod=viewthread&tid=12305&page=1&extra=#pid52954) 直接下载开发板的 bin 文件。
+
+### DIY 属于自己的专属固件
+
+如果想要 DIY 属于自己的专属固件，也非常简单。只需要在 RT-Thread 工程中开启 MicroPython 软件包即可，详细的制作方式可以通过阅读 [《MicroPython 固件开发指南》](https://github.com/RT-Thread-packages/micropython/blob/master/docs/MicroPythonPlug-in/MicroPython_Firmware_Development_Guide.md) 深入了解。
+
+通过上述方式获取固件，然后将 MicroPython 固件烧录到板卡之后，就可以使用 RT-Thread 推出的 MicroPython 开发环境来进行应用开发了。 
 
 ## MicroPython 开发环境使用介绍
 
