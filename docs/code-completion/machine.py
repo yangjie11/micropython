@@ -78,6 +78,7 @@ Usage Model::
     LOW_POWER = ...  # type: int
     MED_POWER = ...  # type: int
     HIGH_POWER = ...  # type: int
+    OUT_PP = ...  # type: int
 
     def __init__(self, id: Any, mode: int = -1, pull: int = -1, *,
                  value: Optional[int] = None,
@@ -784,13 +785,13 @@ class LCD(object):
         """
         """
 
-    def light(value) -> None:
+    def light(self, value : int) -> None:
         """
         控制是否开启 LCD 背光，入参为 True 则打开 LCD 背光，入参为 False 则关闭 LCD 背光。
         """
         ...
 
-    def fill(color) -> None:
+    def fill(self, color : int) -> None:
         """
         根据给定的颜色填充整个屏幕，支持多种颜色，可以传入的参数有：
 
@@ -798,32 +799,39 @@ class LCD(object):
         """
         ...
 
-    def pixel(x, y, color) -> None:
+    def pixel(self, x : int, y : int , color : int) -> None:
         """
         向指定的位置（x, y）画点，点的颜色为 color 指定的颜色，可指定的颜色和上一个功能相同。
         注意：(x, y)  坐标的范围是 0 - 239，使用下面的方法对坐标进行操作时同样需要遵循此限制。
         """
         ...
 
-    def text(str, x, y, size) -> None:
+    def set_color(self, back_color : int, fore_color : int) -> None:
+        """
+        设置 LCD 屏幕的前景色和背景色。
+        """
+        ...
+
+
+    def text(self, input_str : str, x : int, y : int, size : int) -> None:
         """
         在指定的位置（x,y）写入字符串，字符串由 str 指定，字体的大小由 size 指定，size 的大小可为 16，24，32。
         """
         ...
 
-    def line(x1, y1, x2, y2) -> None:
+    def line(self, x1 : int, y1 : int, x2 : int, y2 : int) -> None:
         """
         在 LCD 上画一条直线，起始地址为 （x1, y1），终点为（x2, y2）。
         """
         ...
 
-    def rectangle(x1, y1, x2, y2) -> None:
+    def rectangle(self, x1 : int, y1 : int, x2 : int, y2 : int) -> None:
         """
         在 LCD 上画一个矩形，左上角的位置为（x1, y1），右下角的位置为（x2, y2）。
         """
         ...
 
-    def circle(x1, y1, r) -> None:
+    def circle(self, x1 : int, y1 : int, r : int) -> None:
         """
         在 LCD 上画一个圆形，圆心的位置为（x1, y1），半径长度为 r。。
         """
