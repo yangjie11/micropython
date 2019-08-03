@@ -392,7 +392,9 @@ class SPI(object):
     LSB = ...  # type: int
     MSB = ...  # type: int
 
-    def __init__(self, id: int) -> None:
+    def __init__(self, id: int, baudrate: int = 1000000, polarity: int = 0, phase: int = 0,
+             bits: int = 8, firstbit: int = MSB, sck: Optional[Pin] = None,
+             mosi: Optional[Pin] = None, miso: Optional[Pin] = None) -> None:
         """
         Construct an SPI object on the given bus, ``id``. Values of id depend
         on a particular port and its hardware. Values 0, 1, etc. are commonly
