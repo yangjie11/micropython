@@ -465,7 +465,7 @@ class SPI(object):
 
 
 class I2C(object):
-    def __init__(self, id: int, *, scl: Pin, sda: Pin, freq: int = 400000) -> None:
+    def __init__(self, id: int, scl: Pin = 0, sda: Pin = 0, freq: int = 400000) -> None:
         """Construct and return a new I2C object.
 
         :param id: Particular I2C peripheral (-1 for software implementation).
@@ -582,7 +582,7 @@ class I2C(object):
         """
         ...
 
-    def writeto_mem(self, addr: int, memaddr: int, *, addrsize=8) -> None:
+    def writeto_mem(self, addr: int, memaddr: int, addrsize=8) -> None:
         """Write ``buf`` to the slave specified by ``addr`` starting from the
         memory address specified by ``memaddr``. The argument ``addrsize`` specifies
         the address size in bits (on ESP8266 this argument is not recognised
