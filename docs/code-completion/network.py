@@ -20,27 +20,26 @@ class WLAN(object):
     STAT_CONNECT_FAIL = ...  # type: int
     STAT_GOT_IP = ...  # type: int
 
-    def __init__(self, interface_id: int) -> None:
-    """
-    """
-    ...
+    def __init__(self, interface_id : int) -> None:
+        """初始化一个 wlan 对象"""
+        ...
 
-    def active(is_active : int) -> None:
+    def active(self, is_active : int) -> None:
         """
         - active([is_active])
         如果向该方法传入布尔数值，传入 True 则使能卡，传入 False 则禁止网卡。否则，如果不传入参数，则查询当前网卡的状态。
         """
         ...
 
-    def connect(ssid, password) -> None:
+    def connect(self, ssid: str, password : str) -> None:
         """使用指定的账号和密码链接指定的无线热点。"""
         ...
 
-    def disconnect() -> None:
+    def disconnect(self) -> None:
         """从当前链接的无线网络中断开。"""
         ...
 
-    def scan() -> None:
+    def scan(self) -> None:
         """
         扫描当前可以连接的无线网络。
         只能在 STA 模式下进行扫描，使用元组列表的形式返回 WiFi 接入点的相关信息。
@@ -48,7 +47,7 @@ class WLAN(object):
         """
         ...
 
-    def status(param) -> None:
+    def status(self, param : str) -> None:
         """
         - status([param])
         返回当前无线连接的状态。
@@ -59,13 +58,13 @@ class WLAN(object):
         """
         ...
 
-    def isconnected() -> None:
+    def isconnected(self) -> None:
         """
         在 STA 模式时，如果已经连接到 WiFi 网络，并且获得了 IP 地址，则返回 True。
         如果处在 AP 模式，此时已经与客户端建立连接，则返回 True。其他情况下都返回 False。"""
         ...
 
-    def ifconfig(config: tuple) -> None:
+    def ifconfig(self, config: tuple) -> None:
         """
         ifconfig([(ip, subnet, gateway, dns)])
         获取或者设置网络接口的参数，IP 地址，子网掩码，网关，DNS 服务器。
@@ -75,7 +74,7 @@ class WLAN(object):
         """
         ...
 
-    def config(param) -> None:
+    def config(self, param : str) -> None:
         """
         - config(param=value, ...)
         获取或者设置一般网络接口参数，这些方法允许处理标准的 ip 配置之外的其他参数，如 WLAN.ifconfig() 函数处理的参数。
