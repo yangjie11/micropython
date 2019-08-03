@@ -345,7 +345,7 @@ class UART(object):
         """
         ...
 
-    def read(self, nbytes: Optional[int]) -> bytes:
+    def read(self, nbytes: Optional[int] = None) -> bytes:
         """Read characters. If ``nbytes`` is specified then read at most that many
         bytes, otherwise read as much data as possible.
 
