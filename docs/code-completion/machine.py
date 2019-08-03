@@ -159,7 +159,7 @@ Usage Model::
         """
         ...
 
-    def value(self, x: Optional[int]) -> Optional[int]:
+    def value(self, x: Optional[int] = None) -> Optional[int]:
         """This method allows to set and get the value of the pin, depending on
         whether the argument **x** is supplied or not.
 
@@ -465,7 +465,7 @@ class SPI(object):
 
 
 class I2C(object):
-    def __init__(self, id: int, scl: Pin = 0, sda: Pin = 0, freq: int = 400000) -> None:
+    def __init__(self, id: int, scl: Pin = None, sda: Pin = None, freq: int = 400000) -> None:
         """Construct and return a new I2C object.
 
         :param id: Particular I2C peripheral (-1 for software implementation).
@@ -747,13 +747,13 @@ class PWM(object):
         """
         ...
 
-    def freq(self, freq : int)-> None:
+    def freq(self, freq : int = None)-> None:
         """
         用于获取或者设置 PWM 对象的频率，频率的范围为 [1, 156250]。如果参数为空，返回当前 PWM 对象的频率；如果参数非空，则使用该参数设置当前 PWM 对象的频率。
         """
         ...
 
-    def duty(self, duty : int) -> None:
+    def duty(self, duty : int = None) -> None:
         """
         用于获取或者设置 PWM 对象的占空比数值，占空比数值的范围为 [0, 255]，例如 duty = 100，表示当前设备占空比为 100/255 = 39.22% 。如果参数为空，返回当前 PWM 对象的占空比数值；如果参数非空，则使用该参数设置当前 PWM 对象的占空比数值。
         """
