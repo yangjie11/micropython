@@ -79,6 +79,7 @@ Usage Model::
     MED_POWER = ...  # type: int
     HIGH_POWER = ...  # type: int
     OUT_PP = ...  # type: int
+    OUT_OD = ...  # type: int
 
     def __init__(self, id: Any, mode: int = -1, pull: int = -1, *,
                  value: Optional[int] = None,
@@ -677,7 +678,7 @@ class Timer(object):
         :param id: Timer ID.
         """
 
-    def init(mode : Timer.PERIODIC, period : int, callback : func) -> None:
+    def init(self, mode : Timer.PERIODIC, period : int, callback : func) -> None:
         """
         Init the timer. Start the timer, and enable the timer peripheral.
         """
@@ -700,7 +701,7 @@ class ADC(object):
         """
         """
 
-    def init(channel) -> None:
+    def init(self, channel : int) -> None:
         """
         根据输入的层参数初始化 ADC 对象，入参为使用的 ADC 对象通道号；
         """
@@ -712,7 +713,7 @@ class ADC(object):
         """
         ...
 
-    def read() -> None:
+    def read(self) -> None:
         """
         用于获取并返回当前 ADC 对象的采样值。例如当前采样值为 2048，对应设备的分辨率为 12位，当前设备参考电压为 3.3V ，则该 ADC 对象通道上实际电压值的计算公式为：采样值 * 参考电压  /  （1 <<  分辨率位数），即 vol = 2048 / 4096 * 3.3 V = 1.15V。
         """
@@ -734,7 +735,7 @@ class PWM(object):
         """
         """
 
-    def init(channel, freq, duty) -> None:
+    def init(self, channel : int, freq : int, duty : int) -> None:
         """
         根据输入的参数初始化 PWM 对象。
         """
@@ -746,13 +747,13 @@ class PWM(object):
         """
         ...
 
-    def freq(freq)-> None:
+    def freq(self, freq : int)-> None:
         """
         用于获取或者设置 PWM 对象的频率，频率的范围为 [1, 156250]。如果参数为空，返回当前 PWM 对象的频率；如果参数非空，则使用该参数设置当前 PWM 对象的频率。
         """
         ...
 
-    def duty(duty) -> None:
+    def duty(self, duty : int) -> None:
         """
         用于获取或者设置 PWM 对象的占空比数值，占空比数值的范围为 [0, 255]，例如 duty = 100，表示当前设备占空比为 100/255 = 39.22% 。如果参数为空，返回当前 PWM 对象的占空比数值；如果参数非空，则使用该参数设置当前 PWM 对象的占空比数值。
         """
@@ -840,7 +841,7 @@ class LCD(object):
 
 class WDT(object):
 
-    def __init__(self) -> None:
+    def __init__(self, timeout : int) -> None:
         """
         Construct a new watchdog object.
         """
