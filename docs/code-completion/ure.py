@@ -14,19 +14,19 @@ class compile(...):
     def __init__(self) -> None:
     ...
 
-    def match(string) -> None:
+    def match(self, string) -> None:
         """用 string 匹配 regex，匹配总是从字符串的开始匹配。"""
         ...
 
-    def search(string) -> None:
+    def search(self, string) -> None:
         """在 string 中搜索 regex。不同于匹配，它搜索第一个匹配位置的正则表达式字符串 (结果可能会是0)。"""
         ...
 
-    def sub(replace, string, count, flags) -> None:
+    def sub(self, replace, string, count, flags) -> None:
         """Compile regex_str and search for it in string, replacing all matches with replace, and returning the new string."""
         ...
 
-    def split() -> None:
+    def split(self) -> None:
         """获取缓存区内容。"""
         ...
 
@@ -39,25 +39,25 @@ class match(...):
     def __init__(self) -> None:
     ...
 
-    def group(index) -> None:
+    def group(self, index) -> None:
         """用 string 匹配 regex，匹配总是从字符串的开始匹配。"""
         ...
 
-    def groups() -> None:
+    def groups(self) -> None:
         """在 string 中搜索 regex。不同于匹配，它搜索第一个匹配位置的正则表达式字符串 (结果可能会是0)。"""
         ...
 
-    def start(index) -> None:
+    def start(self, index) -> None:
         """start([index])"""
         ...
 
-    def end(index) -> None:
+    def end(self, index) -> None:
         """end([index])
         Return the index in the original string of the start or end of the substring group that was matched. index defaults to the entire group, otherwise it will select a group.
         """
         ...
 
-    def span() -> None:
+    def span(self) -> None:
         """Returns the 2-tuple (match.start(index), match.end(index))."""
         ...
 
@@ -70,25 +70,25 @@ class search(...):
     def __init__(self) -> None:
     ...
 
-    def group(index) -> None:
+    def group(self, index) -> None:
         """用 string 匹配 regex，匹配总是从字符串的开始匹配。"""
         ...
 
-    def groups() -> None:
+    def groups(self) -> None:
         """在 string 中搜索 regex。不同于匹配，它搜索第一个匹配位置的正则表达式字符串 (结果可能会是0)。"""
         ...
 
-    def start(index) -> None:
+    def start(self, index) -> None:
         """start([index])"""
         ...
 
-    def end(index) -> None:
+    def end(self, index) -> None:
         """end([index])
         Return the index in the original string of the start or end of the substring group that was matched. index defaults to the entire group, otherwise it will select a group.
         """
         ...
 
-    def span() -> None:
+    def span(self) -> None:
         """Returns the 2-tuple (match.start(index), match.end(index))."""
         ...
 

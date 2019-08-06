@@ -15,15 +15,15 @@ class sha256(data):
     def __init__(self) -> None:
     ...
 
-    def update(data) -> None:
+    def update(self, data) -> None:
         """将更多二进制数据放入哈希表中。"""
         ...
 
-    def digest() -> None:
+    def digest(self) -> None:
         """返回字节对象哈希的所有数据。调用此方法后，将无法将更多数据送入哈希。"""
         ...
 
-    def hexdigest() -> None:
+    def hexdigest(self) -> None:
         """此方法没有实现， 使用 ubinascii.hexlify(hash.digest()) 达到类似效果。"""
         ...
 
@@ -36,15 +36,15 @@ class sha1(data):
     def __init__(self) -> None:
     ...
 
-    def update(data) -> None:
+    def update(self, data) -> None:
         """将更多二进制数据放入哈希表中。"""
         ...
 
-    def digest() -> None:
+    def digest(self) -> None:
         """返回字节对象哈希的所有数据。调用此方法后，将无法将更多数据送入哈希。"""
         ...
 
-    def hexdigest() -> None:
+    def hexdigest(self) -> None:
         """此方法没有实现， 使用 ubinascii.hexlify(hash.digest()) 达到类似效果。"""
         ...
 
@@ -58,14 +58,14 @@ class md5(data):
     def __init__(self) -> None:
     ...
 
-    def update(data) -> None:
+    def update(self, data) -> None:
         """将更多二进制数据放入哈希表中。"""
         ...
 
-    def digest() -> None:
+    def digest(self) -> None:
         """返回字节对象哈希的所有数据。调用此方法后，将无法将更多数据送入哈希。"""
         ...
 
-    def hexdigest() -> None:
+    def hexdigest(self) -> None:
         """此方法没有实现， 使用 ubinascii.hexlify(hash.digest()) 达到类似效果。"""
         ...

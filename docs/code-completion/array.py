@@ -20,7 +20,7 @@ class array(object):
     """
     ...
 
-    def append(val) -> None:
+    def append(self, val) -> None:
         """
         将一个新元素追加到数组的末尾。
         示例：
@@ -34,7 +34,7 @@ class array(object):
         """
         ...
 
-    def extend(iterable) -> None:
+    def extend(self, iterable) -> None:
         """
         将一个新的数组追加到数组的末尾，注意追加的数组和原来数组的数据类型要保持一致。
         示例：

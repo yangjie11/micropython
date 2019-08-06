@@ -13,17 +13,18 @@ SO_REUSEADDR = ...  # type: int
 IPPROTO_TCP  = ...  # type: int
 IPPROTO_UDP  = ...  # type: int
 
-class socket(family, type, protocol) -> None:
-    """
-    创建新的套接字，使用指定的地址、类型和协议号。
-    - usocket.socket(usocket.AF_INET,usocket.SOCK_STREAM)
-    """
-    ...
 
-    def __init__(self) -> None:
-    ...
+class socket(object):
 
-    def getaddrinfo(host, port) -> None:
+    def __init__(self, family, type, protocol = socket.IPPROTO_TCP) -> None:
+        """
+        创建新的套接字，使用指定的地址、类型和协议号。
+        - usocket.socket(usocket.AF_INET,usocket.SOCK_STREAM)
+        """
+        ...
+
+    def getaddrinfo(self, host, port) -> None:
+        return tuple
         """
         将主机域名（host）和端口（port）转换为用于创建套接字的5元组序列。元组列表的结构如下:
 
@@ -36,15 +37,15 @@ class socket(family, type, protocol) -> None:
         """
         ...
 
-    def close() -> None:
+    def close(self) -> None:
         """关闭套接字。一旦关闭后，套接字所有的功能都将失效。远端将接收不到任何数据 (清理队列数据后)。 虽然在垃圾回收时套接字会自动关闭，但还是推荐在必要时用 close() 去关闭。"""
         ...
 
-    def bind(address) -> None:
+    def bind(self, address) -> None:
         """将套接字绑定到地址，套接字不能是已经绑定的。"""
         ...
 
-    def listen(backlog) -> None:
+    def listen(self, backlog) -> None:
         """
         listen([backlog])
         监听套接字，使服务器能够接收连接。
@@ -52,7 +53,8 @@ class socket(family, type, protocol) -> None:
         """
         ...
 
-    def accept() -> None:
+    def accept(self) -> None:
+        return conn, address
         """
         接收连接请求。 注意： 只能在绑定地址端口号和监听后调用，返回 conn 和 address。
 
@@ -61,7 +63,7 @@ class socket(family, type, protocol) -> None:
         """
         ...
 
-    def connect(address) -> None:
+    def connect(self, address : tuple) -> None:
         """
         连接服务器。
 
@@ -69,7 +71,8 @@ class socket(family, type, protocol) -> None:
         """
         ...
 
-    def send(bytes) -> None:
+    def send(self, bytes) -> None:
+        return size
         """
         发送数据，并返回成功发送的字节数，返回字节数可能比发送的数据长度少。
 
@@ -77,7 +80,8 @@ class socket(family, type, protocol) -> None:
         """
         ...
 
-    def recv(bufsize) -> None:
+    def recv(self, bufsize) -> None:
+        return obj
         """
         接收数据，返回接收到的数据对象。
 
@@ -88,7 +92,8 @@ class socket(family, type, protocol) -> None:
         """
         ...
 
-    def sendto(bytes, address) -> None:
+    def sendto(self, bytes, address) -> None:
+        return size
         """
         送数据，目标由address决定，常用于UDP通信，返回发送的数据大小。
 
@@ -101,7 +106,8 @@ class socket(family, type, protocol) -> None:
         """
         ...
 
-    def recvfrom(bufsize) -> None:
+    def recvfrom(self, bufsize) -> None:
+        return size
         """
         接收数据，常用于UDP通信，并返回接收到的数据对象和对象的地址。
 
@@ -112,7 +118,8 @@ class socket(family, type, protocol) -> None:
         """
         ...
 
-    def setsockopt(level, optname, value) -> None:
+    def setsockopt(self, level, optname, value) -> None:
+        return status
         """
         根据选项值设置套接字。
 
@@ -125,7 +132,8 @@ class socket(family, type, protocol) -> None:
         """
         ...
 
-    def settimeout(value) -> None:
+    def settimeout(self, value) -> None:
+        return status
         """
         设置超时时间，单位：秒。 示例：
 
@@ -133,13 +141,15 @@ class socket(family, type, protocol) -> None:
         """
         ...
 
-    def setblocking(flag) -> None:
+    def setblocking(self, flag) -> None:
+        return status
         """
         设置阻塞或非阻塞模式: 如果 flag 是 false，设置非阻塞模式。
         """
         ...
 
-    def read(size) -> None:
+    def read(self, size) -> None:
+        return size
         """
         - read([size])
         Read up to size bytes from the socket. 
@@ -149,7 +159,8 @@ class socket(family, type, protocol) -> None:
         """
         ...
 
-    def readinto(buf) -> None:
+    def readinto(self, buf) -> None:
+        return size
         """
         readinto(buf[, nbytes])
         Read bytes into the buf. 
@@ -160,13 +171,15 @@ class socket(family, type, protocol) -> None:
         """
         ...
         
-    def readline() -> None:
+    def readline(self) -> None:
+        return obj
         """
         接收一行数据，遇换行符结束，并返回接收数据的对象 。
         """
         ...
 
-    def write(buf) -> None:
+    def write(self, buf) -> None:
+        return size
         """
         将字节类型数据写入套接字，并返回写入成功的数据大小。
         """

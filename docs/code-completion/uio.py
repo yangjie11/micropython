@@ -27,6 +27,6 @@ class BytesIO(string):
     def __init__(self) -> None:
     ...
 
-    def getvalue() -> None:
+    def getvalue(self) -> None:
         """获取缓存区内容。"""
         ...

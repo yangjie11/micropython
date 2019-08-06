@@ -78,6 +78,8 @@ Usage Model::
     LOW_POWER = ...  # type: int
     MED_POWER = ...  # type: int
     HIGH_POWER = ...  # type: int
+    OUT_PP = ...  # type: int
+    OUT_OD = ...  # type: int
 
     def __init__(self, id: Any, mode: int = -1, pull: int = -1, *,
                  value: Optional[int] = None,
@@ -157,7 +159,7 @@ Usage Model::
         """
         ...
 
-    def value(self, x: Optional[int]) -> Optional[int]:
+    def value(self, x: Optional[int] = None) -> Optional[int]:
         """This method allows to set and get the value of the pin, depending on
         whether the argument **x** is supplied or not.
 
@@ -343,7 +345,7 @@ class UART(object):
         """
         ...
 
-    def read(self, nbytes: Optional[int]) -> bytes:
+    def read(self, nbytes: Optional[int] = None) -> bytes:
         """Read characters. If ``nbytes`` is specified then read at most that many
         bytes, otherwise read as much data as possible.
 
@@ -390,7 +392,9 @@ class SPI(object):
     LSB = ...  # type: int
     MSB = ...  # type: int
 
-    def __init__(self, id: int) -> None:
+    def __init__(self, id: int, baudrate: int = 1000000, polarity: int = 0, phase: int = 0,
+             bits: int = 8, firstbit: int = MSB, sck: Optional[Pin] = None,
+             mosi: Optional[Pin] = None, miso: Optional[Pin] = None) -> None:
         """
         Construct an SPI object on the given bus, ``id``. Values of id depend
         on a particular port and its hardware. Values 0, 1, etc. are commonly
@@ -463,7 +467,7 @@ class SPI(object):
 
 
 class I2C(object):
-    def __init__(self, id: int, *, scl: Pin, sda: Pin, freq: int = 400000) -> None:
+    def __init__(self, id: int, scl: Pin = None, sda: Pin = None, freq: int = 400000) -> None:
         """Construct and return a new I2C object.
 
         :param id: Particular I2C peripheral (-1 for software implementation).
@@ -580,7 +584,7 @@ class I2C(object):
         """
         ...
 
-    def writeto_mem(self, addr: int, memaddr: int, *, addrsize=8) -> None:
+    def writeto_mem(self, addr: int, memaddr: int, addrsize=8) -> None:
         """Write ``buf`` to the slave specified by ``addr`` starting from the
         memory address specified by ``memaddr``. The argument ``addrsize`` specifies
         the address size in bits (on ESP8266 this argument is not recognised
@@ -676,7 +680,7 @@ class Timer(object):
         :param id: Timer ID.
         """
 
-    def init(mode : Timer.PERIODIC, period : int, callback : func) -> None:
+    def init(self, mode : Timer.PERIODIC, period : int, callback : func) -> None:
         """
         Init the timer. Start the timer, and enable the timer peripheral.
         """
@@ -699,7 +703,7 @@ class ADC(object):
         """
         """
 
-    def init(channel) -> None:
+    def init(self, channel : int) -> None:
         """
         根据输入的层参数初始化 ADC 对象，入参为使用的 ADC 对象通道号；
         """
@@ -711,7 +715,7 @@ class ADC(object):
         """
         ...
 
-    def read() -> None:
+    def read(self) -> None:
         """
         用于获取并返回当前 ADC 对象的采样值。例如当前采样值为 2048，对应设备的分辨率为 12位，当前设备参考电压为 3.3V ，则该 ADC 对象通道上实际电压值的计算公式为：采样值 * 参考电压  /  （1 <<  分辨率位数），即 vol = 2048 / 4096 * 3.3 V = 1.15V。
         """
@@ -733,7 +737,7 @@ class PWM(object):
         """
         """
 
-    def init(channel, freq, duty) -> None:
+    def init(self, channel : int, freq : int, duty : int) -> None:
         """
         根据输入的参数初始化 PWM 对象。
         """
@@ -745,13 +749,13 @@ class PWM(object):
         """
         ...
 
-    def freq(freq)-> None:
+    def freq(self, freq : int = None)-> None:
         """
         用于获取或者设置 PWM 对象的频率，频率的范围为 [1, 156250]。如果参数为空，返回当前 PWM 对象的频率；如果参数非空，则使用该参数设置当前 PWM 对象的频率。
         """
         ...
 
-    def duty(duty) -> None:
+    def duty(self, duty : int = None) -> None:
         """
         用于获取或者设置 PWM 对象的占空比数值，占空比数值的范围为 [0, 255]，例如 duty = 100，表示当前设备占空比为 100/255 = 39.22% 。如果参数为空，返回当前 PWM 对象的占空比数值；如果参数非空，则使用该参数设置当前 PWM 对象的占空比数值。
         """
@@ -784,13 +788,13 @@ class LCD(object):
         """
         """
 
-    def light(value) -> None:
+    def light(self, value : int) -> None:
         """
         控制是否开启 LCD 背光，入参为 True 则打开 LCD 背光，入参为 False 则关闭 LCD 背光。
         """
         ...
 
-    def fill(color) -> None:
+    def fill(self, color : int) -> None:
         """
         根据给定的颜色填充整个屏幕，支持多种颜色，可以传入的参数有：
 
@@ -798,32 +802,39 @@ class LCD(object):
         """
         ...
 
-    def pixel(x, y, color) -> None:
+    def pixel(self, x : int, y : int , color : int) -> None:
         """
         向指定的位置（x, y）画点，点的颜色为 color 指定的颜色，可指定的颜色和上一个功能相同。
         注意：(x, y)  坐标的范围是 0 - 239，使用下面的方法对坐标进行操作时同样需要遵循此限制。
         """
         ...
 
-    def text(str, x, y, size) -> None:
+    def set_color(self, back_color : int, fore_color : int) -> None:
+        """
+        设置 LCD 屏幕的前景色和背景色。
+        """
+        ...
+
+
+    def text(self, input_str : str, x : int, y : int, size : int) -> None:
         """
         在指定的位置（x,y）写入字符串，字符串由 str 指定，字体的大小由 size 指定，size 的大小可为 16，24，32。
         """
         ...
 
-    def line(x1, y1, x2, y2) -> None:
+    def line(self, x1 : int, y1 : int, x2 : int, y2 : int) -> None:
         """
         在 LCD 上画一条直线，起始地址为 （x1, y1），终点为（x2, y2）。
         """
         ...
 
-    def rectangle(x1, y1, x2, y2) -> None:
+    def rectangle(self, x1 : int, y1 : int, x2 : int, y2 : int) -> None:
         """
         在 LCD 上画一个矩形，左上角的位置为（x1, y1），右下角的位置为（x2, y2）。
         """
         ...
 
-    def circle(x1, y1, r) -> None:
+    def circle(self, x1 : int, y1 : int, r : int) -> None:
         """
         在 LCD 上画一个圆形，圆心的位置为（x1, y1），半径长度为 r。。
         """
@@ -832,7 +843,7 @@ class LCD(object):
 
 class WDT(object):
 
-    def __init__(self) -> None:
+    def __init__(self, timeout : int) -> None:
         """
         Construct a new watchdog object.
         """

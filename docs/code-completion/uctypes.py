@@ -31,7 +31,7 @@ class struct(addr, descriptor, type):
     def __init__(self) -> None:
     ...
 
-    def sizeof(struct) -> None:
+    def sizeof(self, struct) -> None:
         """
         按字节返回数据的大小。参数可以是类或者数据对象 (或集合)。 示例：
 
@@ -44,7 +44,7 @@ class struct(addr, descriptor, type):
         """
         ...
 
-    def addressof(obj) -> None:
+    def addressof(self, obj) -> None:
         """
         返回对象地址。参数需要是 bytes, bytearray 。 示例：
 
@@ -54,7 +54,7 @@ class struct(addr, descriptor, type):
         """
         ...
 
-    def bytes_at(addr, size)-> None:
+    def bytes_at(self, addr, size)-> None:
         """
         捕捉从 addr 开始到 size 个地址偏移量结束的内存数据为 bytearray 对象并返回。 示例：
 
@@ -64,7 +64,7 @@ class struct(addr, descriptor, type):
         """
         ...
 
-    def bytearray_at(addr, size) -> None:
+    def bytearray_at(self, addr, size) -> None:
         """
         捕捉给定大小和地址内存为 bytearray 对象。与 bytes_at() 函数不同的是，它可以被再次写入，可以访问给定地址的参数。 示例：
 

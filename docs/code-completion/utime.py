@@ -2,7 +2,10 @@
 utime 模块提供获取当前时间和日期、测量时间间隔和延迟的功能。
 """
 
-def localtime(secs : int) -> None:
+from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
+
+def localtime(secs : int) -> Tuple:
+    return Tuple
     """
     从初始时间的秒转换为元组: (年, 月, 日, 时, 分, 秒, 星期, yearday) 。如果 secs 是空或者 None，那么使用当前时间。
     year 年份包括世纪（例如2014）。
@@ -17,7 +20,8 @@ def localtime(secs : int) -> None:
     """
     ...
 
-def mktime(time : tuple) -> None:
+def mktime(time : tuple) -> int:
+    return time
     """时间的反函数，它的参数是完整8参数的元组，返回值一个整数自2000年1月1日以来的秒数。"""
     ...
 
@@ -33,7 +37,8 @@ def sleep_us(us) -> None:
     """延时指定微秒，参数不能小于0。"""
     ...
 
-def ticks_ms() -> None:
+def ticks_ms() -> int:
+    return time
     """
     返回不断递增的毫秒计数器，在某些值后会重新计数(未指定)。
     计数值本身无特定意义，只适合用在ticks_diff()。
@@ -42,7 +47,8 @@ def ticks_ms() -> None:
     """
     ...
 
-def ticks_us() -> None:
+def ticks_us() -> int:
+    return time
     """
     返回不断递增的微秒计数器，在某些值后会重新计数(未指定)。
     计数值本身无特定意义，只适合用在ticks_diff()。
@@ -55,7 +61,8 @@ def ticks_cpu() -> None:
     """与 ticks_ms() 和 ticks_us() 类似，具有更高精度 (使用 CPU 时钟)，并非每个端口都实现此功能。"""
     ...
 
-def ticks_add(ticks, delta) -> None:
+def ticks_add(ticks, delta) -> int:
+    return time
     """
     给定一个数字作为节拍的偏移值 delta，这个数字的值是正数或者负数都可以。 
     给定一个 ticks 节拍值，本函数允许根据节拍值的模算数定义来计算给定节拍值之前或者之后 delta 个节拍的节拍值 。 
@@ -65,7 +72,8 @@ def ticks_add(ticks, delta) -> None:
     """
     ...
 
-def ticks_diff(ticks1, ticks2) -> None:
+def ticks_diff(ticks1, ticks2) -> int :
+    return time
     """
     计算两次调用 ticksms(), ticks_us(), 或 ticks_cpu()之间的时间。
     因为这些函数的计数值可能会回绕，所以不能直接相减，需要使用 ticks_diff() 函数。
@@ -82,7 +90,8 @@ def ticks_diff(ticks1, ticks2) -> None:
     """
     ...
 
-def time() -> None:
+def time() -> int:
+    return time
     """
     返回从开始时间的秒数（整数），假设 RTC 已经按照前面方法设置好。
     如果 RTC 没有设置，函数将返回参考点开始计算的秒数 (对于 RTC 没有后备电池的板子，上电或复位后的情况)。

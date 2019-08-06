@@ -40,7 +40,7 @@ class poll(string):
     def __init__(self) -> None:
     ...
 
-    def register(obj) -> None:
+    def register(self, obj) -> None:
         """
         - register(obj[, eventmask])
         注册一个用以监控的对象，并设置被监控对象的监控标志位 flag。
@@ -54,7 +54,7 @@ class poll(string):
         """
         ...
 
-    def unregister(obj) -> None:
+    def unregister(self, obj) -> None:
         """
         解除监控的对象的注册。
 
@@ -69,7 +69,7 @@ class poll(string):
         """
         ...
 
-    def modify(obj, eventmask) -> None:
+    def modify(self, obj, eventmask) -> None:
         """
         修改已注册的对象监控标志。
 
@@ -85,7 +85,7 @@ class poll(string):
         """
         ...
 
-    def poll(timeout) -> None:
+    def poll(self, timeout) -> None:
         """
         - poll([timeout])
         等待至少一个已注册的对象准备就绪。
