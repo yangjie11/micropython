@@ -10,7 +10,7 @@ def getcwd() -> None:
     """获取当前目录。"""
     ...
 
-def listdir(dir : str) -> None:
+def listdir(dir : str = None) -> None:
     """没有参数就列出当前目录，否则列出给定目录。"""
     ...
 
