@@ -14,9 +14,9 @@ IPPROTO_TCP  = ...  # type: int
 IPPROTO_UDP  = ...  # type: int
 
 
-class socket(object) -> None:
+class socket(object):
 
-    def __init__(self, family, type, protocol) -> None:
+    def __init__(self, family, type, protocol = socket.IPPROTO_TCP) -> None:
         """
         创建新的套接字，使用指定的地址、类型和协议号。
         - usocket.socket(usocket.AF_INET,usocket.SOCK_STREAM)
@@ -24,6 +24,7 @@ class socket(object) -> None:
         ...
 
     def getaddrinfo(self, host, port) -> None:
+        return tuple
         """
         将主机域名（host）和端口（port）转换为用于创建套接字的5元组序列。元组列表的结构如下:
 
@@ -53,6 +54,7 @@ class socket(object) -> None:
         ...
 
     def accept(self) -> None:
+        return conn, address
         """
         接收连接请求。 注意： 只能在绑定地址端口号和监听后调用，返回 conn 和 address。
 
@@ -61,7 +63,7 @@ class socket(object) -> None:
         """
         ...
 
-    def connect(self, address) -> None:
+    def connect(self, address : tuple) -> None:
         """
         连接服务器。
 
@@ -70,6 +72,7 @@ class socket(object) -> None:
         ...
 
     def send(self, bytes) -> None:
+        return size
         """
         发送数据，并返回成功发送的字节数，返回字节数可能比发送的数据长度少。
 
@@ -78,6 +81,7 @@ class socket(object) -> None:
         ...
 
     def recv(self, bufsize) -> None:
+        return obj
         """
         接收数据，返回接收到的数据对象。
 
@@ -89,6 +93,7 @@ class socket(object) -> None:
         ...
 
     def sendto(self, bytes, address) -> None:
+        return size
         """
         送数据，目标由address决定，常用于UDP通信，返回发送的数据大小。
 
@@ -102,6 +107,7 @@ class socket(object) -> None:
         ...
 
     def recvfrom(self, bufsize) -> None:
+        return size
         """
         接收数据，常用于UDP通信，并返回接收到的数据对象和对象的地址。
 
@@ -113,6 +119,7 @@ class socket(object) -> None:
         ...
 
     def setsockopt(self, level, optname, value) -> None:
+        return status
         """
         根据选项值设置套接字。
 
@@ -126,6 +133,7 @@ class socket(object) -> None:
         ...
 
     def settimeout(self, value) -> None:
+        return status
         """
         设置超时时间，单位：秒。 示例：
 
@@ -134,12 +142,14 @@ class socket(object) -> None:
         ...
 
     def setblocking(self, flag) -> None:
+        return status
         """
         设置阻塞或非阻塞模式: 如果 flag 是 false，设置非阻塞模式。
         """
         ...
 
     def read(self, size) -> None:
+        return size
         """
         - read([size])
         Read up to size bytes from the socket. 
@@ -150,6 +160,7 @@ class socket(object) -> None:
         ...
 
     def readinto(self, buf) -> None:
+        return size
         """
         readinto(buf[, nbytes])
         Read bytes into the buf. 
@@ -161,12 +172,14 @@ class socket(object) -> None:
         ...
         
     def readline(self) -> None:
+        return obj
         """
         接收一行数据，遇换行符结束，并返回接收数据的对象 。
         """
         ...
 
     def write(self, buf) -> None:
+        return size
         """
         将字节类型数据写入套接字，并返回写入成功的数据大小。
         """
