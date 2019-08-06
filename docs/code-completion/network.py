@@ -74,7 +74,7 @@ class WLAN(object):
         """
         ...
 
-    def config(self, param : str) -> None:
+    def config(self, mac : str = None, essid : str = None, password : str = None, hidden : int = 0, channel : int = 0) -> None:
         """
         - config(param=value, ...)
         获取或者设置一般网络接口参数，这些方法允许处理标准的 ip 配置之外的其他参数，如 WLAN.ifconfig() 函数处理的参数。
