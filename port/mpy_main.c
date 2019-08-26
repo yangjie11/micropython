@@ -46,6 +46,9 @@
 #include "mpgetcharport.h"
 #include "mpputsnport.h"
 
+#define THREAD_STACK_NO_SYNC   4096
+#define THREAD_STACK_WITH_SYNC 8192
+
 #if MICROPY_ENABLE_COMPILER
 void do_str(const char *src, mp_parse_input_kind_t input_kind) {
     nlr_buf_t nlr;
@@ -68,13 +71,21 @@ static char *heap = RT_NULL;
 
 void mpy_main(const char *filename) {
     int stack_dummy;
+    int stack_size_check;
     stack_top = (void *)&stack_dummy;
 
     mp_getchar_init();
     mp_putsn_init();
 
-    if (rt_thread_self()->stack_size < 8192) {
-        mp_printf(&mp_plat_print, "The stack (%.*s) size for executing MicroPython must be >= 8192\n", RT_NAME_MAX, rt_thread_self()->name);
+#if defined(MICROPYTHON_USING_FILE_SYNC_VIA_IDE)
+    stack_size_check = THREAD_STACK_WITH_SYNC;
+#else
+    stack_size_check = THREAD_STACK_NO_SYNC;
+#endif
+
+    if (rt_thread_self()->stack_size < stack_size_check) 
+    {
+        mp_printf(&mp_plat_print, "The stack (%.*s) size for executing MicroPython must be >= %d\n", RT_NAME_MAX, rt_thread_self()->name, stack_size_check);
     }
 
 #if MICROPY_PY_THREAD
