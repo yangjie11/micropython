@@ -92,7 +92,7 @@ STATIC mp_obj_t machine_timer_make_new(const mp_obj_type_t *type, size_t n_args,
     self->timeout_cb = RT_NULL;
     self->is_repeat = RT_TRUE;
     self->is_init = RT_FALSE;
-	self->timer_device->device_id = device_id-1;
+    self->timer_device->device_id = device_id-1;
     
     // return constant object
     return MP_OBJ_FROM_PTR(self);
@@ -216,7 +216,7 @@ STATIC mp_obj_t machine_timer_callback(mp_uint_t n_args, const mp_obj_t *args, m
         self->timer_device->rx_indicate = RT_NULL;//Log-off callback function 
     }
     else if(n_args == 2)
-	{
+    {
         if(self->timeout_cb != mp_const_none)
         {
             timer_self[self->timer_device->device_id] = self;
