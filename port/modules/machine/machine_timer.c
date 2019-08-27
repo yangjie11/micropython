@@ -166,8 +166,7 @@ STATIC mp_obj_t machine_timer_init(mp_uint_t n_args, const mp_obj_t *args, mp_ma
     if (self->timeout_cb != RT_NULL) {
         // set callback timer
         if (timer_self[self->timer_device->device_id] && timer_self[self->timer_device->device_id] != self) {
-            // TODO add multi-timer device support
-            error_check(result == RT_EOK, "Only supports one timer device work");
+            error_check(result == RT_EOK, "Timer device callback function already exists");
         } else {
             timer_self[self->timer_device->device_id] = self;
         }
@@ -213,22 +212,22 @@ STATIC mp_obj_t machine_timer_callback(mp_uint_t n_args, const mp_obj_t *args, m
     
     if(n_args == 1)
     {
-		self->timeout_cb = RT_NULL;
-		self->timer_device->rx_indicate = RT_NULL;//注销回调函数
+        self->timeout_cb = RT_NULL;
+        self->timer_device->rx_indicate = RT_NULL;//Log-off callback function 
     }
     else if(n_args == 2)
 	{
-		if(self->timeout_cb != mp_const_none)
-		{
-			timer_self[self->timer_device->device_id] = self;
-			result = rt_device_set_rx_indicate(self->timer_device, timer_event_handler); //注册回调函数
-			error_check(result == RT_EOK, "Timer set timout callback error");
-		}
-		else
-		{
-			self->timeout_cb = RT_NULL;
-			self->timer_device->rx_indicate = RT_NULL;//注销回调函数
-		}
+        if(self->timeout_cb != mp_const_none)
+        {
+            timer_self[self->timer_device->device_id] = self;
+            result = rt_device_set_rx_indicate(self->timer_device, timer_event_handler); //set callback timer
+            error_check(result == RT_EOK, "Timer set timout callback error");
+        }
+        else
+        {
+            self->timeout_cb = RT_NULL;
+            self->timer_device->rx_indicate = RT_NULL;//Log-off callback function 
+        }
     }
     return mp_const_none;
 }
@@ -237,7 +236,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_KW(machine_timer_callback_obj, 0,machine_timer_ca
 STATIC const mp_rom_map_elem_t machine_timer_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_deinit), MP_ROM_PTR(&machine_timer_deinit_obj) },
     { MP_ROM_QSTR(MP_QSTR_init), MP_ROM_PTR(&machine_timer_init_obj) },
-	{ MP_ROM_QSTR(MP_QSTR_callback), MP_ROM_PTR(&machine_timer_callback_obj) },
+    { MP_ROM_QSTR(MP_QSTR_callback), MP_ROM_PTR(&machine_timer_callback_obj) },
     { MP_ROM_QSTR(MP_QSTR_ONE_SHOT), MP_ROM_INT(RT_FALSE) },
     { MP_ROM_QSTR(MP_QSTR_PERIODIC), MP_ROM_INT(RT_TRUE) },
 };
