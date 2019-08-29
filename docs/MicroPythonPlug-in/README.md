@@ -31,6 +31,7 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 `sudo usermod -aG dialout user`
 
+注意：配置修改后需要 **重启一下操作系统** 使配置生效。
 
 ## 快速入门
 
