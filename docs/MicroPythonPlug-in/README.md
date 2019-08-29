@@ -11,18 +11,26 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 - 支持在设备上运行示例代码
 - 支持运行选中的代码片段
 - 支持多款 MicroPython 开发板
+- 支持在 windows 以及 ubuntu 操作系统下运行
 
 ## 准备工作
 
-如果想要使用 MicroPython 自动补全功能（如果暂时不需要自动补全功能，可以跳过这一步），需要安装依赖的 Microsoft Python 插件，准备工作如下：
+如果想要使用 MicroPython 自动补全功能（如果暂时不需要自动补全功能，可以跳过这一步），需要安装依赖的 Python 插件，准备工作如下：
 
-1. 安装 Microsoft Python 插件
+1. 安装 Python 插件
 
 2. 按照 Python 插件的提示在 PC 上安装 Python3 并加入到系统环境变量中
 
 ![Python plug](assets/install_python_plug.png)
 
 如果在 PC 上已经安装过上述插件和程序，可以跳过此准备步骤。
+
+### ubuntu 支持
+
+本插件支持在 **ubuntu 18.04** 版本下运行，为了避免在 ubuntu 系统下频繁获取串口权限，需要将当前用户加入到 `dialout` 用户组中，手动输入如下命令即可，user 是系统当前当前用户名：
+
+`sudo usermod -aG dialout user`
+
 
 ## 快速入门
 
