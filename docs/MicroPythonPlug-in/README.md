@@ -27,9 +27,9 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 ### ubuntu 支持
 
-本插件支持在 **ubuntu 18.04** 版本下运行，为了避免在 ubuntu 系统下频繁获取串口权限，需要将当前用户加入到 `dialout` 用户组中，手动输入如下命令即可，user 是系统当前当前用户名：
+本插件支持在 **ubuntu 18.04** 版本下运行，为了避免在 ubuntu 系统下频繁获取串口权限，需要将当前用户加入到 `dialout` 用户组中，手动输入如下命令即可，`$USERNAME` 是系统当前当前用户名：
 
-`sudo usermod -aG dialout user`
+`sudo usermod -aG dialout $USERNAME`
 
 注意：配置修改后需要 **重启一下操作系统** 使配置生效。
 
