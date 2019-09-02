@@ -6,19 +6,15 @@ MicroPython 固件指的是可以运行在特定板卡上，并且已经对该�
 
 ### 获取固件源码 
 
-MicroPython 固件源码可以从 RT-Thread 官方直接获取，自行编译下载即可。目前功能支持比较完备的是 IoT Board 潘多拉开发板，源代码地址如下：
+MicroPython 固件源码可以从 RT-Thread 官方直接获取，自行编译下载即可，目前功能支持比较完备的开发板列表如下：
 
-- Github 下载地址
+- IoT Board 潘多拉开发板
+    - [Github 仓库](https://github.com/RT-Thread/IoT_Board/tree/master/examples/31_micropython)
+    - [Gitee 仓库](https://gitee.com/Armink/IoT_Board/tree/master/examples/31_micropython) 
 
-```
-https://github.com/RT-Thread/IoT_Board/tree/master/examples/31_micropython
-```
-
-- Gitee 下载地址
-
-```
-https://gitee.com/Armink/IoT_Board
-```
+- W601 IoT Board 开发板
+    - [Github 仓库](https://github.com/RT-Thread/W601_IoT_Board/tree/master/examples/15_component_micropython)
+    - [Gitee 仓库](https://gitee.com/Armink/W601_IoT_Board/tree/master/examples/15_component_micropython) 
 
 ### 直接下载 bin 文件
 
