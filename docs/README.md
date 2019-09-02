@@ -54,12 +54,14 @@
 ## RT-Thread MicroPython 开发资源
 
 - [RT-Thread MicroPython 开发用户手册](https://www.rt-thread.org/document/site/submodules/micropython/docs/)
+- [RT-Thread MicroPython IDE 用户指南](https://www.rt-thread.org/document/site/submodules/micropython/docs/MicroPythonPlug-in/MicroPython_IDE_User_Manual/)
+- [RT-Thread MicroPython 固件开发指南](https://www.rt-thread.org/document/site/submodules/micropython/docs/MicroPythonPlug-in/MicroPython_Firmware_Development_Guide/)
 - [RT-Thread MicroPython 软件包](https://github.com/RT-Thread-packages/micropython)
 - [RT-Thread MicroPython 示例程序及库](https://github.com/RT-Thread/mpy-snippets)
 - [RT-Thread MicroPython 论坛](https://www.rt-thread.org/qa/forum.php?mod=forumdisplay&fid=2&filter=typeid&typeid=20)
-- [MicroPython IDE 用户指南](https://www.rt-thread.org/document/site/submodules/micropython/docs/MicroPythonPlug-in/MicroPython_IDE_User_Manual/)
-- [MicroPython 固件开发指南](https://www.rt-thread.org/document/site/submodules/micropython/docs/MicroPythonPlug-in/MicroPython_Firmware_Development_Guide/)
+- RT-Thread MicroPython 交流 QQ 群：703840633
 
+## MicroPython 官方资料
 - [MicroPython 官方网站](https://micropython.org/)
 
 - [MicroPython 官方在线文档](http://docs.micropython.org/en/latest/pyboard/)
@@ -72,4 +74,3 @@
 
 - [MicroPython 中文社区](http://www.micropython.org.cn/)
 
-- RT-Thread MicroPython 交流 QQ 群：703840633
