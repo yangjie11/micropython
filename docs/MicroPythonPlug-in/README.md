@@ -15,11 +15,15 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 ## 准备工作
 
-如果想要使用 MicroPython 自动补全功能（如果暂时不需要自动补全功能，可以跳过这一步），需要安装依赖的 Python 插件，准备工作如下：
+1. 在 windows 操作系统下使用插件需要将 vscode 的默认终端修改为 powershell，如下图所示：
 
-1. 安装 Python 插件
+   ![select_powershell](assets/select_powershell.gif)
 
-2. 按照 Python 插件的提示在 PC 上安装 Python3 并加入到系统环境变量中
+如果想要使用 MicroPython 自动补全功能（如果暂时不需要自动补全功能，可以跳过后续步骤），还需要进行如下操作：
+
+2. 安装 Python 插件
+
+3. 按照 Python 插件的提示在 PC 上安装 Python3 并加入到系统环境变量中
 
 ![Python plug](assets/install_python_plug.png)
 
