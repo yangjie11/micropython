@@ -41,7 +41,7 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 ### 创建一个 MicroPython 工程
 
-![open_dir](assets/open_dir.gif)
+![open_dir](assets/create_blank_prj.gif)
 
 ### 连接开发板
 
