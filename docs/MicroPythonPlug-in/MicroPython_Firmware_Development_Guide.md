@@ -91,5 +91,7 @@ int main(void)
 - 按下 `CTRL + D` 进入 msh 使用 `mkfs -t elm W25Q128` 命令创建文件系统
 - 在 REPL 交互环境中输入 `import os`，`os.mkfs("elm", "W25Q128")` 命令来创建文件系统
 
+注意： **W25Q128** 是本次示例中将要创建文件系统的块设备名称，并不是固定填写该名称。因此在使用上述命令创建文件系统前，需要确定当前系统中块设备的实际名称。
+
 成功创建文件系统后，就可以使用 [ **MicroPython 开发环境**](https://marketplace.visualstudio.com/items?itemName=RT-Thread.rt-thread-micropython) 来进行应用开发了。
 
