@@ -26,10 +26,9 @@
 
 #include <stdio.h>
 #include <string.h>
-
+#include <dfs_posix.h>
 #include "py/mphal.h"
 #include "py/runtime.h"
-#include <dfs_posix.h>
 #include "py/mperrno.h"
 
 #if MICROPY_PY_MACHINE_LCD
@@ -216,13 +215,13 @@ STATIC mp_obj_t machine_lcd_show_image(size_t n_args, const mp_obj_t *args) {
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_show_image_obj, 6, 6, machine_lcd_show_image);
 
 rt_uint16_t rgb888to565(rt_uint32_t RGB) 
- {
+{
      int R, G, B; 
      R = (RGB >> 19) & 0x1F; 
      G = (RGB >> 10) & 0x3F; 
      B = (RGB >> 3) & 0x1F; 
      return (R << 11) | (G << 5) | B; 
- } 
+} 
 
 /// \method show_image array
 ///
@@ -258,6 +257,13 @@ STATIC mp_obj_t machine_lcd_show_bmp(size_t n_args, const mp_obj_t *args) {
 
     rt_uint32_t width  = *(rt_uint32_t *)(bmp_info + 18);
     rt_uint32_t heigth = *(rt_uint32_t *)(bmp_info + 22);
+    rt_uint16_t bit_count = *(rt_uint16_t *)(bmp_info + 28);
+    
+    if (bit_count != 32)
+    {
+        nlr_raise(mp_obj_new_exception_msg_varg(&mp_type_ValueError,
+              "bit count : %d, only support 32-bit bmp picture", bit_count));
+    }
 
     void *image_buf = rt_malloc(2 * width);
     if (image_buf == RT_NULL)
