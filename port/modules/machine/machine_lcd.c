@@ -214,7 +214,7 @@ STATIC mp_obj_t machine_lcd_show_image(size_t n_args, const mp_obj_t *args) {
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(machine_lcd_show_image_obj, 6, 6, machine_lcd_show_image);
 
-rt_uint16_t rgb888to565(rt_uint32_t RGB) 
+STATIC rt_uint16_t rgb888to565(rt_uint32_t RGB) 
 {
      int R, G, B; 
      R = (RGB >> 19) & 0x1F; 
