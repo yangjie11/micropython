@@ -27,13 +27,10 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
-
 #include <rtthread.h>
-
 #ifdef RT_USING_DFS
 #include <dfs_posix.h>
 #endif
-
 #include <py/compile.h>
 #include <py/runtime.h>
 #include <py/repl.h>
@@ -66,6 +63,75 @@ void do_str(const char *src, mp_parse_input_kind_t input_kind) {
 }
 #endif
 
+#ifdef RT_USING_DFS
+static int mp_sys_resource_bak(struct dfs_fdtable **table_bak)
+{
+    struct dfs_fdtable *fd_table;
+    struct dfs_fdtable *fd_table_bak;
+    struct dfs_fd **fds;
+
+    fd_table = dfs_fdtable_get();
+    if (!fd_table) 
+    {
+        return RT_FALSE;
+    }
+
+    fd_table_bak = (struct dfs_fdtable *)rt_malloc(sizeof(struct dfs_fdtable));
+    if (!fd_table_bak)
+    {
+        goto _exit_tab;
+    }
+
+    fds = (struct dfs_fd **)rt_malloc((int)fd_table->maxfd * sizeof(struct dfs_fd *));
+    if (!fds)
+    {
+        goto _exit_fds;
+    }
+    else
+    {
+        rt_memcpy(fds, fd_table->fds, (int)fd_table->maxfd * sizeof(struct dfs_fd *));
+        fd_table_bak->maxfd = (int)fd_table->maxfd;
+        fd_table_bak->fds = fds;
+    }
+
+    *table_bak = fd_table_bak;
+
+    return RT_TRUE;
+
+_exit_fds:
+    rt_free(fd_table_bak);
+    
+_exit_tab:
+    return RT_FALSE;
+}
+
+static void mp_sys_resource_gc(struct dfs_fdtable *fd_table_bak)
+{
+    struct dfs_fdtable *fd_table;
+    struct dfs_fd *fd;
+    
+    if (!fd_table_bak) return;
+
+    fd_table = dfs_fdtable_get();
+
+    for(int i = 0; i < fd_table->maxfd; i++)
+    {
+        if (fd_table->fds[i] != RT_NULL)
+        {
+            if ((i < fd_table_bak->maxfd && fd_table_bak->fds[i] == RT_NULL) || (i >= fd_table_bak->maxfd))
+            {
+                fd = fd_table->fds[i];
+                dfs_file_close(fd);
+                fd_put(fd);
+            }
+        }
+    }
+
+    rt_free(fd_table_bak->fds);
+    rt_free(fd_table_bak);
+}
+#endif
+
 static void *stack_top = RT_NULL;
 static char *heap = RT_NULL;
 
@@ -73,6 +139,11 @@ void mpy_main(const char *filename) {
     int stack_dummy;
     int stack_size_check;
     stack_top = (void *)&stack_dummy;
+    
+#ifdef RT_USING_DFS
+    struct dfs_fdtable *fd_table_bak = NULL;
+    mp_sys_resource_bak(&fd_table_bak);
+#endif
 
     mp_getchar_init();
     mp_putsn_init();
@@ -167,6 +238,10 @@ void mpy_main(const char *filename) {
 
     mp_putsn_deinit();
     mp_getchar_deinit();
+    
+#ifdef RT_USING_DFS
+    mp_sys_resource_gc(fd_table_bak);
+#endif
 }
 
 #if !MICROPY_PY_MODUOS_FILE
