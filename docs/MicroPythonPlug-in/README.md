@@ -6,11 +6,11 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 - 支持基于 MicroPython 的代码智能补全与语法检查
 - 支持 MicroPython REPL 交互环境
 - 提供丰富的代码示例与 demo 程序
-- 支持工程同步功能
-- 支持直接在设备上运行示例代码文件
+- 支持全工程同步功能
+- 支持在设备上运行示例代码文件
 - 支持代码片段运行功能
-- 支持主流 MicroPython 开发板
-- 支持在 windows 以及 ubuntu 操作系统下运行
+- 支持多款主流 MicroPython 开发板
+- 支持 windows 及 ubuntu 操作系统
 
 ## 开发板支持列表
 
@@ -25,7 +25,7 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 `STM32L4 Pandora IoT Board` 与 `W601 IoT Board` 开发板的固件由 RT-Thread 官方提供，同时针对 MicroPython 插件开发环境进行深度优化，提供强大的工程同步功能以及更加丰富的固件功能。
 
-欢迎加入RT-Thread MicroPython 交流 QQ 群 **703840633** 获取最新固件，进行技术交流。
+欢迎加入`RT-Thread MicroPython` 交流 QQ 群 **703840633** 获取最新固件，进行技术交流。
 
 ## 准备工作
 
@@ -63,7 +63,9 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 ![create_demo_dir](assets/create_demo_prj.gif)
 
-- weather show demo 运行效果
+- `weather show demo` 在 `pandora IoT board` 上的运行效果
+
+该 demo 全部代码使用 MicroPython 编写，可在 `Pandora/W601 IoT Board` 开发板上直接下载运行。
 
 ![demo_express](assets/demo_express.png)
 
@@ -71,21 +73,17 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 ![uart_connect](assets/uart_connect.gif)
 
-### 运行示例代码
+### 查看示例代码文件
+
+![example_code](assets/example_code.png)
+
+### 在开发板上下载并运行示例文件
 
 和开发板建立连接后，可以直接运行示例代码，并观察代码在开发板上的运行效果，如下图所示：
 
 ![run_example](assets/run_example.gif)
 
-### 丰富的 MicroPython 代码示例程序
-
-![example_code](assets/example_code.png)
-
-### 在设备上直接运行示例代码文件
-
-![run_example_code](assets/run_example_code.png)
-
-### 使用运行代码片段功能
+### 在开发板上运行 MicroPython 代码片段
 
 ![run_code_snippet](assets/run_code_snippet.gif)
 
@@ -101,7 +99,6 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 - [RT-Thread MicroPython 论坛](https://www.rt-thread.org/qa/forum.php?mod=forumdisplay&fid=2&filter=typeid&typeid=20)
 - [MicroPython IDE 用户指南](https://www.rt-thread.org/document/site/submodules/micropython/docs/MicroPythonPlug-in/MicroPython_IDE_User_Manual/)
 - [MicroPython 固件开发指南](https://www.rt-thread.org/document/site/submodules/micropython/docs/MicroPythonPlug-in/MicroPython_Firmware_Development_Guide/)
-- RT-Thread MicroPython 技术交流 QQ 群：703840633
 
 ## 注意事项
 
