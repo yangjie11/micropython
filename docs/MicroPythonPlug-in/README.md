@@ -18,10 +18,10 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 | ---- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 1    | [STM32L4 Pandora IoT Board](https://github.com/RT-Thread/IoT_Board/tree/master/examples/31_micropython) | [RT-Thread 论坛固件汇总贴](https://www.rt-thread.org/qa/forum.php?mod=viewthread&tid=12305&page=1&extra=#pid52954) |
 | 2    | [W601 IoT Board](https://github.com/RT-Thread/W601_IoT_Board/tree/master/examples/15_component_micropython) | [RT-Thread 论坛固件汇总贴 ](https://www.rt-thread.org/qa/forum.php?mod=viewthread&tid=12305&page=1&extra=#pid52954) |
-| 3    | [ESP8266](https://micropython.org/download#esp8266)          | 点击开发板名称链接获取                                       |
-| 4    | [ESP32](https://micropython.org/download#esp32)              | 点击开发板名称链接获取                                       |
-| 5    | [PYboard](https://micropython.org/download#pyboard)          | 点击开发板名称链接获取                                       |
-| 6    | [others](https://micropython.org/download#other)             | 点击开发板名称链接获取                                       |
+| 3    | [ESP8266](https://micropython.org/download#esp8266)          | 点击左侧链接                                                 |
+| 4    | [ESP32](https://micropython.org/download#esp32)              | 点击左侧链接                                                 |
+| 5    | [PYboard](https://micropython.org/download#pyboard)          | 点击左侧链接                                                 |
+| 6    | [others](https://micropython.org/download#other)             | 点击左侧链接                                                 |
 
 `STM32L4 Pandora IoT Board` 与 `W601 IoT Board` 开发板的固件由 RT-Thread 官方提供，同时针对 MicroPython 插件开发环境进行深度优化，提供强大的工程同步功能以及更加丰富的固件功能。
 
@@ -59,9 +59,13 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 ![create_blank_dir](assets/create_blank_prj.gif)
 
-#### 创建一个基于demo 的 MicroPython 工程
+#### 创建一个基于 demo 的 MicroPython 工程
 
 ![create_demo_dir](assets/create_demo_prj.gif)
+
+- weather show demo 运行效果
+
+![demo_express](assets/demo_express.png)
 
 ### 连接开发板
 
