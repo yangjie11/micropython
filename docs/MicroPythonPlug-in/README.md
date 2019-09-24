@@ -72,7 +72,7 @@ MicroPython 开发的第一步是创建 MicroPython 工程，后续所有操作�
 
 ![demo_express](assets/demo_express.png)
 
-该 Demo 全部代码使用 MicroPython 编写，可以同时在 [潘多拉 IoT Board 开发板](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-18400369818.12.2ba47ea5PzJxZx&id=583843059625) 和 [正点原子 W601 WIFI 物联网开发板](https://item.taobao.com/item.htm?spm=a230r.1.14.13.7c5b4a9bS2LYUD&id=602233847745&ns=1&abbucket=17#detail) 上直接下载运行。
+该 Demo 全部代码使用 MicroPython 编写，可以在 [潘多拉 IoT Board 开发板](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-18400369818.12.2ba47ea5PzJxZx&id=583843059625) 和 [正点原子 W601 WIFI 物联网开发板](https://item.taobao.com/item.htm?spm=a230r.1.14.13.7c5b4a9bS2LYUD&id=602233847745&ns=1&abbucket=17#detail) 上直接下载运行。
 
 ### 连接开发板
 
@@ -100,7 +100,7 @@ MicroPython 插件提供丰富的示例代码，可在左侧活动栏中查看�
 
 ### 基于 MicroPython 的代码智能补全
 
-本插件支持基于 MicroPython 语法的代码智能补全和语法检查，这一强大功能对编写 MicroPython 代码十分友好。开发者可以在编写代码的同时查看 API 参数提示，同时醒目的错误提示也会让开发者更易于查找代码错误。
+本插件支持基于 MicroPython 语法的代码智能补全和语法检查，这一强大功能对于开发 MicroPython 代码十分实用。它可以让开发者在编写函数的同时查看 API 参数提示，同时它给出的醒目提示也让开发者更易于查找代码中的错误。
 
 ![auto_complete](assets/auto_complete.gif)
 
