@@ -24,7 +24,7 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 | 6    | [PYboard](http://docs.micropython.org/en/latest/pyboard/quickref.html) | [官方下载链接](https://micropython.org/download#pyboard)     |
 | 7    | [others](https://micropython.org/download#other)             | [官方下载链接](https://micropython.org/download#other)       |
 
-编号为 1、2、3 的开发板的固件由 RT-Thread 官方提供，同时针对 MicroPython 插件开发环境进行深度优化，提供强大的工程同步功能以及更加丰富的固件功能。
+编号为 1、2、3 的开发板的固件由 RT-Thread 官方提供，同时针对 MicroPython 插件开发环境进行 **深度优化** ，提供强大的工程同步功能以及更加丰富的固件功能。
 
 欢迎加入`RT-Thread MicroPython` 交流 QQ 群 **703840633** 获取最新固件，进行技术交流。
 
@@ -56,39 +56,51 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 ###  创建 MicroPython 工程
 
+MicroPython 开发的第一步是创建 MicroPython 工程，后续所有操作都必须在工程内才能运行。创建一个新的 MicroPython 工程有两种方式，分别是创建一个空白工程和基于 Demo 创建工程，下面展示这两种方式。
+
 #### 创建一个空白 MicroPython 工程
 
 ![create_blank_dir](assets/create_blank_prj.gif)
 
 #### 创建一个基于 Demo 的 MicroPython 工程
 
+通过该功能可以创建一个基于 demo 的 MicroPython 工程，开发者可以直接运行该 Demo 工程或者在该 Demo 的基础上实现自己想要的功能。
+
 ![create_demo_dir](assets/create_demo_prj.gif)
 
-- `weather show demo` 在 [潘多拉 IoT Board 开发板](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-18400369818.12.2ba47ea5PzJxZx&id=583843059625) 上的运行效果
-
-该 Demo 全部代码使用 MicroPython 编写，同时也可以在 [正点原子 W601 WIFI 物联网开发板](https://item.taobao.com/item.htm?spm=a230r.1.14.13.7c5b4a9bS2LYUD&id=602233847745&ns=1&abbucket=17#detail) 上直接下载运行。
+#### Weather Show Demo 在开发板上的运行效果
 
 ![demo_express](assets/demo_express.png)
 
+该 Demo 全部代码使用 MicroPython 编写，可以同时在 [潘多拉 IoT Board 开发板](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-18400369818.12.2ba47ea5PzJxZx&id=583843059625) 和 [正点原子 W601 WIFI 物联网开发板](https://item.taobao.com/item.htm?spm=a230r.1.14.13.7c5b4a9bS2LYUD&id=602233847745&ns=1&abbucket=17#detail) 上直接下载运行。
+
 ### 连接开发板
+
+点击左下角的连接按钮，然后在弹出的设备列表中选择想要连接的设备，即可连接 MicroPython 开发板。
 
 ![uart_connect](assets/uart_connect.gif)
 
 ### 查看示例代码文件
 
-![example_code](assets/example_code.png)
+MicroPython 插件提供丰富的示例代码，可在左侧活动栏中查看示例代码和库文件。
 
-### 在开发板上下载并运行示例文件
+![example_code](assets/check_example.png)
 
-和开发板建立连接后，可以直接运行示例代码，并观察代码在开发板上的运行效果，如下图所示：
+### 在设备上运行 MicroPython 文件
+
+开发板连接成功后，在示例代码文件上单击右键，在菜单中选择 `下载并在设备上运行该 MicroPython 文件 `，即可将示例文件下载到开发板中并运行，如下图所示：
 
 ![run_example](assets/run_example.gif)
 
 ### 在开发板上运行 MicroPython 代码片段
 
+如果只是想进行代码量不大的代码调试，而不想将文件下载到开发板上，那么可以使用 **代码片段** 功能。在编辑器中选中想要运行的代码片段，然后在右键下拉菜单中选择 `在设备上执行选中的 MicroPython 代码` 选项，即可在 REPL 环境中运行所选代码。
+
 ![run_code_snippet](assets/run_code_snippet.gif)
 
 ### 基于 MicroPython 的代码智能补全
+
+本插件支持基于 MicroPython 语法的代码智能补全和语法检查，这一强大功能对编写 MicroPython 代码十分友好。开发者可以在编写代码的同时查看 API 参数提示，同时醒目的错误提示也会让开发者更易于查找代码错误。
 
 ![auto_complete](assets/auto_complete.gif)
 
