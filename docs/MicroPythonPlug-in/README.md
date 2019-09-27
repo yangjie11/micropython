@@ -28,7 +28,7 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 欢迎加入`RT-Thread MicroPython` 交流 QQ 群 **703840633** 交流 MicroPython 技术。
 
-您还可以向 email : SummerGift@qq.com 发送邮件反馈宝贵的使用意见和建议，我们会第一时间根据您的反馈改进插件的使用体验。
+您还可以登陆 [RT-Thread 官方论坛 Micropython 专区](https://www.rt-thread.org/qa/forum.php?mod=forumdisplay&fid=2&filter=typeid&typeid=20) 或者向 email : SummerGift@qq.com 发送邮件反馈宝贵的使用意见和建议，我们会第一时间根据您的反馈改进插件的使用体验。
 
 ## 准备工作
 
