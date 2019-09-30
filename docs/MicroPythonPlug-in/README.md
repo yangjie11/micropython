@@ -1,6 +1,6 @@
 # VSCode 最好用的 MicroPython 插件 
 
-## 介绍 [(English)](# The best MicroPython plug-in of vscode)
+## 介绍 ([English](#Introduction))
 
 VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大的开发环境，主要特性如下：
 
@@ -141,15 +141,15 @@ RT-Thread MicroPython is the best micropython plug-in in VScode, which provides 
 
 ## Development board support list
 
-| 编号 | 开发板名称                                                   | 固件获取方式                                                 |
-| ---- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 1    | [潘多拉 IoT Board 物联网开发板 STM32L475](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-18400369818.12.2ba47ea5PzJxZx&id=583843059625) | [RT-Thread 论坛固件汇总贴](https://www.rt-thread.org/qa/forum.php?mod=viewthread&tid=12305&page=1&extra=#pid52954) |
-| 2    | [正点原子 W601 WIFI 物联网开发板](https://item.taobao.com/item.htm?spm=a230r.1.14.13.7c5b4a9bS2LYUD&id=602233847745&ns=1&abbucket=17#detail) | [RT-Thread 论坛固件汇总贴 ](https://www.rt-thread.org/qa/forum.php?mod=viewthread&tid=12305&page=1&extra=#pid52954) |
-| 3    | [正点原子探索者 STM32F407 开发板](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-18400369818.18.569779dc0A3gkT&id=41855882779) | [RT-Thread 论坛固件汇总贴](https://www.rt-thread.org/qa/forum.php?mod=viewthread&tid=12305&page=1&extra=#pid52954) |
-| 4    | [ESP8266](http://docs.micropython.org/en/latest/esp8266/quickref.html) | [Official download link](https://micropython.org/download#esp8266)     |
-| 5    | [ESP32](http://docs.micropython.org/en/latest/esp32/quickref.html) | [Official download link](https://micropython.org/download#esp32)       |
-| 6    | [PYboard](http://docs.micropython.org/en/latest/pyboard/quickref.html) | [Official download link](https://micropython.org/download#pyboard)     |
-| 7    | [others](https://micropython.org/download#other)             | [Official download link](https://micropython.org/download#other)       |
+| number | Name of development board                                    | Firmware acquisition                                         |
+| ------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 1      | [潘多拉 IoT Board 物联网开发板 STM32L475](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-18400369818.12.2ba47ea5PzJxZx&id=583843059625) | [RT-Thread 论坛固件汇总贴](https://www.rt-thread.org/qa/forum.php?mod=viewthread&tid=12305&page=1&extra=#pid52954) |
+| 2      | [正点原子 W601 WIFI 物联网开发板](https://item.taobao.com/item.htm?spm=a230r.1.14.13.7c5b4a9bS2LYUD&id=602233847745&ns=1&abbucket=17#detail) | [RT-Thread 论坛固件汇总贴](https://www.rt-thread.org/qa/forum.php?mod=viewthread&tid=12305&page=1&extra=#pid52954) |
+| 3      | [正点原子探索者 STM32F407 开发板](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-18400369818.18.569779dc0A3gkT&id=41855882779) | [RT-Thread 论坛固件汇总贴](https://www.rt-thread.org/qa/forum.php?mod=viewthread&tid=12305&page=1&extra=#pid52954) |
+| 4      | [ESP8266](http://docs.micropython.org/en/latest/esp8266/quickref.html) | [Official download link](https://micropython.org/download#esp8266) |
+| 5      | [ESP32](http://docs.micropython.org/en/latest/esp32/quickref.html) | [Official download link](https://micropython.org/download#esp32) |
+| 6      | [PYboard](http://docs.micropython.org/en/latest/pyboard/quickref.html) | [Official download link](https://micropython.org/download#pyboard) |
+| 7      | [others](https://micropython.org/download#other)             | [Official download link](https://micropython.org/download#other) |
 
 The firmware for the development boards numbered 1, 2, and 3 is provided by rt-thread, and is also optimized for the MicroPython plug-in development environment to provide powerful engineering synchronization and richer firmware features. 
 
