@@ -157,7 +157,7 @@ The firmware for the development boards numbered 1, 2, and 3 is provided by rt-t
 
 1. Using plug-in under the Windows operating system requires changing the default terminal of vscode to powershell, as shown below:
 
-   ![select_powershell](assets/select_powershell.gif)
+   ![select_powershell](assets/en_select_powershell.gif)
 
 If you want to use the MicroPython autocompletion feature (you can skip the next step if you don't need autocompletion for now), you need to do the following:
 
@@ -183,13 +183,13 @@ Note: the configuration change requires **to restart the operating system** for 
 
 The first step in MicroPython development is to create a MicroPython project within which all subsequent operations must run. There are two ways to create a new MicroPython project, a blank project and a demo-based project, which are shown below.
 
-![create_blank_dir](assets/create_blank_prj.gif)
+![create_blank_dir](assets/en_create_blank_project.gif)
 
 ### Connecting development board
 
 You can connect to the MicroPython development board by clicking the connection button in the lower left corner and then selecting the device you want to connect to in the pop-up list of devices.
 
-![uart_connect](assets/uart_connect.gif)
+![uart_connect](assets/en_connect_board.gif)
 
 ### View the sample code file
 
@@ -201,13 +201,13 @@ The MicroPython plug-in provides a wealth of sample code and library files to vi
 
 After successful connection of the development board, right click on the sample code file, select 'download and run the MicroPython file' on the device from the menu, and the sample file can be downloaded to the development board and run, as shown below:
 
-![run_example](assets/run_example.gif)
+![run_example](assets/en_run_example_files.gif)
 
 ### Run MicroPython code snippets on the development board
 
 If you just want to debug a small amount of code without downloading files to the development board, you can use the **code snippet** function.You can run the selected code in the REPL environment by selecting the snippet you want to run in the editor, and then selecting the 'execute the selected MicroPython code' option on the device from the right-click menu.
 
-![run_code_snippet](assets/run_code_snippet.gif)
+![run_code_snippet](assets/en_run_snippets.gif)
 
 ### Intelligent code completion based on MicroPython
 
