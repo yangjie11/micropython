@@ -90,11 +90,17 @@ MicroPython 插件提供丰富的示例代码，可在左侧活动栏中查看�
 
 ![example_code](assets/check_example.png)
 
-### 在设备上运行 MicroPython 文件
+### 下载并在开发板上运行 MicroPython 文件
 
 开发板连接成功后，在示例代码文件上单击右键，在菜单中选择 `下载并在设备上运行该 MicroPython 文件 `，即可将示例文件下载到开发板中并运行，如下图所示：
 
 ![run_example](assets/run_example.gif)
+
+### 直接在开发板上运行  MicroPython 文件（调试神器）
+
+该功能用于快速调试单个文件，频繁应用在调试代码的过程中，当我们在一个单独的文件中编写测试程序时，使用该功能可以将当前 python 文件下载到开发板的内存中运行，达到快速调试的效果。
+
+![run_example](assets/direct_run_files.gif)
 
 ### 在开发板上运行 MicroPython 代码片段
 
@@ -165,7 +171,7 @@ If you want to use the MicroPython autocompletion feature (you can skip the next
 
 3. Install Python3 on your PC and add it to the system environment variables as instructed by the Python plug-in
 
-   ![Python plug](assets/install_python_plug.png)
+   ![Python plug](assets/install_python_plug_en.png)
 
 If you already have the above plug-ins and programs installed on your PC, you can skip this preparation step.
 
@@ -195,13 +201,19 @@ You can connect to the MicroPython development board by clicking the connection 
 
 The MicroPython plug-in provides a wealth of sample code and library files to view in the left active bar.
 
-![example_code](assets/check_example.png)
+![example_code](assets/check_example_en.png)
 
-### Run the MicroPython file on the device
+### Download and run the MicroPython file on the development board
 
 After successful connection of the development board, right click on the sample code file, select 'download and run the MicroPython file' on the device from the menu, and the sample file can be downloaded to the development board and run, as shown below:
 
 ![run_example](assets/en_run_example_files.gif)
+
+### Run MicroPython files directly on the development board (kind for debug)
+
+This feature is used to quickly debug a single file. It is frequently used in the process of debugging code. When we write the test program in a separate file, we can download the current python file into the memory of the development board and run it.
+
+![run_example](assets/direct_run_files_en.gif)
 
 ### Run MicroPython code snippets on the development board
 
