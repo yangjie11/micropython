@@ -8,9 +8,10 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 - 支持基于 MicroPython 的代码智能补全与语法检查
 - 支持 MicroPython REPL 交互环境
 - 提供丰富的代码示例与 demo 程序
-- 支持全工程同步功能
-- 支持在设备上运行示例代码文件
-- 支持代码片段运行功能
+- 提供工程同步功能
+- 支持下载单个文件或文件夹至开发板
+- 支持在内存中快速运行代码文件功能
+- 支持运行代码片段功能
 - 支持多款主流 MicroPython 开发板
 - 支持 windows 及 ubuntu 操作系统
 
@@ -86,19 +87,13 @@ MicroPython 开发的第一步是创建 MicroPython 工程，后续所有操作�
 
 ### 查看示例代码文件
 
-MicroPython 插件提供丰富的示例代码，可在左侧活动栏中查看示例代码和库文件。
+MicroPython 插件提供丰富的示例代码，可在左侧活动栏中查看示例代码和库文件。右键点击示例文件，在下拉菜单中可以将示例文件添加到工程中。
 
 ![example_code](assets/check_example.png)
 
-### 下载并在开发板上运行 MicroPython 文件
+### 直接在开发板上运行 MicroPython 文件（调试神器）
 
-开发板连接成功后，在示例代码文件上单击右键，在菜单中选择 `下载并在设备上运行该 MicroPython 文件 `，即可将示例文件下载到开发板中并运行，如下图所示：
-
-![run_example](assets/run_example.gif)
-
-### 直接在开发板上运行  MicroPython 文件（调试神器）
-
-该功能用于快速调试单个文件，频繁应用在调试代码的过程中，当我们在一个单独的文件中编写测试程序时，使用该功能可以将当前 python 文件下载到开发板的内存中运行，达到快速调试的效果。
+该功能用于快速调试单个文件，频繁应用在调试代码的过程中。当我们在一个单独的文件中编写测试程序时，使用该功能可以将当前 python 文件下载到开发板的内存中运行，达到快速调试的效果，还可以使用快捷键 `alt + q` 来触发该功能。
 
 ![run_example](assets/direct_run_files.gif)
 
@@ -107,6 +102,27 @@ MicroPython 插件提供丰富的示例代码，可在左侧活动栏中查看�
 如果只是想进行代码量不大的代码调试，而不想将文件下载到开发板上，那么可以使用 **代码片段** 功能。在编辑器中选中想要运行的代码片段，然后在右键下拉菜单中选择 `在设备上执行选中的 MicroPython 代码` 选项，即可在 REPL 环境中运行所选代码。
 
 ![run_code_snippet](assets/run_code_snippet.gif)
+
+### 下载文件/文件夹到开发板
+
+如果想要下载单个文件/文件夹到开发板，此时可以使用 **下载单个文件/文件夹到开发板** 的功能。在工程中选中想要下载到开发板上的文件/文件夹，在下拉菜单中使用该功能即可。这里需要注意的是，如果开发板上有同名的文件/文件夹，下载操作将会覆盖这些已有的文件/文件夹。
+
+通过在 `repl` 中输入 `os.listdir()` 命令可以查看相应的文件/文件夹是否下载成功，同样在 `repl` 中还可以使用相应的命令 **删除文件或文件夹**，命令列表如下所示：
+
+| 功能       | 命令                       |
+| ---------- | -------------------------- |
+| 删除文件   | `os.remove("file_to_del")` |
+| 删除文件夹 | `os.rmdir("dir_to_del")`   |
+
+![run_code_snippet](assets/download_file_floder.gif)
+
+### 工程同步功能
+
+点击左下角的同步按钮可以启动工程同步功能。通过该功能可将本地工程中所有目录文件，同步到开发板的文件系统中。该功能推荐在代码调试完成后使用，在调试过程中不必频繁同步工程。
+
+工程同步完成后，可以在 `DEVICE FILES LIST` 栏目中看到 **设备中的文件列表**。
+
+![run_code_snippet](assets/sync_files.gif)
 
 ### 基于 MicroPython 的代码智能补全
 
@@ -140,7 +156,8 @@ RT-Thread MicroPython is the best micropython plug-in in VScode, which provides 
 - Support MicroPython REPL interactive environment
 - Provides many code samples and demo program
 - Support full project synchronization function
-- Support for running sample code files on devices
+- Support to download files or folders to the development board
+- Supports fast running code files in memory
 - Supports code snippets to run functions
 - Supports several major MicroPython development boards
 - Support Windows and ubuntu operating systems
@@ -199,31 +216,48 @@ You can connect to the MicroPython development board by clicking the connection 
 
 ### View the sample code file
 
-The MicroPython plug-in provides a wealth of sample code and library files to view in the left active bar.
+The MicroPython plug-in provides a wealth of sample code and library files to view in the left active bar. Right-click on the sample file to add the sample file to the project from the drop-down menu.
 
 ![example_code](assets/check_example_en.png)
 
-### Download and run the MicroPython file on the development board
-
-After successful connection of the development board, right click on the sample code file, select 'download and run the MicroPython file' on the device from the menu, and the sample file can be downloaded to the development board and run, as shown below:
-
-![run_example](assets/en_run_example_files.gif)
-
 ### Run MicroPython files directly on the development board (kind for debug)
 
-This feature is used to quickly debug a single file. It is frequently used in the process of debugging code. When we write the test program in a separate file, we can download the current python file into the memory of the development board and run it.
+This feature is used to `quickly debug a single file` and is frequently used in debugging code. When we write the test program in a separate file, we can use this function to download the current python file to the memory of the development board to run, achieving the effect of rapid debugging. We can also use the shortcut key `Alt + q` to trigger this function.
 
 ![run_example](assets/direct_run_files_en.gif)
 
 ### Run MicroPython code snippets on the development board
 
-If you just want to debug a small amount of code without downloading files to the development board, you can use the **code snippet** function.You can run the selected code in the REPL environment by selecting the snippet you want to run in the editor, and then selecting the 'execute the selected MicroPython code' option on the device from the right-click menu.
+If you just want to debug a small amount of code without downloading files to the development board, you can use the **code snippet** function. You can run the selected code in the REPL environment by selecting the snippet you want to run in the editor, and then selecting the `execute the selected MicroPython code` option on the device from the right-click menu.
 
 ![run_code_snippet](assets/en_run_snippets.gif)
 
+### Download files/folders to the development board
+
+If you want to download individual files/folders to the development board, you can use the function of to **download individual files/folders to the development board**. Select the file/folder in the project that you want to download to the development board and use this feature in the drop-down menu. 
+
+Note that if there are files/folders with the `same name` on the development board, the download will `overwrite` the existing files/folders.
+
+By entering the command `os.listdir()` in `repl`, you can check whether the corresponding file/folder has been `downloaded` successfully. Similarly, you can also use the corresponding command **to delete the file or folder** in `repl`. The command list is as follows:
+
+| function       | command                       |
+| ---------- | -------------------------- |
+| remove file   | `os.remove("file_to_del")` |
+| remove folder | `os.rmdir("folder_to_del")`   |
+
+![auto_complete](assets/download_file_floder_en.gif)
+
+### project synchronization
+
+Click the synchronization button `in the lower left corner` to start the project synchronization function. This feature synchronizes `all directory files` in the local project to the development board's file system. This feature is recommended to be used `after the code is debugged`, without the need to synchronize the project frequently during debugging.
+
+After the project synchronization is completed, `the list of files` in the DEVICE can be seen in the `DEVICE FILES LIST column`.
+
+![run_code_snippet](assets/sync_files_en.gif)
+
 ### Intelligent code completion based on MicroPython
 
-This plug-in supports intelligent code completion and syntax checking based on MicroPython syntax, which is a powerful tool for developing MicroPython code.It allows developers to write functions while looking at API parameter hints, and it gives them a visual reminder that makes it easier to find errors in code.
+This plug-in supports `intelligent code completion` and syntax checking `based on MicroPython syntax`, which is a powerful tool for developing MicroPython code. It allows developers to write functions while looking at API parameter hints, and it gives them a visual reminder that makes it easier to find errors in code.
 
 ![auto_complete](assets/auto_complete.gif)
 
