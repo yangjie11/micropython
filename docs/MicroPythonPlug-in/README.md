@@ -37,7 +37,7 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 1. 在 windows 操作系统下使用插件需要将 vscode 的默认终端修改为 powershell，如下图所示：
 
-   ![select_powershell](assets/select_powershell.gif)
+   ![select_powershell](https://i1.fuimg.com/702031/d0c62d645f9a76be.gif)
 
 如果想要使用 MicroPython 自动补全功能（如果暂时不需要自动补全功能，可以跳过后续步骤），还需要进行如下操作：
 
@@ -45,7 +45,7 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 3. 按照 Python 插件的提示在 PC 上安装 Python3 并加入到系统环境变量中
 
-   ![Python plug](assets/install_python_plug.png)
+   ![Python plug](https://i1.fuimg.com/702031/024cc705ecc90783.png)
 
 如果在 PC 上已经安装过上述插件和程序，可以跳过此准备步骤。
 
@@ -65,17 +65,17 @@ MicroPython 开发的第一步是创建 MicroPython 工程，后续所有操作�
 
 #### 创建一个空白 MicroPython 工程
 
-![create_blank_dir](assets/create_blank_prj.gif)
+![create_blank_dir](https://i1.fuimg.com/702031/11702fcf6e5dd2b9.gif)
 
 #### 创建一个基于 Demo 的 MicroPython 工程
 
 通过该功能可以创建一个基于 demo 的 MicroPython 工程，开发者可以直接运行该 Demo 工程或者在该 Demo 的基础上实现自己想要的功能。
 
-![create_demo_dir](assets/create_demo_prj.gif)
+![create_demo_dir](https://i1.fuimg.com/702031/a6b92e101c9f0f2b.gif)
 
 #### Weather Show Demo 在开发板上的运行效果
 
-![demo_express](assets/demo_express.png)
+![demo_express](https://i1.fuimg.com/702031/06c1e8cfa44b9911.png)
 
 该 Demo 全部代码使用 MicroPython 编写，可以在 [潘多拉 IoT Board 开发板](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-18400369818.12.2ba47ea5PzJxZx&id=583843059625) 和 [正点原子 W601 WIFI 物联网开发板](https://item.taobao.com/item.htm?spm=a230r.1.14.13.7c5b4a9bS2LYUD&id=602233847745&ns=1&abbucket=17#detail) 上直接下载运行。
 
@@ -83,25 +83,25 @@ MicroPython 开发的第一步是创建 MicroPython 工程，后续所有操作�
 
 点击左下角的连接按钮，然后在弹出的设备列表中选择想要连接的设备，即可连接 MicroPython 开发板。
 
-![uart_connect](assets/uart_connect.gif)
+![uart_connect](https://i1.fuimg.com/702031/362176660da9c6d1.gif)
 
 ### 查看示例代码文件
 
 MicroPython 插件提供丰富的示例代码，可在左侧活动栏中查看示例代码和库文件。右键点击示例文件，在下拉菜单中可以将示例文件添加到工程中。
 
-![example_code](assets/check_example.png)
+![check_example](https://i1.fuimg.com/702031/db8a8ee5ebea3195.png)
 
 ### 直接在开发板上运行 MicroPython 文件（调试神器）
 
 该功能用于快速调试单个文件，频繁应用在调试代码的过程中。当我们在一个单独的文件中编写测试程序时，使用该功能可以将当前 python 文件下载到开发板的内存中运行，达到快速调试的效果，还可以使用快捷键 `alt + q` 来触发该功能。
 
-![run_example](assets/direct_run_files.gif)
+![direct_run_files](https://i1.fuimg.com/702031/5d440f9850e49b8c.gif)
 
 ### 在开发板上运行 MicroPython 代码片段
 
 如果只是想进行代码量不大的代码调试，而不想将文件下载到开发板上，那么可以使用 **代码片段** 功能。在编辑器中选中想要运行的代码片段，然后在右键下拉菜单中选择 `在设备上执行选中的 MicroPython 代码` 选项，即可在 REPL 环境中运行所选代码。
 
-![run_code_snippet](assets/run_code_snippet.gif)
+![run_code_snippet](https://i1.fuimg.com/702031/509ddce884b3bbda.gif)
 
 ### 下载文件/文件夹到开发板
 
@@ -114,7 +114,7 @@ MicroPython 插件提供丰富的示例代码，可在左侧活动栏中查看�
 | 删除文件   | `os.remove("file_to_del")` |
 | 删除文件夹 | `os.rmdir("dir_to_del")`   |
 
-![run_code_snippet](assets/download_file_floder.gif)
+![download_file_floder](https://i1.fuimg.com/702031/18d9990f5f5f3b64.gif)
 
 ### 工程同步功能
 
@@ -122,13 +122,13 @@ MicroPython 插件提供丰富的示例代码，可在左侧活动栏中查看�
 
 工程同步完成后，可以在 `DEVICE FILES LIST` 栏目中看到 **设备中的文件列表**。
 
-![run_code_snippet](assets/sync_files.gif)
+![sync_files](https://i1.fuimg.com/702031/8e389d66693f2986.gif)
 
 ### 基于 MicroPython 的代码智能补全
 
 本插件支持基于 MicroPython 语法的代码智能补全和语法检查，这一强大功能对于开发 MicroPython 代码十分实用。它可以让开发者在编写函数的同时查看 API 参数提示，同时它给出的醒目提示也让开发者更易于查找代码中的错误。
 
-![auto_complete](assets/auto_complete.gif)
+![auto_complete](https://i1.fuimg.com/702031/3145644b4275bce5.gif)
 
 ## 开发资源
 
