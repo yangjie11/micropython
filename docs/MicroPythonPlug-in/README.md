@@ -1,6 +1,6 @@
 # VSCode 最好用的 MicroPython 插件 
 
-## 介绍 ([English](#Introduction))
+## 介绍 ([Drop down to view the English introduction document](#Introduction))
 
 VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大的开发环境，主要特性如下：
 
@@ -37,7 +37,7 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 1. 在 windows 操作系统下使用插件需要将 vscode 的默认终端修改为 powershell，如下图所示：
 
-   ![select_powershell](https://i1.fuimg.com/702031/d0c62d645f9a76be.gif)
+   ![01_select_powershell](https://www.rt-thread.org/qa/data/attachment/forum/201910/22/095612g1fkz5fkr7fff177.gif)
 
 如果想要使用 MicroPython 自动补全功能（如果暂时不需要自动补全功能，可以跳过后续步骤），还需要进行如下操作：
 
@@ -45,7 +45,7 @@ VSCode 最好用的 MicroPython 插件，为 MicroPython 开发提供了强大�
 
 3. 按照 Python 插件的提示在 PC 上安装 Python3 并加入到系统环境变量中
 
-   ![Python plug](https://i1.fuimg.com/702031/024cc705ecc90783.png)
+   ![02_Python plug](https://www.rt-thread.org/qa/data/attachment/forum/201910/22/095612sku6jdblbtu3jpb6.png)
 
 如果在 PC 上已经安装过上述插件和程序，可以跳过此准备步骤。
 
@@ -65,17 +65,17 @@ MicroPython 开发的第一步是创建 MicroPython 工程，后续所有操作�
 
 #### 创建一个空白 MicroPython 工程
 
-![create_blank_dir](https://i1.fuimg.com/702031/11702fcf6e5dd2b9.gif)
+![03_create_blank_dir](https://www.rt-thread.org/qa/data/attachment/forum/201910/22/095613f5oshzvj2og32gio.gif)
 
 #### 创建一个基于 Demo 的 MicroPython 工程
 
 通过该功能可以创建一个基于 demo 的 MicroPython 工程，开发者可以直接运行该 Demo 工程或者在该 Demo 的基础上实现自己想要的功能。
 
-![create_demo_dir](https://i1.fuimg.com/702031/a6b92e101c9f0f2b.gif)
+![04_create_demo_dir](https://www.rt-thread.org/qa/data/attachment/forum/201910/22/095613zsspdy1cywjiyhcb.gif)
 
 #### Weather Show Demo 在开发板上的运行效果
 
-![demo_express](https://i1.fuimg.com/702031/06c1e8cfa44b9911.png)
+![05_demo_express](https://www.rt-thread.org/qa/data/attachment/forum/201910/22/095613vjarrl8nflyfzoya.png)
 
 该 Demo 全部代码使用 MicroPython 编写，可以在 [潘多拉 IoT Board 开发板](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-18400369818.12.2ba47ea5PzJxZx&id=583843059625) 和 [正点原子 W601 WIFI 物联网开发板](https://item.taobao.com/item.htm?spm=a230r.1.14.13.7c5b4a9bS2LYUD&id=602233847745&ns=1&abbucket=17#detail) 上直接下载运行。
 
@@ -83,25 +83,25 @@ MicroPython 开发的第一步是创建 MicroPython 工程，后续所有操作�
 
 点击左下角的连接按钮，然后在弹出的设备列表中选择想要连接的设备，即可连接 MicroPython 开发板。
 
-![uart_connect](https://i1.fuimg.com/702031/362176660da9c6d1.gif)
+![06_uart_connect](https://www.rt-thread.org/qa/data/attachment/forum/201910/22/095613vpb82unp0n9m8lf2.gif)
 
 ### 查看示例代码文件
 
 MicroPython 插件提供丰富的示例代码，可在左侧活动栏中查看示例代码和库文件。右键点击示例文件，在下拉菜单中可以将示例文件添加到工程中。
 
-![check_example](https://i1.fuimg.com/702031/db8a8ee5ebea3195.png)
+![07_check_example](https://www.rt-thread.org/qa/data/attachment/forum/201910/22/095613szp10s0ouaulrxpq.png)
 
 ### 直接在开发板上运行 MicroPython 文件（调试神器）
 
 该功能用于快速调试单个文件，频繁应用在调试代码的过程中。当我们在一个单独的文件中编写测试程序时，使用该功能可以将当前 python 文件下载到开发板的内存中运行，达到快速调试的效果，还可以使用快捷键 `alt + q` 来触发该功能。
 
-![direct_run_files](https://i1.fuimg.com/702031/5d440f9850e49b8c.gif)
+![08_direct_run_files](https://www.rt-thread.org/qa/data/attachment/forum/201910/22/095614s0rbxgxrle0bjjix.gif)
 
 ### 在开发板上运行 MicroPython 代码片段
 
 如果只是想进行代码量不大的代码调试，而不想将文件下载到开发板上，那么可以使用 **代码片段** 功能。在编辑器中选中想要运行的代码片段，然后在右键下拉菜单中选择 `在设备上执行选中的 MicroPython 代码` 选项，即可在 REPL 环境中运行所选代码。
 
-![run_code_snippet](https://i1.fuimg.com/702031/509ddce884b3bbda.gif)
+![09_run_code_snippet](https://www.rt-thread.org/qa/data/attachment/forum/201910/22/095614buewlgkp2mml2wca.gif)
 
 ### 下载文件/文件夹到开发板
 
@@ -114,7 +114,7 @@ MicroPython 插件提供丰富的示例代码，可在左侧活动栏中查看�
 | 删除文件   | `os.remove("file_to_del")` |
 | 删除文件夹 | `os.rmdir("dir_to_del")`   |
 
-![download_file_floder](https://i1.fuimg.com/702031/18d9990f5f5f3b64.gif)
+![10_download_file_floder](https://www.rt-thread.org/qa/data/attachment/forum/201910/22/095614nbjb8bqzz48f8tl6.gif)
 
 ### 工程同步功能
 
@@ -122,13 +122,13 @@ MicroPython 插件提供丰富的示例代码，可在左侧活动栏中查看�
 
 工程同步完成后，可以在 `DEVICE FILES LIST` 栏目中看到 **设备中的文件列表**。
 
-![sync_files](https://i1.fuimg.com/702031/8e389d66693f2986.gif)
+![11_sync_files](https://www.rt-thread.org/qa/data/attachment/forum/201910/22/095614jaitcbhh1ge30h1e.gif)
 
 ### 基于 MicroPython 的代码智能补全
 
 本插件支持基于 MicroPython 语法的代码智能补全和语法检查，这一强大功能对于开发 MicroPython 代码十分实用。它可以让开发者在编写函数的同时查看 API 参数提示，同时它给出的醒目提示也让开发者更易于查找代码中的错误。
 
-![auto_complete](https://i1.fuimg.com/702031/3145644b4275bce5.gif)
+![12_auto_complete](https://i1.fuimg.com/702031/3145644b4275bce5.gif)
 
 ## 开发资源
 
@@ -180,7 +180,7 @@ The firmware for the development boards numbered 1, 2, and 3 is provided by rt-t
 
 1. Using plug-in under the Windows operating system requires changing the default terminal of vscode to powershell, as shown below:
 
-   ![select_powershell](assets/en_select_powershell.gif)
+   ![select_powershell](https://raw.githubusercontent.com/RT-Thread-packages/micropython/master/docs/MicroPythonPlug-in/assets/en_select_powershell.gif)
 
 If you want to use the MicroPython autocompletion feature (you can skip the next step if you don't need autocompletion for now), you need to do the following:
 
@@ -188,7 +188,7 @@ If you want to use the MicroPython autocompletion feature (you can skip the next
 
 3. Install Python3 on your PC and add it to the system environment variables as instructed by the Python plug-in
 
-   ![Python plug](assets/install_python_plug_en.png)
+   ![Python plug](https://raw.githubusercontent.com/RT-Thread-packages/micropython/master/docs/MicroPythonPlug-in/assets/install_python_plug_en.png)
 
 If you already have the above plug-ins and programs installed on your PC, you can skip this preparation step.
 
@@ -206,31 +206,31 @@ Note: the configuration change requires **to restart the operating system** for 
 
 The first step in MicroPython development is to create a MicroPython project within which all subsequent operations must run. There are two ways to create a new MicroPython project, a blank project and a demo-based project, which are shown below.
 
-![create_blank_dir](assets/en_create_blank_project.gif)
+![create_blank_dir](https://raw.githubusercontent.com/RT-Thread-packages/micropython/master/docs/MicroPythonPlug-in/assets/en_create_blank_project.gif)
 
 ### Connecting development board
 
 You can connect to the MicroPython development board by clicking the connection button in the lower left corner and then selecting the device you want to connect to in the pop-up list of devices.
 
-![uart_connect](assets/en_connect_board.gif)
+![uart_connect](https://raw.githubusercontent.com/RT-Thread-packages/micropython/master/docs/MicroPythonPlug-in/assets/en_connect_board.gif)
 
 ### View the sample code file
 
 The MicroPython plug-in provides a wealth of sample code and library files to view in the left active bar. Right-click on the sample file to add the sample file to the project from the drop-down menu.
 
-![example_code](assets/check_example_en.png)
+![example_code](https://raw.githubusercontent.com/RT-Thread-packages/micropython/master/docs/MicroPythonPlug-in/assets/check_example_en.png)
 
 ### Run MicroPython files directly on the development board (kind for debug)
 
 This feature is used to `quickly debug a single file` and is frequently used in debugging code. When we write the test program in a separate file, we can use this function to download the current python file to the memory of the development board to run, achieving the effect of rapid debugging. We can also use the shortcut key `Alt + q` to trigger this function.
 
-![run_example](assets/direct_run_files_en.gif)
+![run_example](https://raw.githubusercontent.com/RT-Thread-packages/micropython/master/docs/MicroPythonPlug-in/assets/direct_run_files_en.gif)
 
 ### Run MicroPython code snippets on the development board
 
 If you just want to debug a small amount of code without downloading files to the development board, you can use the **code snippet** function. You can run the selected code in the REPL environment by selecting the snippet you want to run in the editor, and then selecting the `execute the selected MicroPython code` option on the device from the right-click menu.
 
-![run_code_snippet](assets/en_run_snippets.gif)
+![run_code_snippet](https://raw.githubusercontent.com/RT-Thread-packages/micropython/master/docs/MicroPythonPlug-in/assets/en_run_snippets.gif)
 
 ### Download files/folders to the development board
 
@@ -245,7 +245,7 @@ By entering the command `os.listdir()` in `repl`, you can check whether the corr
 | remove file   | `os.remove("file_to_del")` |
 | remove folder | `os.rmdir("folder_to_del")`   |
 
-![auto_complete](assets/download_file_floder_en.gif)
+![auto_complete](https://raw.githubusercontent.com/RT-Thread-packages/micropython/master/docs/MicroPythonPlug-in/assets/download_file_floder_en.gif)
 
 ### project synchronization
 
@@ -253,13 +253,13 @@ Click the synchronization button `in the lower left corner` to start the project
 
 After the project synchronization is completed, `the list of files` in the DEVICE can be seen in the `DEVICE FILES LIST column`.
 
-![run_code_snippet](assets/sync_files_en.gif)
+![run_code_snippet](https://raw.githubusercontent.com/RT-Thread-packages/micropython/master/docs/MicroPythonPlug-in/assets/sync_files_en.gif)
 
 ### Intelligent code completion based on MicroPython
 
 This plug-in supports `intelligent code completion` and syntax checking `based on MicroPython syntax`, which is a powerful tool for developing MicroPython code. It allows developers to write functions while looking at API parameter hints, and it gives them a visual reminder that makes it easier to find errors in code.
 
-![auto_complete](assets/auto_complete.gif)
+![auto_complete](https://raw.githubusercontent.com/RT-Thread-packages/micropython/master/docs/MicroPythonPlug-in/assets/auto_complete.gif)
 
 ## Matters needing attention
 
