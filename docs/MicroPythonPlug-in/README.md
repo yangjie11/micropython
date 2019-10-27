@@ -122,7 +122,7 @@ MicroPython 插件提供丰富的示例代码，可在左侧活动栏中查看�
 
 工程同步完成后，可以在 `DEVICE FILES LIST` 栏目中看到 **设备中的文件列表**。
 
-![11_sync_files](https://www.rt-thread.org/qa/data/attachment/forum/201910/22/095614jaitcbhh1ge30h1e.gif)
+![11_sync_files](https://www.rt-thread.org/qa/data/attachment/forum/201910/22/095614gr112oj2nteoylrj.gif)
 
 ### 基于 MicroPython 的代码智能补全
 
