@@ -39,7 +39,7 @@
     - [LCD](spec-librarys/machine/LCD.md)
     - [RTC](spec-librarys/machine/RTC.md)
     - [PWM](spec-librarys/machine/PWM.md)
-    - [ADC](spec-librarys/machine/Pin.md)
+    - [ADC](spec-librarys/machine/ADC.md)
     - [WDT](spec-librarys/machine/WDT.md)
     - [TIMER](spec-librarys/machine/Timer.md)
 
