@@ -28,16 +28,31 @@ RT-Thread MicroPython  遵循 MIT 许可，详见 `LICENSE` 文件。
 
 使用 `MicroPython package` 需要在 RT-Thread 的包管理器中选择它，具体路径如下：
 
-![elect_micropytho](./docs/figures/select_micropython.png)
+![elect_micropytho](./docs/assets/select_micropython.png)
 
 然后让 RT-Thread 的包管理器自动更新，或者使用 `pkgs --update` 命令更新包到 BSP 中。
 
 ## 3、使用 RT-Thread MicroPython
 
+### 3.1 添加软件包到工程
+
 在选中 `MicroPython package` 后，再次进行 `bsp` 编译时，它会被加入到 `bsp` 工程中进行编译。
 
 * 快速入门可查看 [快速上手](./docs/01-Getting_Started_Guide.md) 说明文档。
 * 开发过程可参考 `docs` 目录下的开发文档或者查看 [RT-Thread 文档中心](https://www.rt-thread.org/document/site/) 中的 `MicroPython 开发手册`。
+
+### 3.2 使用 MicroPython IDE
+
+[RT-Thread MicroPython IDE](https://marketplace.visualstudio.com/items?itemName=RT-Thread.rt-thread-micropython) 为 MicroPython 提供了强大的开发环境，可以通过 VScode 应用商店直接查询下载，示例如下：
+
+![08_direct_run_files](docs/assets/08_direct_run_files.gif)
+
+
+### 3.3 向 MicroPython 添加 C 函数
+
+为了方便用户添加自己编写的 C 函数到 MicroPython 中被 Python 脚本调用，RT-Thread 提供了 [MicroPython C 绑定代码自动生成器](https://summerggift.github.io/Micropython-C-Generator/) 供大家使用。通过该工具，用户只需要简单几步，即可实现添加 C 绑定的功能，下图展示了自动生成的 C 代码的形式。
+
+![08_direct_run_files](docs/assets/c-gen.png)
 
 ## 4、注意事项
 
@@ -47,11 +62,9 @@ RT-Thread MicroPython  遵循 MIT 许可，详见 `LICENSE` 文件。
 
 ## 5、开发资源
 
-* [RT-Thread MicroPython 源码](https://github.com/RT-Thread-packages/micropython)
 * [RT-Thread MicroPython 论坛](https://www.rt-thread.org/qa/forum.php)
-* [MicroPython 官方网站](https://micropython.org/)
-* [官方在线文档](http://docs.micropython.org/en/latest/pyboard/)
-* [MicroPython 在线演示](https://micropython.org/unicorn)
-* [MicroPython 源码](https://github.com/micropython/micropython)
-* [MicroPython 官方论坛](http://forum.micropython.org/)
-* [MicroPython 中文社区](http://www.micropython.org.cn/)
+* [RT-Thread MicroPython 文档中心](https://www.rt-thread.org/document/site/submodules/micropython/docs/introduction/)
+* [MicroPython C 绑定代码自动生成器](https://summerggift.github.io/Micropython-C-Generator/)
+* [RT-Thread MicroPython IDE](https://marketplace.visualstudio.com/items?itemName=RT-Thread.rt-thread-micropython)
+* [点击加入 RT-Thread MicroPython 交流群](https://jq.qq.com/?_wv=1027&k=5EhyEjx)
+
