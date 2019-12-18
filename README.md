@@ -28,7 +28,7 @@ RT-Thread MicroPython  遵循 MIT 许可，详见 `LICENSE` 文件。
 
 使用 `MicroPython package` 需要在 RT-Thread 的包管理器中选择它，具体路径如下：
 
-![elect_micropytho](./docs/figures/select_micropython.png)
+![elect_micropytho](./docs/assets/select_micropython.png)
 
 然后让 RT-Thread 的包管理器自动更新，或者使用 `pkgs --update` 命令更新包到 BSP 中。
 
