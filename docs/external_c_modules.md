@@ -17,7 +17,7 @@ def add(a, b):
 
 ### 添加用户函数到 MicroPython
 
-我们假设上述函数的参数类型都为整形，通过自动生成器我们可以得到如下样板函数：
+假设上述函数的参数类型都为整形，通过自动生成器可以得到如下样板函数：
 
 ```c
 STATIC mp_obj_t add(
@@ -38,7 +38,7 @@ STATIC mp_obj_t add(
 MP_DEFINE_CONST_FUN_OBJ_2(add_obj, add);
 ```
 
-生成器会帮我们处理好需要导出到 MicroPython 的函数的入参和出参，而我们只需要编写相应的代码来处理这些输入参数，并且把返回值赋给输出参数即可。 你可以通过包含头文件的方式，调用先前编写的 C 函数来对输入参数进行处理，或者根据输入参数来执行相应的动作，添加控制硬件的驱动的原理也是一样的。
+生成器会处理好需要导出到 MicroPython 的函数的入参和出参，而开发者只需要编写相应的代码来处理这些输入参数，并且把返回值赋给输出参数即可。 通过包含头文件的方式，可以调用先前编写的 C 函数来对输入参数进行处理，或者根据输入参数来执行相应的动作，添加控制硬件的驱动的原理也是一样的。
 
 最终使用 Python 调用 C 函数的效果如下：  
 
@@ -50,4 +50,4 @@ MP_DEFINE_CONST_FUN_OBJ_2(add_obj, add);
 
 ### 添加用户模块到 MicroPython
 
-添加属于自己的模块到 MicroPython 中也不难，推荐你先熟练掌握上述添加 C 函数的过程， 然后参考 PR [add module userfunc to MicroPython](https://github.com/RT-Thread-packages/micropython/pull/144) 来添加属于自己的模块，该 PR 实现了添加 `userfunc` 模块到 MicroPython 的功能，你可以按照同样的方式将自己编写的模块注册到 MicroPython 中， 要注意仔细查看这个 PR 中修改的 4 个文件，不要漏掉修改的细节。
+添加用户模块到 MicroPython 中也不难，首先应当熟练掌握上述添加 C 函数的过程，然后参考 PR [add module userfunc to MicroPython](https://github.com/RT-Thread-packages/micropython/pull/144) 来添加属于自己的模块，该 PR 实现了添加 `userfunc` 模块到 MicroPython 的功能，你可以按照同样的方式将自己编写的模块注册到 MicroPython 中，要注意仔细查看这个 PR 中修改的 4 个文件，不要漏掉修改的细节。
