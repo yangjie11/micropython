@@ -2,7 +2,7 @@
 
 当使用原生 MicroPython 进行开发时，你可能会遇到这样一些限制，比如官方没有实现自己想要的功能，或者你觉得这些实现不符合自己的工作需求。此时，添加自己的 C 模块到 MicroPython 中是一个不错的选择，你可以按照自己的想法，设计适合自己的 Python 函数调用。
 
-为了帮助各位开发者快速添加 C 模块，RT-Thread 提供了相应的辅助工具 [C 绑定代码自动生成器](https://summerggift.github.io/Micropython-C-Generator/)。该工具可以帮助开发者自动生成 C 代码和 MicroPython 之间的接口层，开发者只需将 C 语言编写的功能代码添加到指定位置，MicroPython 即可直接调用该功能。
+为了帮助各位开发者快速添加 C 模块，RT-Thread 提供了相应的辅助工具 [C 绑定代码自动生成器](https://summerlife.github.io/RT-MicroPython-Generator/)。该工具可以帮助开发者自动生成 C 代码和 MicroPython 之间的接口层，开发者只需将 C 语言编写的功能代码添加到指定位置，MicroPython 即可直接调用该功能。
 
 ## Python 调用 C 函数的实现原理
 
