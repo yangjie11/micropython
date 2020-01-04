@@ -43,13 +43,21 @@ RT-Thread MicroPython mini 版本占用资源最大不超过：
 
 ![config_runtime](assets/config_runtime.png)
 
-### 在根目录挂载文件系统
+### 在系统根目录挂载文件系统
 
-最后要确保系统中 `/` 目录挂载了文件系统。有了文件系统，后续才能使用 [**MicroPython 开发环境**](https://marketplace.visualstudio.com/items?itemName=RT-Thread.rt-thread-micropython) 将 Python 代码文件同步到板卡中来运行，本次示例中将使用 elm-fat 文件系统，需要对系统进行如下配置：
+最后要确保系统中 `/` 目录挂载了文件系统。有了文件系统，后续才能使用 [**MicroPython 开发环境**](https://marketplace.visualstudio.com/items?itemName=RT-Thread.rt-thread-micropython) 将 Python 代码文件同步到板卡中来运行。
+
+1. 打开 MicroPython 的文件同步功能选项
+
+![open filesync option](assets/open_filesync_option.png)
+
+2. 本次示例使用的开发板，文件系统存放在 SPI Flash 上，BSP 对该存储设备的支持已经做好了，在这里只需开启 elm-fat 文件系统即可，对系统进行如下配置：
 
 ![mount_fs](assets/mount_fs.png)
 
 配置完成后，记得要使用 `scons --target=mkd5` 重新生成工程，使配置在工程中生效。
+
+当你在自己的板卡上运行 MicroPython 时，你可以自由选择文件系统的存储介质，但是有一点很重要，文件系统要被挂载到根目录 / 上，这样才能保证在后续使用 MicroPython IDE 进行文件传输时不会出错。
 
 ### 在 main 线程中启动 MicroPython 
 
