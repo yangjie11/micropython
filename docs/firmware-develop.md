@@ -17,7 +17,7 @@ RT-Thread MicroPython mini 版本占用资源最大不超过：
 
 ### 获取 MicroPython 软件包
 
-先使用 `pkgs --upgrade` 命令更新软件包列表，然后通过 env 工具选中 MicroPython 软件包，最后使用 `pkgs -update` 命令将软件包拉取到本地。
+先使用 `pkgs --upgrade` 命令更新软件包列表，然后通过 env 工具选中 MicroPython 软件包，最后使用 `pkgs --update` 命令将软件包拉取到本地。
 
 ![select_mpy_package](assets/select_mpy_package.png)
 
