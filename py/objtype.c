@@ -372,7 +372,7 @@ mp_obj_t mp_obj_instance_make_new(const mp_obj_type_t *self, size_t n_args, size
 
 // Qstrs for special methods are guaranteed to have a small value, so we use byte
 // type to represent them.
-const byte mp_unary_op_method_name[MP_UNARY_OP_NUM_RUNTIME] = {
+const qstr mp_unary_op_method_name[MP_UNARY_OP_NUM_RUNTIME] = {
     [MP_UNARY_OP_BOOL] = MP_QSTR___bool__,
     [MP_UNARY_OP_LEN] = MP_QSTR___len__,
     [MP_UNARY_OP_HASH] = MP_QSTR___hash__,
@@ -464,7 +464,7 @@ STATIC mp_obj_t instance_unary_op(mp_unary_op_t op, mp_obj_t self_in) {
 // fail).  They can be added at the expense of code size for the qstr.
 // Qstrs for special methods are guaranteed to have a small value, so we use byte
 // type to represent them.
-const byte mp_binary_op_method_name[MP_BINARY_OP_NUM_RUNTIME] = {
+const qstr mp_binary_op_method_name[MP_BINARY_OP_NUM_RUNTIME] = {
     [MP_BINARY_OP_LESS] = MP_QSTR___lt__,
     [MP_BINARY_OP_MORE] = MP_QSTR___gt__,
     [MP_BINARY_OP_EQUAL] = MP_QSTR___eq__,

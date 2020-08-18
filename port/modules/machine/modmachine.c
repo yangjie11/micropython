@@ -49,7 +49,7 @@
 
 #if MICROPY_PY_MACHINE
 
-STATIC mp_obj_t machine_info(uint n_args, const mp_obj_t *args) {
+STATIC mp_obj_t machine_info(size_t n_args, const mp_obj_t *args) {
 #ifdef RT_USING_FINSH
     extern long list_thread(void);
 #endif
@@ -147,7 +147,7 @@ STATIC mp_obj_t pyb_disable_irq(void) {
 }
 MP_DEFINE_CONST_FUN_OBJ_0(pyb_disable_irq_obj, pyb_disable_irq);
 
-STATIC mp_obj_t pyb_enable_irq(uint n_args, const mp_obj_t *arg) {
+STATIC mp_obj_t pyb_enable_irq(size_t n_args, const mp_obj_t *arg) {
     if (n_args == 0) {
         rt_hw_interrupt_enable(int_lvl);
     } else {

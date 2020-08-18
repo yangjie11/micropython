@@ -253,9 +253,9 @@ NORETURN void nlr_jump_fail(void *val) {
 }
 
 #ifndef NDEBUG
-void MP_WEAK __assert_func(const char *file, int line, const char *func, const char *expr) {
+NORETURN void MP_WEAK __assert_func(const char *file, int line, const char *func, const char *expr) {
     mp_printf(MICROPY_ERROR_PRINTER, "Assertion '%s' failed, at file %s:%d\n", expr, file, line);
-    RT_ASSERT(0);
+    while (1);
 }
 #endif
 
