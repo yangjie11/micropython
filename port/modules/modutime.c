@@ -35,6 +35,7 @@
 #include "py/mphal.h"
 #include "extmod/utime_mphal.h"
 #include "lib/timeutils/timeutils.h"
+#include <math.h>
 
 STATIC mp_obj_t mod_time_time(void) {
 #if MICROPY_PY_BUILTINS_FLOAT
