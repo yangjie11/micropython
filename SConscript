@@ -25,7 +25,7 @@ path   += [cwd + '/port/modules/machine']
 LOCAL_CCFLAGS = ''
 
 if rtconfig.CROSS_TOOL == 'gcc':
-    LOCAL_CCFLAGS += ' -std=c99'
+    LOCAL_CCFLAGS += ' -std=gnu99'
 elif rtconfig.CROSS_TOOL == 'keil':
     LOCAL_CCFLAGS += ' --c99 --gnu'
 
