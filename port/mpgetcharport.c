@@ -25,6 +25,7 @@
  */
 
 #include <stdio.h>
+#include <stdint.h>
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <rthw.h>
