@@ -281,6 +281,22 @@
     } while (0);
 #endif
 
+/*****************************************************************************/
+/* Modules define in your project
+   You must provide 'moddefsuserextmods.h'
+   and 'qstrdefsuserextmods.h'
+*/
+
+#ifdef MICROPYTHON_USING_USEREXTMODS
+#define MICROPY_USER_EXTMODS     (1)
+#include <moddefsuserextmods.h>
+#else
+#define MICROPY_USER_EXTMODS     (0)
+#endif
+#ifndef MICROPY_USER_MODULES
+#define MICROPY_USER_MODULES
+#endif
+
 #if defined(__CC_ARM)
 #include <sys/types.h>
 #define MICROPY_NO_ALLOCA           1
@@ -498,6 +514,7 @@ extern const struct _mp_obj_module_t mp_module_userfunc;
     MODFFI_PORT_BUILTIN_MODULES \
     MODNETWORK_PORT_BUILTIN_MODULES \
     USERFUNC_PORT_BUILTIN_MODULES \
+    MICROPY_USER_MODULES \
 
 #define MICROPY_PORT_BUILTIN_MODULE_WEAK_LINKS \
     MODUTIME_PORT_BUILTIN_MODULE_WEAK_LINKS \

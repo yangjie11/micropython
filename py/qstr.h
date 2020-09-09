@@ -40,6 +40,9 @@ enum {
 #ifndef NO_QSTR
 #define QDEF(id, str) id,
 #include "genhdr/qstrdefs.generated.h"
+#if (MICROPY_USER_EXTMODS == 1)
+#include <qstrdefsuserextmods.h>
+#endif
 #undef QDEF
 #endif
     MP_QSTRnumber_of, // no underscore so it can't clash with any of the above
