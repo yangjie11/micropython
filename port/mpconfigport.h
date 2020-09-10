@@ -283,13 +283,13 @@
 
 /*****************************************************************************/
 /* Modules define in your project
-   You must provide 'moddefsuserextmods.h'
-   and 'qstrdefsuserextmods.h'
+   You must provide 'moddefs.user.extmods.h'
+   and 'qstrdefs.user.extmods.h'
 */
 
 #ifdef MICROPYTHON_USING_USEREXTMODS
 #define MICROPY_USER_EXTMODS     (1)
-#include <moddefsuserextmods.h>
+#include <moddefs.user.extmods.h>
 #else
 #define MICROPY_USER_EXTMODS     (0)
 #endif

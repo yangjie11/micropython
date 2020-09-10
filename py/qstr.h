@@ -41,7 +41,7 @@ enum {
 #define QDEF(id, str) id,
 #include "genhdr/qstrdefs.generated.h"
 #if (MICROPY_USER_EXTMODS == 1)
-#include <qstrdefsuserextmods.h>
+#include <qstrdefs.user.extmods.h>
 #endif
 #undef QDEF
 #endif
