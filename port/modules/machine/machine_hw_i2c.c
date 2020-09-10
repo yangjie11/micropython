@@ -99,8 +99,8 @@ STATIC const mp_machine_i2c_p_t machine_hard_i2c_p = {
     .stop = NULL,
     .read = NULL,
     .write = NULL,
-    .readfrom = machine_hard_i2c_readfrom,
-    .writeto = machine_hard_i2c_writeto,
+    .transfer = NULL,
+    .transfer_single = NULL,
 };
 
 STATIC const mp_obj_type_t machine_hard_i2c_type = {
