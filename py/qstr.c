@@ -109,6 +109,9 @@ const qstr_pool_t mp_qstr_const_pool = {
 #ifndef NO_QSTR
 #define QDEF(id, str) str,
 #include "genhdr/qstrdefs.generated.h"
+#if (MICROPY_USER_EXTMODS == 1)
+#include <qstrdefs.user.extmods.h>
+#endif
 #undef QDEF
 #endif
     },
