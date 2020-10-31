@@ -65,7 +65,6 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_0(mod_stacks_analyze_obj, mod_stacks_analyze);
 STATIC mp_obj_t mod_list_device(void) {
     struct rt_device *device;
     struct rt_list_node *node;
-    rt_ubase_t level;
 
     struct rt_object_information *info = rt_object_get_information(RT_Object_Class_Device);
     struct rt_list_node *list = &info->object_list;
