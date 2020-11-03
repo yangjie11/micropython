@@ -778,6 +778,7 @@ QDEF(MP_QSTR___bases__, (const byte*)"\x03\x09" "__bases__")
 QDEF(MP_QSTR_writevto, (const byte*)"\x75\x08" "writevto")
 QDEF(MP_QSTR_do_handshake, (const byte*)"\x86\x0c" "do_handshake")
 QDEF(MP_QSTR___ne__, (const byte*)"\x0e\x06" "__ne__")
+QDEF(MP_QSTR_i, (const byte*)"\xcc\x01" "i")
 
 #if MICROPY_USER_EXTMODS
 #include "qstrdefs.user.extmods.h"
