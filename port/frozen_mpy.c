@@ -30,7 +30,7 @@ typedef struct _mp_obj_complex_t {
 enum {
     MP_QSTR_frozentest_dot_py = MP_QSTRnumber_of,
     MP_QSTR_uPy,
-    MP_QSTR_i,
+    //MP_QSTR_i,
 };
 
 extern const qstr_pool_t mp_qstr_const_pool;

@@ -74,7 +74,7 @@ NORETURN static void exception_from_errno(int _errno) {
 }
 
 static inline void check_for_exceptions(void) {
-    mp_handle_pending();
+    mp_handle_pending(true);
 }
 
 static int _socket_getaddrinfo2(const mp_obj_t host, const mp_obj_t portx, struct addrinfo **resp) {

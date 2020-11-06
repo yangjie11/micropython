@@ -101,7 +101,7 @@ mp_state_thread_t *mp_thread_get_state(void) {
     return (mp_state_thread_t *)(rt_thread_self()->user_data);
 }
 
-void mp_thread_set_state(void *state) {
+void mp_thread_set_state(mp_state_thread_t *state) {
     rt_thread_self()->user_data = (rt_uint32_t)state;
 }
 

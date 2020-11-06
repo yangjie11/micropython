@@ -470,6 +470,7 @@ QDEF(MP_QSTR_exit, (const byte*)"\x85\x04" "exit")
 QDEF(MP_QSTR_byteorder, (const byte*)"\x61\x09" "byteorder")
 QDEF(MP_QSTR_version_info, (const byte*)"\x6e\x0c" "version_info")
 QDEF(MP_QSTR_sys, (const byte*)"\xbc\x03" "sys")
+QDEF(MP_QSTR_usys, (const byte*)"\xc9\x04" "usys")
 QDEF(MP_QSTR_fileno, (const byte*)"\x82\x06" "fileno")
 QDEF(MP_QSTR_makefile, (const byte*)"\xc1\x08" "makefile")
 QDEF(MP_QSTR_usocket, (const byte*)"\x75\x07" "usocket")
@@ -776,3 +777,9 @@ QDEF(MP_QSTR___matmul__, (const byte*)"\x49\x0a" "__matmul__")
 QDEF(MP_QSTR___bases__, (const byte*)"\x03\x09" "__bases__")
 QDEF(MP_QSTR_writevto, (const byte*)"\x75\x08" "writevto")
 QDEF(MP_QSTR_do_handshake, (const byte*)"\x86\x0c" "do_handshake")
+QDEF(MP_QSTR___ne__, (const byte*)"\x0e\x06" "__ne__")
+QDEF(MP_QSTR_i, (const byte*)"\xcc\x01" "i")
+
+#if MICROPY_USER_EXTMODS
+#include "qstrdefs.user.extmods.h"
+#endif

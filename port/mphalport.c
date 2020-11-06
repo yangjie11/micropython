@@ -90,7 +90,7 @@ void mp_hal_delay_us(mp_uint_t us) {
         if (dt >= dtick) {
             break;
         }
-        mp_handle_pending();
+        mp_handle_pending(true);
     }
 }
 
