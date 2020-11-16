@@ -1,56 +1,58 @@
 # MicroPython
 
-## 1、介绍
+[中文页](README_ZH.md) | English
 
-这是一个在 RT-Thread 上的 `MicroPython` 移植，可以运行在 **RT-Thread 3.0** 版本以上。通过这个软件包可以在搭载了 RT-Thread 的嵌入式系统上运行 `MicroPython`。
+## 1. Introduction
 
-### 1.1 目录结构
+This is a port of `MicroPython` on RT-Thread, which can run on **RT-Thread 3.0** or higher. This software package can run `MicroPython` on embedded systems equipped with RT-Thread.
 
-| 名称 | 说明 |
+### 1.1 Directory structure
+
+| Name | Description |
 | ---- | ---- |
-| docs  | 文档目录，包括入门指南和开发手册 |
-| drivers | MicroPython 源代码目录 |
-| extmod | MicroPython 源代码目录 |
-| lib | MicroPython 源代码目录 |
-| py | MicroPython 源代码目录 |
-| port | 移植代码目录 |
-| LICENSE | Micropython MIT 许可证 |
+| docs | Document directory, including getting started guide and development manual |
+| drivers | MicroPython source code directory |
+| extmod | MicroPython Source Code Directory |
+| lib | MicroPython source code directory |
+| py | MicroPython source code directory |
+| port | Porting code directory |
+| LICENSE | Micropython MIT License |
 
-### 1.2 许可证
+### 1.2 License
 
-RT-Thread MicroPython  遵循 MIT 许可，详见 `LICENSE` 文件。
+RT-Thread MicroPython follows the MIT license, see the `LICENSE` file for details.
 
-### 1.3 依赖
+### 1.3 Dependency
 
 - RT-Thread 3.0+
 
-## 2、如何打开 RT-Thread MicroPython
+## 2. How to open RT-Thread MicroPython
 
-使用 `MicroPython package` 需要在 RT-Thread 的包管理器中选择它，具体路径如下：
+To use `MicroPython package`, you need to select it in the RT-Thread package manager. The specific path is as follows:
 
 ![elect_micropytho](./docs/figures/select_micropython.png)
 
-然后让 RT-Thread 的包管理器自动更新，或者使用 `pkgs --update` 命令更新包到 BSP 中。
+Then let the RT-Thread package manager automatically update, or use the `pkgs --update` command to update the package to the BSP.
 
-## 3、使用 RT-Thread MicroPython
+## 3. Use RT-Thread MicroPython
 
-在选中 `MicroPython package` 后，再次进行 `bsp` 编译时，它会被加入到 `bsp` 工程中进行编译。
+After selecting `MicroPython package`, when compiling `bsp` again, it will be added to the `bsp` project for compilation.
 
-* 快速入门可查看 [快速上手](./docs/01-Getting_Started_Guide.md) 说明文档。
-* 开发过程可参考 `docs` 目录下的开发文档或者查看 [RT-Thread 文档中心](https://www.rt-thread.org/document/site/) 中的 `MicroPython 开发手册`。
+* For quick start, please refer to [Quick Start](./docs/01-Getting_Started_Guide.md) documentation.
+* For the development process, please refer to the development documents under the `docs` directory or view the `MicroPython Development Manual` in [RT-Thread Documentation Center](https://www.rt-thread.org/document/site/).
 
-## 4、注意事项
+## 4. Matters needing attention
 
-- 需要使用 **RT-Thread 3.0** 以上版本。
-- 在 `menuconfig` 选项中选择 `Micropython` 的 `latest` 版本。
+- Need to use **RT-Thread 3.0** or above.
+- Select the `latest` version of `Micropython` in the `menuconfig` option.
 
-## 5、开发资源
+## 5. Development resources
 
-* [RT-Thread MicroPython 源码](https://github.com/RT-Thread-packages/micropython)
-* [RT-Thread MicroPython 论坛](https://www.rt-thread.org/qa/forum.php)
-* [MicroPython 官方网站](https://micropython.org/)
-* [官方在线文档](http://docs.micropython.org/en/latest/pyboard/)
-* [MicroPython 在线演示](https://micropython.org/unicorn)
-* [MicroPython 源码](https://github.com/micropython/micropython)
-* [MicroPython 官方论坛](http://forum.micropython.org/)
-* [MicroPython 中文社区](http://www.micropython.org.cn/)
+* [RT-Thread MicroPython source code](https://github.com/RT-Thread-packages/micropython)
+* [RT-Thread MicroPython Forum](https://www.rt-thread.org/qa/forum.php)
+* [MicroPython official website](https://micropython.org/)
+* [Official online documentation](http://docs.micropython.org/en/latest/pyboard/)
+* [MicroPython Online Demo](https://micropython.org/unicorn)
+* [MicroPython source code](https://github.com/micropython/micropython)
+* [MicroPython Official Forum](http://forum.micropython.org/)
+* [MicroPython Chinese Community](http://www.micropython.org.cn/)
