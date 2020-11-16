@@ -30,7 +30,7 @@ RT-Thread MicroPython follows the MIT license, see the `LICENSE` file for detail
 
 To use `MicroPython package`, you need to select it in the RT-Thread package manager. The specific path is as follows:
 
-![elect_micropytho](./docs/figures/select_micropython.png)
+![elect_micropytho](./docs/figures/select_micropython_en.png)
 
 Then let the RT-Thread package manager automatically update, or use the `pkgs --update` command to update the package to the BSP.
 
@@ -38,8 +38,8 @@ Then let the RT-Thread package manager automatically update, or use the `pkgs --
 
 After selecting `MicroPython package`, when compiling `bsp` again, it will be added to the `bsp` project for compilation.
 
-* For quick start, please refer to [Quick Start](./docs/01-Getting_Started_Guide.md) documentation.
-* For the development process, please refer to the development documents under the `docs` directory or view the `MicroPython Development Manual` in [RT-Thread Documentation Center](https://www.rt-thread.org/document/site/).
+* For quick start, please refer to [this article](https://rt-thread.medium.com/micropython-software-package-2101e3cafc93).
+* For the development process, please refer to the [development documents](https://github.com/RT-Thread/mpy-snippets/blob/master/docs/MicroPythonPlug-in/README_EN.md).
 
 ## 4. Matters needing attention
 
@@ -55,4 +55,3 @@ After selecting `MicroPython package`, when compiling `bsp` again, it will be ad
 * [MicroPython Online Demo](https://micropython.org/unicorn)
 * [MicroPython source code](https://github.com/micropython/micropython)
 * [MicroPython Official Forum](http://forum.micropython.org/)
-* [MicroPython Chinese Community](http://www.micropython.org.cn/)
