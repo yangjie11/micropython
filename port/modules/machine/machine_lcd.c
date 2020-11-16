@@ -35,7 +35,7 @@
 #include "machine_lcd.h"
 #include <drv_lcd.h>
 
-#define MAX_CO (240 - 1)
+#define MAX_CO (2400 - 1)
 
 typedef struct _machine_lcd_obj_t {
     mp_obj_base_t base;
