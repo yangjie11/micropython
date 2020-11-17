@@ -1,71 +1,73 @@
 # MicroPython
 
-## 1、介绍
+[中文页](README_ZH.md) | English
 
-这是一个在 RT-Thread 上的 `MicroPython` 移植，可以运行在 **RT-Thread 3.0** 版本以上。通过该软件包可以在搭载了 RT-Thread 的嵌入式系统上运行 `MicroPython`。
+## 1. Introduction
 
-如果是第一次接触 RT-Thread MicroPython，推荐你先通过 RT-Thread 官方支持的开发板来快速上手，这些开发板的固件功能完善并提供源代码，适合入门学习，官方支持开发板 [固件下载请点我](https://www.rt-thread.org/qa/forum.php?mod=viewthread&tid=12305&extra=page%3D1%26filter%3Dtypeid%26typeid%3D20)。
+This is a port of `MicroPython` on RT-Thread, which can run on **RT-Thread 3.0** or higher. This software package can run `MicroPython` on embedded systems equipped with RT-Thread.
 
-### 1.1 目录结构
+If it is the first time to come into contact with RT-Thread MicroPython, it is recommended that you use RT-Thread officially supported development boards to get started quickly. These development boards have complete firmware functions and provide source code, suitable for introductory learning, and officially support development boards [firmware download Please click on me](https://www.rt-thread.org/qa/forum.php?mod=viewthread&tid=12305&extra=page%3D1%26filter%3Dtypeid%26typeid%3D20).
 
-| 名称 | 说明 |
+### 1.1 Directory structure
+
+| Name | Description |
 | ---- | ---- |
-| docs  | 文档目录，包括入门指南和开发手册 |
-| drivers | MicroPython 源代码目录 |
-| extmod | MicroPython 源代码目录 |
-| lib | MicroPython 源代码目录 |
-| py | MicroPython 源代码目录 |
-| port | 移植代码目录 |
-| LICENSE | Micropython MIT 许可证 |
+| docs | Document directory, including getting started guide and development manual |
+| drivers | MicroPython source code directory |
+| extmod | MicroPython Source Code Directory |
+| lib | MicroPython source code directory |
+| py | MicroPython source code directory |
+| port | Porting code directory |
+| LICENSE | Micropython MIT License |
 
-### 1.2 许可证
+### 1.2 License
 
-RT-Thread MicroPython  遵循 MIT 许可，详见 `LICENSE` 文件。
+RT-Thread MicroPython follows the MIT license, see the `LICENSE` file for details.
 
-### 1.3 依赖
+### 1.3 Dependency
 
 - RT-Thread 3.0+
 
-## 2、如何打开 RT-Thread MicroPython
+## 2. How to open RT-Thread MicroPython
 
-使用 `MicroPython package` 需要在 RT-Thread 的包管理器中选择它，具体路径如下：
+To use `MicroPython package`, you need to select it in the RT-Thread package manager. The specific path is as follows:
 
 ![elect_micropytho](./docs/assets/select_micropython.png)
 
-然后让 RT-Thread 的包管理器自动更新，或者使用 `pkgs --update` 命令更新包到 BSP 中。
+Then let the RT-Thread package manager automatically update, or use the `pkgs --update` command to update the package to the BSP.
 
-## 3、使用 RT-Thread MicroPython
+## 3. Use RT-Thread MicroPython
 
-### 3.1 添加软件包到工程
+### 3.1 Add software package to project
 
-选中 `MicroPython package` 后，再次进行 `bsp` 编译时，它会被加入到 `bsp` 工程中进行编译。
+After selecting `MicroPython package`, when compiling with `bsp` again, it will be added to the `bsp` project for compilation.
 
-* 固件开发可参考 [《MicroPython 固件开发指南》](./docs/firmware-develop.md)
+* For firmware development, please refer to [《MicroPython Firmware Development Guide》](./docs/firmware-develop.md)
 
-* 查阅更多 MicroPython 说明文档请访问 [RT-Thread 文档中心](https://www.rt-thread.org/document/site/submodules/micropython/docs/introduction/)
+* For more MicroPython documentation, please visit [RT-Thread Documentation Center](https://www.rt-thread.org/document/site/submodules/micropython/docs/introduction/)
 
 
-### 3.2 使用 MicroPython IDE
+### 3.2 Using MicroPython IDE
 
-[RT-Thread MicroPython IDE](https://marketplace.visualstudio.com/items?itemName=RT-Thread.rt-thread-micropython) 为 MicroPython 提供了强大的开发环境，可以通过 VScode 应用商店直接查询下载，示例如下所示：
+[RT-Thread MicroPython IDE](https://marketplace.visualstudio.com/items?itemName=RT-Thread.rt-thread-micropython) provides a powerful development environment for MicroPython, which can be directly searched and downloaded through the VScode application store. Examples are as follows:
 
 ![08_direct_run_files](docs/assets/08_direct_run_files.gif)
 
 
-### 3.3 向 MicroPython 添加 C 扩展
+### 3.3 Add C extension to MicroPython
 
-为了方便用户添加自己编写的 C 函数到 MicroPython 中被 Python 脚本调用，RT-Thread 提供了 [MicroPython C 绑定代码自动生成器](https://summerlife.github.io/RT-MicroPython-Generator/) 供大家使用。通过该工具，用户只需要简单几步，即可实现 C 函数扩展，下图展示了自动生成的 C 代码的形式。
+In order to facilitate users to add their own C functions to MicroPython to be called by Python scripts, RT-Thread provides [MicroPython C binding code automatic generator](https://summerlife.github.io/RT-MicroPython-Generator/) For everyone to use. With this tool, users only need a few simple steps to achieve C function extension. The following figure shows the form of the automatically generated C code.
 
 ![08_direct_run_files](docs/assets/c-gen.png)
 
-## 4、注意事项
+## 4. Matters needing attention
 
-- 需要使用 **RT-Thread 3.0** 以上版本
-- 在 `menuconfig` 选项中选择 `Micropython` 的 `latest` 版本
-- 目前 `System Module` 下的 `ffi` 模块只支持 GCC 工具链，且需要在链接脚本中添加相关段信息
+- Need to use **RT-Thread 3.0** or above
+- Select the `latest` version of `Micropython` in the `menuconfig` option
+- Currently, the `ffi` module under `System Module` only supports GCC toolchain, and relevant information needs to be added to the link script
 
-## 5、开发资源
+## 5. Development resources
 
-* [RT-Thread MicroPython 论坛](https://www.rt-thread.org/qa/forum.php)
-* [RT-Thread MicroPython 文档中心](https://www.rt-thread.org/document/site/submodules/micropython/docs/introduction/)
-* [点击加入 RT-Thread MicroPython 交流群](https://jq.qq.com/?_wv=1027&k=5EhyEjx)
+* [RT-Thread MicroPython Forum](https://www.rt-thread.org/qa/forum.php)
+* [RT-Thread MicroPython Documentation Center](https://www.rt-thread.org/document/site/submodules/micropython/docs/introduction/)
+* [Click to join the RT-Thread MicroPython exchange group](https://jq.qq.com/?_wv=1027&k=5EhyEjx)
